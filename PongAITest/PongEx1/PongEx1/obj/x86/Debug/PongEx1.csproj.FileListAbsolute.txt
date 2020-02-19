@@ -1,0 +1,257 @@
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+C:\Users\colr2_18\source\repos\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+D:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+D:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+D:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+D:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+D:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+D:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+E:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+E:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+E:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+E:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+E:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+E:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+F:\Yr2\Game development\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+F:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+F:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+F:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+F:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+F:\Yr2\Game development\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+D:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+E:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+F:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.png
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
+D:\Yr2\Game development\PongAITest\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb

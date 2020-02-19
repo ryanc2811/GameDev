@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateMachines", "StateMachines\StateMachines.csproj", "{0BC04DD2-5180-485B-AB88-F4354EBD4F94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BC04DD2-5180-485B-AB88-F4354EBD4F94}.Debug|x86.ActiveCfg = Debug|x86
+		{0BC04DD2-5180-485B-AB88-F4354EBD4F94}.Debug|x86.Build.0 = Debug|x86
+		{0BC04DD2-5180-485B-AB88-F4354EBD4F94}.Release|x86.ActiveCfg = Release|x86
+		{0BC04DD2-5180-485B-AB88-F4354EBD4F94}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E80593FC-669E-4243-ABD2-44CB8F6D4EA4}
+	EndGlobalSection
+EndGlobal
