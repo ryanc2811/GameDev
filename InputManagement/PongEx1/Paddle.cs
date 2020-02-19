@@ -11,7 +11,7 @@ namespace PongEx1
 {
     class Paddle:PongEntity, ICollidable
     {
-
+        private string phrase;
         public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
@@ -46,7 +46,12 @@ namespace PongEx1
                 entityLocn.Y = Kernel.ScreenHeight-150;
 
             }
-          
+
+    }
+        public virtual void OnNewInput(object source, myEventArgs args)
+        {
+            // Act on data:
+            phrase = args.currentArg;
         }
     }
 }

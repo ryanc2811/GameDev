@@ -197,3 +197,32 @@ F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCom
 F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete
 F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.exe
 F:\Yr2\Game development\Wk2\PongEx1\PongEx1\obj\x86\Debug\PongEx1.pdb
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\obj\x86\Debug\PongEx1.csprojAssemblyReference.cache
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\obj\x86\Debug\PongEx1.csproj.CoreCompileInputs.cache
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\obj\x86\Debug\PongEx1.exe
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\obj\x86\Debug\PongEx1.pdb
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\Content\paddle.png
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\Content\square.png
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\Content\paddle.xnb
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\Content\square.xnb
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\PongEx1.exe
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\PongEx1.pdb
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\colr2_18\Documents\GitHub\GameDev\InputManagement\PongEx1\obj\x86\Debug\PongEx1.csproj.CopyComplete

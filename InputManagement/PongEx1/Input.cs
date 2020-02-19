@@ -98,5 +98,10 @@ namespace PongEx1
             
             return direction;
         }
+
+        public void Update()
+        {
+
+        }
     }
 }
