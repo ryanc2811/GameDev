@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PongEx1
 {
-    class Paddle:PongEntity, ICollidable
+    class Paddle:PongEntity, ICollidable,IKeyboardListener
     {
-        private string phrase;
+        private Keys Key;
         public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
@@ -48,10 +48,13 @@ namespace PongEx1
             }
 
     }
-        public virtual void OnNewInput(object source, myEventArgs args)
+        public virtual void OnNewInput(object source, InputEventArgs args)
         {
             // Act on data:
-            phrase = args.currentArg;
+            Key = args.PressedKeys[0];
+
         }
+
+      
     }
 }

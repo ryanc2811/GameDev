@@ -56,11 +56,14 @@
     <Compile Include="IKeyboardInput.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="InputDevice.cs" />
+    <Compile Include="InputEventArgs.cs" />
     <Compile Include="InputManager.cs" />
+    <Compile Include="InputSubscriber.cs" />
     <Compile Include="IPaddle.cs" />
     <Compile Include="ISceneManager.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="KeybHandler.cs" />
+    <Compile Include="IKeyboardListener.cs" />
     <Compile Include="MouseHandler.cs" />
     <Compile Include="myEventArgs.cs" />
     <Compile Include="Paddle.cs" />

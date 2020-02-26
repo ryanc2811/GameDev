@@ -21,7 +21,7 @@ namespace PongEx1
         private IEntity paddle1;
         private IEntity paddle2;
         private ICollisionManager collisionManager;
-        
+        private IInputManager inputManager;
         
 
         //DECLARE Vector 2 for storing the location if the paddle, name it paddleLocn
@@ -62,9 +62,12 @@ namespace PongEx1
             //initialise SceneManager
             sceneManager = new SceneManager();
             collisionManager = new CollisionManager();
+            inputManager = new InputManager();
             ((ICollisionSubscriber)collisionManager).Subscribe((ICollidable)ball);
             ((ICollisionSubscriber)collisionManager).Subscribe((ICollidable)paddle1);
             ((ICollisionSubscriber)collisionManager).Subscribe((ICollidable)paddle2);
+
+            inputManager.addEventListener(InputDevice.Keyboard, ((IKeyboardListener)paddle1).OnNewInput);
             //add entities to list
             sceneManager.addEntity(ball);
             sceneManager.addEntity(paddle1);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PongEx1
 {
+    //This is the publisher class
     class InputManager :IInputManager
     {
         private Dictionary<InputDevice,IInput> dictInput;
@@ -24,18 +26,20 @@ namespace PongEx1
             }
         }
 
-        protected virtual void OnNewInput(string newArg)
+        public virtual void OnNewInput(IList<Keys> newArg)
         {
-            myEventArgs args = new myEventArgs(newArg);
+            InputEventArgs args = new InputEventArgs();
+            args.PressedKeys = newArg;
             NewInput(this, args);
         }
-        public void addEventListener(InputDevice inputDevice, EventHandler<myEventArgs> handler)
+        public void addEventListener(InputDevice inputDevice, EventHandler<InputEventArgs> handler)
         {
             NewInput += handler;
         }
-        public event EventHandler<myEventArgs> NewInput;
+        public event EventHandler<InputEventArgs> NewInput;
 
-        public void removeEventLister(EventHandler<myEventArgs> handler)
+      
+        public void removeEventLister(EventHandler<InputEventArgs> handler)
         {
             
         }

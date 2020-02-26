@@ -8,8 +8,8 @@ namespace PongEx1
 {
     interface IInputManager
     {
-        void addEventListener(InputDevice inputDevice, EventHandler<myEventArgs> handler);
-        void removeEventLister(EventHandler<myEventArgs> handler);
+        void addEventListener(InputDevice inputDevice, EventHandler<InputEventArgs> handler);
+        void removeEventLister(EventHandler<InputEventArgs> handler);
         void Update();
     }
 }
