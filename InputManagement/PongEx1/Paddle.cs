@@ -12,6 +12,7 @@ namespace PongEx1
     class Paddle:PongEntity, ICollidable,IKeyboardListener
     {
         private IList<Keys> keyList;
+        
         public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
@@ -37,8 +38,7 @@ namespace PongEx1
 
         public override void Update()
         {
-            //update the paddles position
-            entityLocn.Y +=velocity.Y*2;
+            
             //if the paddle reaches the bottom of the screen, stop the Y from decreasing further
             if (entityLocn.Y < 0 )
             {
@@ -59,19 +59,41 @@ namespace PongEx1
         public virtual void OnNewInput(object source, InputEventArgs args)
         {
             // Act on data:
+            velocity.Y = 0;
             keyList = args.PressedKeys;
-            foreach (Keys key in keyList)
+            if (entityLocn.X == 1550)
+                {
+                if (keyList.Contains(Keys.Up))
+                    {
+                        velocity.Y -= 15f;
+                    //update the paddles position
+                    entityLocn.Y += velocity.Y;
+                }
+                    else if (keyList.Contains(Keys.Down))
+                    {
+                        velocity.Y += 15f;
+                    //update the paddles position
+                    entityLocn.Y += velocity.Y;
+                    }
+                }
+            if (entityLocn.X == 0)
             {
-                if (key == Keys.W)
+                if (keyList.Contains(Keys.W))
                 {
-                    velocity.Y -= 0.2f;
+                    velocity.Y -= 15f;
+                    //update the paddles position
+                    entityLocn.Y += velocity.Y;
                 }
-                else if(key==Keys.S)
-                {
-                    velocity.Y += 0.2f;
-                }
+               else if (keyList.Contains(Keys.S))
+               {
+                    velocity.Y += 15f;
+                    //update the paddles position
+                    entityLocn.Y += velocity.Y;
+               }
             }
+        }
+
 
         }
     }
-}
+

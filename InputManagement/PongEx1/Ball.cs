@@ -25,7 +25,7 @@ namespace PongEx1
         //Serve the ball
         public void Serve()
         {
-            speed = 20;
+            speed = 15;
             //place ball in the centre of the screen
             setPosition(Kernel.ScreenWidth / 2, Kernel.ScreenHeight / 2);
             float rotation= (float)(Math.PI / 2 + (random.NextDouble() * (Math.PI / 5.0f) - Math.PI / 3));
@@ -94,10 +94,10 @@ namespace PongEx1
         {
             if(entity is Paddle)
             {
-               //velocity.X =velocity.X + ((Paddle)entity).velocity.X+((Paddle)entity).Spin;
-               //velocity.Y = velocity.Y + ((Paddle)entity).velocity.Y;
-               //velocity *=-1;
-
+                //velocity.X =velocity.X + ((Paddle)entity).velocity.X+((Paddle)entity).Spin;
+                //velocity.Y = velocity.Y + ((Paddle)entity).velocity.Y;
+                //velocity *=-1;
+                
             https://gamedev.stackexchange.com/questions/4253/in-pong-how-do-you-calculate-the-balls-direction-when-it-bounces-off-the-paddl 
                 //create a variable that stores the y position of the ball when the collision occurs
                 float onCollideY = entityLocn.Y;
@@ -110,15 +110,15 @@ namespace PongEx1
 
                 //update the Y position with the new ball angle variable
                 velocity.Y = speed * -(float)Math.Sin(ballAngle);
+                if(speed<30)
                 //each time a paddle collides with a ball, add 3 to the speed
-                speed += 3;
+                    speed += 3;
                 //if the entity that collides with the ball is an AI
-
+                Console.WriteLine(speed);
                 if (entity.getPosition().X== 1550)
                 {
                     //add the ball angle variable to the velocity on the x axis
                     velocity.X = speed * -(float)Math.Cos(ballAngle);
-
                 }
                 else
                 {

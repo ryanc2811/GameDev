@@ -68,6 +68,7 @@ namespace PongEx1
             ((ICollisionSubscriber)collisionManager).Subscribe((ICollidable)paddle2);
 
             inputManager.addEventListener(InputDevice.Keyboard, ((IKeyboardListener)paddle1).OnNewInput);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IKeyboardListener)paddle2).OnNewInput);
             //add entities to list
             sceneManager.addEntity(ball);
             sceneManager.addEntity(paddle1);

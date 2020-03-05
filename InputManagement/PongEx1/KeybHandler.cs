@@ -9,7 +9,8 @@ namespace PongEx1
 {
     public class KeybHandler : IKeyboardInput
     {
-        private IList<Keys>pressedKeys=new List<Keys>();
+        private Keys[] pressedKeys;
+        //private IList<Keys> pressedKeys = new List<Keys>();
         public event EventHandler<InputEventArgs> InputEvent;
         KeyboardState keyboardState;
         public KeybHandler()
@@ -25,12 +26,12 @@ namespace PongEx1
             
             if (pressedKeys != null)
             {
-                
+
                 //for (int i = 0; i < pressedKeys.Count; i++)
                 //{
                 //    if (keyboardState.IsKeyUp(Keys.W))
                 //    {
-                //        if(pressedKeys[i]==Keys.W)
+                //        if (pressedKeys[i] == Keys.W)
                 //            pressedKeys.RemoveAt(i);
                 //    }
 
@@ -38,11 +39,11 @@ namespace PongEx1
                 //    {
                 //        if (pressedKeys[i] == Keys.S)
                 //            pressedKeys.RemoveAt(i);
-                        
+
                 //    }
-                    
+
                 //}
-                OnEvent(pressedKeys.ToArray());
+                OnEvent(pressedKeys);
             }
         }
 
