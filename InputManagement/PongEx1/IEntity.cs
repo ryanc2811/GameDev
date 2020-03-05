@@ -14,6 +14,7 @@ namespace PongEx1
         string id { get; set; }
         void setTexture(Texture2D texture2D);
         void setPosition(float x, float y);
+        Vector2 getPosition();
         void Initialise();
         void draw(SpriteBatch spriteBatch);
         void Update();

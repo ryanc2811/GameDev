@@ -23,6 +23,8 @@ namespace PongEx1
         public abstract void Initialise();
         //Update method
         public abstract void Update();
+
+        public abstract Vector2 getPosition();
         
     }
 }

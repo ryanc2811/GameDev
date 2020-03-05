@@ -12,7 +12,8 @@ namespace PongEx1
     {
         public int speed = 20;
         public Random random;
-        
+        float maxAngle = 45f;
+        float ballAngle;
         //DECLARE integer for storing the facing direction of the ball(1=moving right, -1=moving left), Name it facingDirection
         private int facingDirection = 1;
 
@@ -24,7 +25,7 @@ namespace PongEx1
         //Serve the ball
         public void Serve()
         {
-            
+            speed = 20;
             //place ball in the centre of the screen
             setPosition(Kernel.ScreenWidth / 2, Kernel.ScreenHeight / 2);
             float rotation= (float)(Math.PI / 2 + (random.NextDouble() * (Math.PI / 5.0f) - Math.PI / 3));
@@ -64,6 +65,13 @@ namespace PongEx1
         {
             Serve();
         }
+        public float getRandomAngle(float minDegrees = 140f, float maxDegrees = 240f)
+        {
+            float minRadius = minDegrees * (float)Math.PI / 180;
+            float maxRadius = maxDegrees * (float)Math.PI / 180;
+            float randAngle = random.Next((int)minRadius, (int)maxRadius);
+            return randAngle;
+        }
         //balls update method
         public override void Update()
         {
@@ -86,9 +94,37 @@ namespace PongEx1
         {
             if(entity is Paddle)
             {
-               velocity.X =velocity.X + ((Paddle)entity).velocity.X+((Paddle)entity).Spin;
-               velocity.Y = velocity.Y + ((Paddle)entity).velocity.Y;
-               velocity *=-1;
+               //velocity.X =velocity.X + ((Paddle)entity).velocity.X+((Paddle)entity).Spin;
+               //velocity.Y = velocity.Y + ((Paddle)entity).velocity.Y;
+               //velocity *=-1;
+
+            https://gamedev.stackexchange.com/questions/4253/in-pong-how-do-you-calculate-the-balls-direction-when-it-bounces-off-the-paddl 
+                //create a variable that stores the y position of the ball when the collision occurs
+                float onCollideY = entityLocn.Y;
+                //store the y of the ball in relation to the paddle
+                float onCollideRelativeY = ((Paddle)entity).entityLocn.Y - onCollideY;
+                float onCollideNormalisedY = onCollideRelativeY / (((Paddle)entity).Height() / 2);
+                //create a ball angle variable
+                ballAngle = onCollideNormalisedY * (maxAngle * (float)Math.PI / 180);
+                //move ball in the facing direction of the paddle
+
+                //update the Y position with the new ball angle variable
+                velocity.Y = speed * -(float)Math.Sin(ballAngle);
+                //each time a paddle collides with a ball, add 3 to the speed
+                speed += 3;
+                //if the entity that collides with the ball is an AI
+
+                if (entity.getPosition().X== 1550)
+                {
+                    //add the ball angle variable to the velocity on the x axis
+                    velocity.X = speed * -(float)Math.Cos(ballAngle);
+
+                }
+                else
+                {
+                    //add the ball angle variable to the velocity on the x axis
+                    velocity.X = speed * (float)Math.Cos(ballAngle);
+                }
                
             }
         }

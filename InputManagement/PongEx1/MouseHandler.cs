@@ -8,6 +8,11 @@ namespace PongEx1
 {
     class MouseHandler :IInput
     {
+        public void AddEventHandler(EventHandler<InputEventArgs> handler)
+        {
+            
+        }
+
         public void Update()
         {
 

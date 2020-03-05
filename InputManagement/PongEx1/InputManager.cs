@@ -10,10 +10,12 @@ namespace PongEx1
     //This is the publisher class
     class InputManager :IInputManager
     {
-        private Dictionary<InputDevice,IInput> dictInput;
-
+        private Dictionary<InputDevice, IInput> dictInput;
+        //IInput keyboardHandler;
         public InputManager()
         {
+            //keyboardHandler = new KeybHandler();
+
             dictInput = new Dictionary<InputDevice, IInput>();
             dictInput.Add(InputDevice.Keyboard, new KeybHandler() as IInput);
             dictInput.Add(InputDevice.Mouse, new MouseHandler() as IInput);
@@ -24,6 +26,7 @@ namespace PongEx1
             {
                 dictInput[input].Update();
             }
+            //keyboardHandler.Update();
         }
 
         public virtual void OnNewInput(IList<Keys> newArg)
@@ -32,9 +35,11 @@ namespace PongEx1
             args.PressedKeys = newArg;
             NewInput(this, args);
         }
-        public void addEventListener(InputDevice inputDevice, EventHandler<InputEventArgs> handler)
-        {
-            NewInput += handler;
+        public void addEventListener(InputDevice inputType, EventHandler<InputEventArgs> handler)
+        { 
+                //NewInput += handler;
+            dictInput[inputType].AddEventHandler(handler);
+
         }
         public event EventHandler<InputEventArgs> NewInput;
 

@@ -8,6 +8,7 @@ namespace PongEx1
 {
     interface IPaddle
     {
-        
+        int Width();
+        int Height();
     }
 }

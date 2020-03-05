@@ -9,5 +9,6 @@ namespace PongEx1
    public interface IInput
     {
         void Update();
+        void AddEventHandler(EventHandler<InputEventArgs> handler);
     }
 }

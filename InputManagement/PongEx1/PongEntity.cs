@@ -63,7 +63,10 @@ namespace PongEx1
             pSpriteBatch.Draw(texture, entityLocn, Color.AntiqueWhite);
             
         }
-
+        public override Vector2 getPosition()
+        {
+            return entityLocn;
+        }
         public override void Update()
         {
 

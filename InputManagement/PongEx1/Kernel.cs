@@ -130,13 +130,14 @@ namespace PongEx1
 
             
             collisionManager.Update();
-            // input
-            //send player index one parameter to the GetKeyboardInputDirection Method and store return value in player 1 velocity
-            Vector2 p1Velocity = Input.GetKeyboardInputDirection(PlayerIndex.One);
-            //send player index two parameter to the GetKeyboardInputDirection Method and store return value in player 2 velocity
-            Vector2 p2Velocity = Input.GetKeyboardInputDirection(PlayerIndex.Two);
-            ((Paddle)paddle1).setVelocity(p1Velocity);
-            ((Paddle)paddle2).setVelocity(p2Velocity);
+            inputManager.Update();
+            //// input
+            ////send player index one parameter to the GetKeyboardInputDirection Method and store return value in player 1 velocity
+            //Vector2 p1Velocity = Input.GetKeyboardInputDirection(PlayerIndex.One);
+            ////send player index two parameter to the GetKeyboardInputDirection Method and store return value in player 2 velocity
+            //Vector2 p2Velocity = Input.GetKeyboardInputDirection(PlayerIndex.Two);
+            //((Paddle)paddle1).setVelocity(p1Velocity);
+            //((Paddle)paddle2).setVelocity(p2Velocity);
         }
 
         /// <summary>

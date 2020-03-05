@@ -65,7 +65,6 @@
     <Compile Include="KeybHandler.cs" />
     <Compile Include="IKeyboardListener.cs" />
     <Compile Include="MouseHandler.cs" />
-    <Compile Include="myEventArgs.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="PongEntity.cs" />
     <Compile Include="Program.cs" />

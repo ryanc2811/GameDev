@@ -11,7 +11,7 @@ namespace PongEx1
 {
     class Paddle:PongEntity, ICollidable,IKeyboardListener
     {
-        private Keys Key;
+        private IList<Keys> keyList;
         public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
@@ -22,7 +22,14 @@ namespace PongEx1
         {
            
         }
-
+        public int Height()
+        {
+            return texture.Height;
+        }
+        public int Width()
+        {
+            return texture.Width;
+        }
         public void onCollide(IEntity entity)
         {
             
@@ -47,14 +54,24 @@ namespace PongEx1
 
             }
 
-    }
+            
+        }
         public virtual void OnNewInput(object source, InputEventArgs args)
         {
             // Act on data:
-            Key = args.PressedKeys[0];
+            keyList = args.PressedKeys;
+            foreach (Keys key in keyList)
+            {
+                if (key == Keys.W)
+                {
+                    velocity.Y -= 0.2f;
+                }
+                else if(key==Keys.S)
+                {
+                    velocity.Y += 0.2f;
+                }
+            }
 
         }
-
-      
     }
 }
