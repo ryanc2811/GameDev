@@ -94,10 +94,7 @@ namespace PongEx1
         {
             if(entity is Paddle)
             {
-                //velocity.X =velocity.X + ((Paddle)entity).velocity.X+((Paddle)entity).Spin;
-                //velocity.Y = velocity.Y + ((Paddle)entity).velocity.Y;
-                //velocity *=-1;
-                
+             
             https://gamedev.stackexchange.com/questions/4253/in-pong-how-do-you-calculate-the-balls-direction-when-it-bounces-off-the-paddl 
                 //create a variable that stores the y position of the ball when the collision occurs
                 float onCollideY = entityLocn.Y;
