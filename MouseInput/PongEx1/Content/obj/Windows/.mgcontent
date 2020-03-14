@@ -4,7 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/colr2_18/Documents/GitHub/GameDev/CollisionEvents/PongEx1/Content/paddle.png</File>
-    <File>C:/Users/colr2_18/Documents/GitHub/GameDev/CollisionEvents/PongEx1/Content/square.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/MouseInput/PongEx1/Content/paddle.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/MouseInput/PongEx1/Content/square.png</File>
   </SourceFiles>
 </SourceFileCollection>

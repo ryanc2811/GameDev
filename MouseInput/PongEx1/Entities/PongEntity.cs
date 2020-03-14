@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace PongEx1
+namespace PongEx1.Entities
 {
     
     abstract class PongEntity : Entity

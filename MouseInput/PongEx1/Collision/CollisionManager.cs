@@ -5,22 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-namespace PongEx1
+using PongEx1.Entities;
+namespace PongEx1.Collision
 {
     class CollisionManager:ICollisionManager, ICollisionSubscriber
     {
+        #region Datamembers
+        //DECLARE an IList of type ICollidable for storing a collection of collidable Entities, call it EntityList
+        private IList<ICollidable> EntityList;
+        #endregion
 
-        private List<ICollidable> EntityList;
-        
-
+        #region Constructor
         public CollisionManager()
         {
+            //INSTANTIATE EntityList
             EntityList = new List<ICollidable>();
         }
+        #endregion
 
-        
-        public void CollideCheck()
+        #region CollisionManagement
+        private void CollideCheck()
         {
             //if paddle and ball collide, then return true
             for(int i=0;i<EntityList.Count-1;i++)
@@ -36,7 +40,8 @@ namespace PongEx1
                 
             }
         }
-
+        #endregion
+        #region ICollisionSubscriber
         public void Subscribe(ICollidable collidable)
         {
             EntityList.Add(collidable);
@@ -46,10 +51,12 @@ namespace PongEx1
         {
             EntityList.Remove(collidable);
         }
-
+        #endregion
+        #region ICollisionManager
         public void Update() {
             CollideCheck();
             
         }
+        #endregion
     }
 }

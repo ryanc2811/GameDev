@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PongEx1
+namespace PongEx1.Collision
 {
-    public enum InputDevice
+    public interface ICollisionManager
     {
-        Keyboard,
-        Mouse
+        void Update();
+        
     }
 }

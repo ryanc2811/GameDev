@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-namespace PongEx1
+using PongEx1.Collision;
+using PongEx1.Input;
+namespace PongEx1.Entities
 {
     class Paddle:PongEntity, ICollidable,IInputListener
     {

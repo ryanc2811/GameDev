@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/colr2_18/Documents/GitHub/GameDev/CollisionEvents/PongEx1/Content/paddle.png</SourceFile>
-  <SourceTime>2020-03-11T09:19:07.2998829+00:00</SourceTime>
-  <DestFile>C:/Users/colr2_18/Documents/GitHub/GameDev/CollisionEvents/PongEx1/Content/bin/Windows/paddle.xnb</DestFile>
-  <DestTime>2020-03-11T11:28:17.2595211+00:00</DestTime>
+  <SourceFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/MouseInput/PongEx1/Content/paddle.png</SourceFile>
+  <SourceTime>2020-03-14T14:47:54.1852113+00:00</SourceTime>
+  <DestFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/MouseInput/PongEx1/Content/bin/Windows/paddle.xnb</DestFile>
+  <DestTime>2020-03-14T15:13:43.4017681+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

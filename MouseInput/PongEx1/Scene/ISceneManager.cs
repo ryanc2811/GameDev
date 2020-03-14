@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace PongEx1
+using PongEx1.Entities;
+namespace PongEx1.Scene
 {
     public interface ISceneManager
     {

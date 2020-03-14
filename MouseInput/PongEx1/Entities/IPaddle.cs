@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PongEx1
+namespace PongEx1.Entities
 {
-    interface IBall
+   public interface IPaddle
     {
+        int Width();
+        int Height();
     }
 }

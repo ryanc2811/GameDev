@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-
-namespace PongEx1
+using PongEx1.Collision;
+using PongEx1.Input;
+namespace PongEx1.Entities
 {
     class Ball : PongEntity, ICollidable,IInputListener
     {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PongEx1
+namespace PongEx1.Input
 {
-    interface IPaddle
+    public interface IInputListener
     {
-        int Width();
-        int Height();
+        void OnNewInput(object sender, InputEventArgs args);
+        
     }
 }

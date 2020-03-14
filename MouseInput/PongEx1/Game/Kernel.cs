@@ -3,6 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
+using PongEx1.Collision;
+using PongEx1.Entities;
+using PongEx1.EntityManagement;
+using PongEx1.Scene;
+using PongEx1.Input;
 
 namespace PongEx1
 {

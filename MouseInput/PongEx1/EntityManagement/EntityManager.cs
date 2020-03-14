@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace PongEx1
+using PongEx1.Entities;
+using PongEx1.Scene;
+namespace PongEx1.EntityManagement
 {
     class EntityManager:IEntityManager
     {
