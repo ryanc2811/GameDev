@@ -68,9 +68,9 @@ namespace PongEx1
             sceneManager = new SceneManager();
             collisionManager = new CollisionManager();
             inputManager = new InputManager();
-            ((ICollisionSubscriber)collisionManager).Subscribe((ICollidable)ball);
-            ((ICollisionSubscriber)collisionManager).Subscribe((ICollidable)paddle1);
-            ((ICollisionSubscriber)collisionManager).Subscribe((ICollidable)paddle2);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)ball);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddle1);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddle2);
             inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)ball).OnNewInput);
             inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddle1).OnNewInput);
             inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddle2).OnNewInput);

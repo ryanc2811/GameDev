@@ -48,7 +48,7 @@
     <Compile Include="Entities\IBall.cs" />
     <Compile Include="Collision\ICollidable.cs" />
     <Compile Include="Collision\ICollisionManager.cs" />
-    <Compile Include="Collision\ICollisionSubscriber.cs" />
+    <Compile Include="Collision\ICollisionPublisher.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="EntityManagement\IEntityManager.cs" />
     <Compile Include="Input\IInput.cs" />

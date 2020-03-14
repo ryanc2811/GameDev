@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Collision
 {
-    interface ICollisionSubscriber
+    interface ICollisionPublisher
     {
+        //Subscribes Collidable objects to the collision manager
         void Subscribe(ICollidable collidable);
+        //Unsubscribes Collidable objects to the collision manager
         void Unsubscribe(ICollidable collidable);
     }
 }
