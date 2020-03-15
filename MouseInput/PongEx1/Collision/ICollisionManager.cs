@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Collision
 {
-    public interface ICollisionManager
+    interface ICollisionManager
     {
         void Update();
-        
     }
 }
