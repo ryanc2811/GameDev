@@ -33,7 +33,11 @@ namespace PongEx1
         //DECLARE Input Menager
         private IInputManager inputManager;
         private IEntity player;
-
+        private IEntity wallLeft;
+        private IEntity wallRight;
+        private IEntity wallTop;
+        private IEntity wallBottom;
+        private List<IEntity> Walls;
         #endregion
 
         #region Constructor
@@ -68,21 +72,56 @@ namespace PongEx1
             entityManager = new EntityManager();
             //initialize Sprite Batch
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //initialise reference Entities
-            player = entityManager.createPlayer();
             //initialise SceneManager
             sceneManager = new SceneManager();
             //initialize Collision Manager
             collisionManager = new CollisionManager();
             //initialize Input Manager
             inputManager = new InputManager();
+            Walls = new List<IEntity>(4);
+            //initialise reference Entities
+
+            player = entityManager.createPlayer();
+            for (int i = 0; i < Walls.Capacity; i++)
+            {
+                IEntity Wall = entityManager.createWall();
+                Walls.Add(Wall);
+                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)Walls[i]);
+                //add entities to list
+                sceneManager.addEntity(Walls[i]);
+                if (i == 0)
+                {
+                    //set starting position of wall
+                    Walls[i].setPosition(0, 0);
+                }
+                if (i == 1)
+                {
+                    //set starting position of wall
+                    Walls[i].setPosition(111, 500);
+                }
+                if (i == 2)
+                {
+                    //set starting position of wall
+                    Walls[i].setPosition(444, 12);
+                }
+                if (i == 3)
+                {
+                    //set starting position of wall
+                    Walls[i].setPosition(222, 44);
+                }
+
+            }
+            
+           
             //Add all entities to collision Manager 
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)player);
+           
             //Add all entieties to Input Manager
             inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)player).OnNewInput);
 
             //add entities to list
             sceneManager.addEntity(player);
+            
             //Assign spritebatch from Scene Manager
             sceneManager.spriteBatch = spriteBatch;
             //set starting position of player
@@ -102,6 +141,10 @@ namespace PongEx1
         {
             //load texture for entities
             player.setTexture(Content.Load<Texture2D>("square"));
+            for (int i = 0; i < Walls.Capacity; i++)
+            {
+                Walls[i].setTexture(Content.Load<Texture2D>("paddle"));
+            }
         }
         #endregion
 

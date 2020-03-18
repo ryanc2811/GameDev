@@ -25,6 +25,16 @@ namespace PongEx1.Game_Engine.EntityManagement
             return player;
         }
         #endregion
+        #region Create Wall
+        //Creates a IEntity object with a dynamic type of ball.
+        public IEntity createWall()
+        {
+            IEntity wall = new Wall();
+            //give the object a UID
+            wall.id = generateID();
+            return wall;
+        }
+        #endregion
 
         #region ID
         //Generate a unique ID for an Entity

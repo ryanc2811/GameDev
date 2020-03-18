@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Entities\GameXEntity.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\Wall.cs" />
     <Compile Include="Game_Engine\Collision\CollisionManager.cs" />
     <Compile Include="Game_Engine\Entities\Entity.cs" />
     <Compile Include="Game_Engine\EntityManagement\EntityManager.cs" />
