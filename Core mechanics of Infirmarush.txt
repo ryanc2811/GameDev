@@ -1,0 +1,7 @@
+>>player movement
+>>player collision with a collidable object like wall where player should stop moving on collision (save player position before colliding with object, then set the players current position to previous position)
+>>player interaction with an object (tool bench, patient)
+>>handbook menu
+>>multiple scenes
+>>Score system
+>>
