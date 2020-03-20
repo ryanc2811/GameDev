@@ -17,6 +17,8 @@ namespace PongEx1
         protected Texture2D texture;
         //DECLARE Vector2 used to change the velocity of entities, call it velocity
         protected Vector2 velocity;
+        protected float rotation;
+        protected Vector2 spriteOrigin;
         //DECLARE Id
         public override string id { get; set; }
         #endregion
@@ -45,7 +47,7 @@ namespace PongEx1
         public override void draw(SpriteBatch pSpriteBatch)
         {
             //draw the entity using the spritebatch
-            pSpriteBatch.Draw(texture, entityLocn, Color.AntiqueWhite);
+            pSpriteBatch.Draw(texture, entityLocn, null,Color.AntiqueWhite,rotation,spriteOrigin,1f,SpriteEffects.None,0);
 
         }
         #endregion

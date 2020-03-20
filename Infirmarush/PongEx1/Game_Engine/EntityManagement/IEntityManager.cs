@@ -12,6 +12,7 @@ namespace PongEx1.Game_Engine.EntityManagement
         //Create Ball
         IEntity createPlayer();
         IEntity createWall();
+        IEntity createPlayerHitCheck();
         //Terminate
         void Terminate(IEntity entity, ISceneManager sceneManager);
     }

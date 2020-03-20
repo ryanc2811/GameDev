@@ -5,67 +5,45 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using PongEx1.Game_Engine.Collision;
-using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Input;
 namespace PongEx1.Entities
 {
-    class Player : GameXEntity, ICollidable, IInputListener
+    class PlayerHitCheck : HitCheck, IInputListener
     {
+        private float speed = 10f;
+        private float reducedSpeed;
         //DECLARE Array List for Input
         private IList<Keys> keyList;
-        private float speed=10f;
-        private float reducedSpeed;
-        private Vector2 tempPos;
-        private IEntity HitCheck;
-       
-        public Player()
+        
+        public bool getHitWall { get { return boolHitWall; } }
+        public void setSpriteOrigin(Vector2 spriteOrigin)
+        {
+            //spriteOrigin.Y += 10;
+            this.spriteOrigin = spriteOrigin;
+        }
+        public PlayerHitCheck()
         {
             reducedSpeed = speed *= 0.7f;
-        }
-       public void settHitCheck(IEntity HitCheck)
-       {
-            this.HitCheck = HitCheck;
-       }
-       public Rectangle getHitBox()
-        {
-            return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
-        }
-
-        public void onCollide(IEntity entity)
-        {
-            if(entity is Wall)
-            {
-                entityLocn = tempPos;
-            }
-        }
-        public override void Update()
-        {
-
-            //if (((PlayerHitCheck)HitCheck).getHitWall)
-            //{
-            //    Console.WriteLine("Hi");
-            //    //entityLocn = tempPos;
-            //}
-            spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
-           // ((PlayerHitCheck)HitCheck).setSpriteOrigin(spriteOrigin);
-            if (velocity.X != 0 && velocity.Y != 0)
-            {
-                speed = reducedSpeed;
-            }
-            else
-            {
-                speed = 10;
-            }
             
         }
+        //public override void Update()
+        //{
+        //    boolHitWall = false;
+        //    if (velocity.X != 0 && velocity.Y != 0)
+        //    {
+        //        speed = reducedSpeed;
+        //    }
+        //    else
+        //    {
+        //        speed = 10;
+        //    }
+        //}
         public void OnNewInput(object sender, InputEventArgs args)
         {
             // Act on data:
             velocity = Vector2.Zero;
             keyList = args.PressedKeys;
             tempPos = entityLocn;
-        
             if (keyList.Contains(Keys.W))
             {
                 rotation = MathHelper.ToRadians(0f);
@@ -75,7 +53,7 @@ namespace PongEx1.Entities
             }
             else if (keyList.Contains(Keys.S))
             {
-                rotation = MathHelper.ToRadians(180f);
+                rotation =MathHelper.ToRadians(180f);
                 velocity.Y += speed;
                 //update the paddles position
                 entityLocn.Y += velocity.Y;
@@ -95,7 +73,7 @@ namespace PongEx1.Entities
                 //update the paddles position
                 entityLocn.X += velocity.X;
             }
-
         }
     }
-}
+    }
+

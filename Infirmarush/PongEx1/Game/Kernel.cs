@@ -33,10 +33,7 @@ namespace PongEx1
         //DECLARE Input Menager
         private IInputManager inputManager;
         private IEntity player;
-        private IEntity wallLeft;
-        private IEntity wallRight;
-        private IEntity wallTop;
-        private IEntity wallBottom;
+        private IEntity playerHitCheck;
         private List<IEntity> Walls;
         #endregion
 
@@ -82,6 +79,7 @@ namespace PongEx1
             //initialise reference Entities
 
             player = entityManager.createPlayer();
+           // playerHitCheck = entityManager.createPlayerHitCheck();
             for (int i = 0; i < Walls.Capacity; i++)
             {
                 IEntity Wall = entityManager.createWall();
@@ -91,41 +89,41 @@ namespace PongEx1
                 sceneManager.addEntity(Walls[i]);
                 if (i == 0)
                 {
-                    //set starting position of wall
-                    Walls[i].setPosition(0, 0);
+                    //set starting position of left wall
+                    Walls[i].setPosition(-20, 0);
                 }
                 if (i == 1)
                 {
-                    //set starting position of wall
-                    Walls[i].setPosition(111, 500);
+                    //set starting position of right wall
+                    Walls[i].setPosition(1620, 0);
                 }
                 if (i == 2)
                 {
-                    //set starting position of wall
-                    Walls[i].setPosition(444, 12);
+                    //set starting position of the top wall
+                    Walls[i].setPosition(0, -20);
                 }
                 if (i == 3)
                 {
-                    //set starting position of wall
-                    Walls[i].setPosition(222, 44);
+                    //set starting position of the bottom wall
+                    Walls[i].setPosition(0, 920);
                 }
 
             }
-            
-           
             //Add all entities to collision Manager 
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)player);
-           
+            //((ICollisionPublisher)collisionManager).Subscribe((ICollidable)playerHitCheck);
             //Add all entieties to Input Manager
             inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)player).OnNewInput);
-
+           // inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)playerHitCheck).OnNewInput);
             //add entities to list
             sceneManager.addEntity(player);
-            
+            //sceneManager.addEntity(playerHitCheck);
             //Assign spritebatch from Scene Manager
             sceneManager.spriteBatch = spriteBatch;
             //set starting position of player
-            player.setPosition(0, 0);
+            player.setPosition(800, 800);
+           //playerHitCheck.setPosition(player.getPosition().X, player.getPosition().Y);
+            //((Player)player).settHitCheck(playerHitCheck);
             //INITIALIZE
             base.Initialize();
             
@@ -141,9 +139,13 @@ namespace PongEx1
         {
             //load texture for entities
             player.setTexture(Content.Load<Texture2D>("square"));
+            //playerHitCheck.setTexture(Content.Load<Texture2D>("PlayerHitDetection"));
             for (int i = 0; i < Walls.Capacity; i++)
             {
-                Walls[i].setTexture(Content.Load<Texture2D>("paddle"));
+                if(i==0||i==1)
+                    Walls[i].setTexture(Content.Load<Texture2D>("WallVertical"));
+                if(i==2||i==3)
+                    Walls[i].setTexture(Content.Load<Texture2D>("WallHorizontal"));
             }
         }
         #endregion
@@ -182,7 +184,8 @@ namespace PongEx1
             collisionManager.Update();
             //update Input Manager
             inputManager.Update();
-         
+            
+            
         }
         #endregion
 
@@ -197,7 +200,7 @@ namespace PongEx1
             GraphicsDevice.Clear(Color.CornflowerBlue);
             //Begin Drawing
             spriteBatch.Begin();
-            //Draw entieties
+            //Draw entities
             sceneManager.Draw();
             spriteBatch.End();
             base.Draw(gameTime);

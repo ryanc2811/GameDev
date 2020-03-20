@@ -35,7 +35,16 @@ namespace PongEx1.Game_Engine.EntityManagement
             return wall;
         }
         #endregion
-
+        #region Create HitCheck
+        //Creates a IEntity object with a dynamic type of ball.
+        public IEntity createPlayerHitCheck()
+        {
+            IEntity HitCheck = new PlayerHitCheck();
+            //give the object a UID
+            HitCheck.id = generateID();
+            return HitCheck;
+        }
+        #endregion
         #region ID
         //Generate a unique ID for an Entity
         public string generateID()
