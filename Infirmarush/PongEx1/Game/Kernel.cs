@@ -33,6 +33,7 @@ namespace PongEx1
         //DECLARE Input Menager
         private IInputManager inputManager;
         private IEntity player;
+        private IEntity patient;
         private IEntity playerHitCheck;
         private List<IEntity> Walls;
         #endregion
@@ -77,8 +78,8 @@ namespace PongEx1
             inputManager = new InputManager();
             Walls = new List<IEntity>(4);
             //initialise reference Entities
-
             player = entityManager.createPlayer();
+            patient = entityManager.createPatient();
            // playerHitCheck = entityManager.createPlayerHitCheck();
             for (int i = 0; i < Walls.Capacity; i++)
             {
@@ -111,18 +112,21 @@ namespace PongEx1
             }
             //Add all entities to collision Manager 
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)player);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)patient);
             //((ICollisionPublisher)collisionManager).Subscribe((ICollidable)playerHitCheck);
             //Add all entieties to Input Manager
             inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)player).OnNewInput);
            // inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)playerHitCheck).OnNewInput);
             //add entities to list
             sceneManager.addEntity(player);
+            sceneManager.addEntity(patient);
             //sceneManager.addEntity(playerHitCheck);
             //Assign spritebatch from Scene Manager
             sceneManager.spriteBatch = spriteBatch;
             //set starting position of player
             player.setPosition(800, 800);
-           //playerHitCheck.setPosition(player.getPosition().X, player.getPosition().Y);
+            patient.setPosition(100, 400);
+            //playerHitCheck.setPosition(player.getPosition().X, player.getPosition().Y);
             //((Player)player).settHitCheck(playerHitCheck);
             //INITIALIZE
             base.Initialize();
@@ -139,6 +143,7 @@ namespace PongEx1
         {
             //load texture for entities
             player.setTexture(Content.Load<Texture2D>("square"));
+            patient.setTexture(Content.Load<Texture2D>("Patient"));
             //playerHitCheck.setTexture(Content.Load<Texture2D>("PlayerHitDetection"));
             for (int i = 0; i < Walls.Capacity; i++)
             {

@@ -374,3 +374,4 @@ C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\obj\x86\Deb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\WallVertical.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\WallHorizontal.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\PlayerHitDetection.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Patient.xnb

@@ -23,10 +23,10 @@ namespace PongEx1.Entities
         {
             reducedSpeed = speed *= 0.7f;
         }
-       public void settHitCheck(IEntity HitCheck)
-       {
-            this.HitCheck = HitCheck;
-       }
+       //public void settHitCheck(IEntity HitCheck)
+       //{
+       //     this.HitCheck = HitCheck;
+       //}
        public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
@@ -34,7 +34,7 @@ namespace PongEx1.Entities
 
         public void onCollide(IEntity entity)
         {
-            if(entity is Wall)
+            if(entity is Wall||entity is Patient)
             {
                 entityLocn = tempPos;
             }

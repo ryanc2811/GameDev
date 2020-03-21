@@ -45,6 +45,16 @@ namespace PongEx1.Game_Engine.EntityManagement
             return HitCheck;
         }
         #endregion
+        #region Create Patient
+        //Creates a IEntity object with a dynamic type of ball.
+        public IEntity createPatient()
+        {
+            IEntity patient = new Patient();
+            //give the object a UID
+            patient.id = generateID();
+            return patient;
+        }
+        #endregion
         #region ID
         //Generate a unique ID for an Entity
         public string generateID()

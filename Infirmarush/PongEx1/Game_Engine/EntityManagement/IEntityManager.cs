@@ -13,6 +13,7 @@ namespace PongEx1.Game_Engine.EntityManagement
         IEntity createPlayer();
         IEntity createWall();
         IEntity createPlayerHitCheck();
+        IEntity createPatient();
         //Terminate
         void Terminate(IEntity entity, ISceneManager sceneManager);
     }
