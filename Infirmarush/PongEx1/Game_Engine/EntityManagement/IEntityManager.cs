@@ -14,6 +14,10 @@ namespace PongEx1.Game_Engine.EntityManagement
         IEntity createWall();
         IEntity createPlayerHitCheck();
         IEntity createPatient();
+        IEntity createToolBench();
+        IEntity createContainer();
+        IEntity createQTLine();
+        IEntity createQTGreen();
         //Terminate
         void Terminate(IEntity entity, ISceneManager sceneManager);
     }

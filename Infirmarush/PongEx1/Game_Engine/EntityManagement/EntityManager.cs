@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PongEx1.Activity;
 using PongEx1.Entities;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Scene;
+using PongEx1.Tools;
 namespace PongEx1.Game_Engine.EntityManagement
 {
     class EntityManager:IEntityManager
@@ -53,6 +55,41 @@ namespace PongEx1.Game_Engine.EntityManagement
             //give the object a UID
             patient.id = generateID();
             return patient;
+        }
+        #endregion
+        #region Create ToolBench
+        //Creates a IEntity object with a dynamic type of ball.
+        public IEntity createToolBench()
+        {
+            IEntity toolBench = new ToolBench();
+            //give the object a UID
+            toolBench.id = generateID();
+            return toolBench;
+        }
+        #endregion
+        #region QuickTime
+        public IEntity createContainer()
+        {
+            IEntity container = new Container();
+            //give the object a UID
+            container.id = generateID();
+            return container;
+        }
+
+        public IEntity createQTLine()
+        {
+            IEntity QTLine = new QTLine();
+            //give the object a UID
+            QTLine.id = generateID();
+            return QTLine;
+        }
+
+        public IEntity createQTGreen()
+        {
+            IEntity QTGreen = new QTGreen();
+            //give the object a UID
+            QTGreen.id = generateID();
+            return QTGreen;
         }
         #endregion
         #region ID

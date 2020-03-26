@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Input;
 using PongEx1.Game_Engine.Collision;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Input;
+using PongEx1.Tools;
+
 namespace PongEx1.Entities
 {
     class Player : GameXEntity, ICollidable, IInputListener
@@ -17,38 +19,45 @@ namespace PongEx1.Entities
         private float speed=10f;
         private float reducedSpeed;
         private Vector2 tempPos;
-        private IEntity HitCheck;
+        private bool interact = false;
+        private bool itemAdded = false;
+       
+        //private IEntity HitCheck;
        
         public Player()
         {
             reducedSpeed = speed *= 0.7f;
         }
-       //public void settHitCheck(IEntity HitCheck)
-       //{
-       //     this.HitCheck = HitCheck;
-       //}
-       public Rectangle getHitBox()
+        public ITool currentTool { get; private set; }
+
+        //public void settHitCheck(IEntity HitCheck)
+        //{
+        //     this.HitCheck = HitCheck;
+        //}
+        public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
         }
 
         public void onCollide(IEntity entity)
         {
-            if(entity is Wall||entity is Patient)
+            entityLocn = tempPos;
+            if(entity is IToolBench)
             {
-                entityLocn = tempPos;
+                if (interact&&!itemAdded)
+                {
+                    itemAdded = true;
+                    currentTool =((IToolBench)entity).getTool("BoneSaw");
+                    Console.WriteLine(currentTool.GetName + " Added");
+                }
             }
         }
         public override void Update()
         {
-
-            //if (((PlayerHitCheck)HitCheck).getHitWall)
-            //{
-            //    Console.WriteLine("Hi");
-            //    //entityLocn = tempPos;
-            //}
             spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
-           // ((PlayerHitCheck)HitCheck).setSpriteOrigin(spriteOrigin);
+            if (currentTool != null)
+                currentTool.Update();
+            
             if (velocity.X != 0 && velocity.Y != 0)
             {
                 speed = reducedSpeed;
@@ -59,12 +68,17 @@ namespace PongEx1.Entities
             }
             
         }
+        public void ActivateTool()
+        {
+            currentTool.setActive(true);
+        }
         public void OnNewInput(object sender, InputEventArgs args)
         {
             // Act on data:
             velocity = Vector2.Zero;
             keyList = args.PressedKeys;
             tempPos = entityLocn;
+            interact = false;
         
             if (keyList.Contains(Keys.W))
             {
@@ -94,6 +108,10 @@ namespace PongEx1.Entities
                 velocity.X += speed;
                 //update the paddles position
                 entityLocn.X += velocity.X;
+            }
+            if (keyList.Contains(Keys.F))
+            {
+                interact = true;
             }
 
         }

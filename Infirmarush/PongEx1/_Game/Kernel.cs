@@ -9,6 +9,8 @@ using PongEx1.Game_Engine.EntityManagement;
 using PongEx1.Game_Engine.Scene;
 using PongEx1.Game_Engine.Input;
 using PongEx1.Entities;
+using PongEx1.Tools;
+using PongEx1.Activity;
 
 namespace PongEx1
 {
@@ -25,7 +27,7 @@ namespace PongEx1
         //DECLARE Screen Height
         public static int ScreenHeight;
         //DECLARE Scene Manager 
-        SceneManager sceneManager;
+        ISceneManager sceneManager;
         //DECLARE Entity Manager
         IEntityManager entityManager;
         //DECLARE Collision Manager
@@ -35,6 +37,12 @@ namespace PongEx1
         private IEntity player;
         private IEntity patient;
         private IEntity playerHitCheck;
+        private IEntity toolBench;
+        private IEntity QTContainer;
+        private IEntity QTLine;
+        private IEntity QTGreen;
+        private IToolFactory toolFactory;
+        private IToolBehaviourFactory toolBehaviourFactory;
         private List<IEntity> Walls;
         #endregion
 
@@ -76,11 +84,23 @@ namespace PongEx1
             collisionManager = new CollisionManager();
             //initialize Input Manager
             inputManager = new InputManager();
+            toolFactory = new ToolFactory();
+            toolBehaviourFactory = new ToolBehaviourFactory();
             Walls = new List<IEntity>(4);
             //initialise reference Entities
             player = entityManager.createPlayer();
             patient = entityManager.createPatient();
-           // playerHitCheck = entityManager.createPlayerHitCheck();
+            toolBench = entityManager.createToolBench();
+            QTContainer = entityManager.createContainer();
+            QTLine = entityManager.createQTLine();
+            QTGreen = entityManager.createQTGreen();
+            ITool boneSaw = toolFactory.create("BoneSaw");
+            IToolBehaviour<ToolBehaviour> boneSawBehaviour = toolBehaviourFactory.Create<BoneSawBehaviour>() as BoneSawBehaviour;
+            ((BoneSawBehaviour)boneSawBehaviour).SetQTItems(QTContainer, QTLine, QTGreen);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)boneSawBehaviour).OnNewInput);
+            boneSaw.receiveJob(boneSawBehaviour);
+            ((IToolBench)toolBench).addTool(boneSaw);
+            //playerHitCheck = entityManager.createPlayerHitCheck();
             for (int i = 0; i < Walls.Capacity; i++)
             {
                 IEntity Wall = entityManager.createWall();
@@ -113,6 +133,10 @@ namespace PongEx1
             //Add all entities to collision Manager 
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)player);
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)patient);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)toolBench);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTLine);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTGreen);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTContainer);
             //((ICollisionPublisher)collisionManager).Subscribe((ICollidable)playerHitCheck);
             //Add all entieties to Input Manager
             inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)player).OnNewInput);
@@ -120,12 +144,21 @@ namespace PongEx1
             //add entities to list
             sceneManager.addEntity(player);
             sceneManager.addEntity(patient);
+            sceneManager.addEntity(toolBench);
+            sceneManager.addEntity(QTContainer);
+            sceneManager.addEntity(QTGreen);
+            sceneManager.addEntity(QTLine);
             //sceneManager.addEntity(playerHitCheck);
             //Assign spritebatch from Scene Manager
-            sceneManager.spriteBatch = spriteBatch;
+            ((SceneManager)sceneManager).spriteBatch = spriteBatch;
             //set starting position of player
             player.setPosition(800, 800);
             patient.setPosition(100, 400);
+            toolBench.setPosition(725, 100);
+            QTContainer.setPosition(100, 300);
+            QTGreen.setPosition(150, 310);
+            QTLine.setPosition(100, 310);
+            ((QTLine)QTLine).setContent(Content);
             //playerHitCheck.setPosition(player.getPosition().X, player.getPosition().Y);
             //((Player)player).settHitCheck(playerHitCheck);
             //INITIALIZE
@@ -144,6 +177,10 @@ namespace PongEx1
             //load texture for entities
             player.setTexture(Content.Load<Texture2D>("square"));
             patient.setTexture(Content.Load<Texture2D>("Patient"));
+            toolBench.setTexture(Content.Load<Texture2D>("ToolBench"));
+            QTContainer.setTexture(Content.Load<Texture2D>("QTContainer"));
+            QTGreen.setTexture(Content.Load<Texture2D>("QTGreen"));
+            QTLine.setTexture(Content.Load<Texture2D>("QTLine"));
             //playerHitCheck.setTexture(Content.Load<Texture2D>("PlayerHitDetection"));
             for (int i = 0; i < Walls.Capacity; i++)
             {
@@ -202,7 +239,7 @@ namespace PongEx1
         protected override void Draw(GameTime gameTime)
         {
             //Make the background blue
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Gray);
             //Begin Drawing
             spriteBatch.Begin();
             //Draw entities

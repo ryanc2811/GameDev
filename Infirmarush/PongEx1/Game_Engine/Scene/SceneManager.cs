@@ -13,7 +13,7 @@ namespace PongEx1.Game_Engine.Scene
     {
         #region Variables
         //DECLARE Array to store the entieties from the scene
-        public List<IEntity> EntityList;
+        private List<IEntity> EntityList;
         //DECLARE Sprite Batch to draw them
         public SpriteBatch spriteBatch;
         #endregion
@@ -37,7 +37,6 @@ namespace PongEx1.Game_Engine.Scene
 
         }
         #endregion
-
         #region Draw
         public void Draw()
         {

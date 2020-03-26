@@ -375,3 +375,8 @@ C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\WallHorizontal.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\PlayerHitDetection.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Patient.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\ToolBench.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTContainer.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTGreen.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTLine.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTLineRed.xnb

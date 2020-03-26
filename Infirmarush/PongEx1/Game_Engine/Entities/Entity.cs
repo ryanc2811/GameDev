@@ -16,14 +16,12 @@ namespace PongEx1.Game_Engine.Entities
         public abstract void setTexture(Texture2D texture2D);
         //store position of entity
         public abstract void setPosition(float x, float y);
-       
         //pass the spriteBatch
         public abstract void draw(SpriteBatch spriteBatch);
         //initialise entity
         public abstract void Initialise();
         //Update method
         public abstract void Update();
-
         //return Position value
         public abstract Vector2 getPosition();
         

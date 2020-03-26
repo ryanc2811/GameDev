@@ -26,6 +26,7 @@ namespace PongEx1.Illness
         public void addSymptom(Symptom symptom)
         {
             symptoms.Add(symptom);
+            Console.WriteLine(symptom+" added");
         }
     }
 }
