@@ -52,7 +52,6 @@ namespace PongEx1.Game_Engine.Input
                 for (int i = 0; i < pressedKeysList.Count; i++)
                 {
                     pressedEventKeys.Add(pressedKeys[i]);
-                    
                 }
 
                 if (pressedEventKeys.Count > 0)

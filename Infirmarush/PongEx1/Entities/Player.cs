@@ -9,10 +9,13 @@ using PongEx1.Game_Engine.Collision;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Input;
 using PongEx1.Tools;
+using PongEx1.Entities.PatientStuff;
+using PongEx1.Activity;
+using PongEx1._Game.Events;
 
 namespace PongEx1.Entities
 {
-    class Player : GameXEntity, ICollidable, IInputListener
+    class Player : GameXEntity, ICollidable, IInputListener,IPlayer,IActivityListener,IDeathListener
     {
         //DECLARE Array List for Input
         private IList<Keys> keyList;
@@ -21,19 +24,17 @@ namespace PongEx1.Entities
         private Vector2 tempPos;
         private bool interact = false;
         private bool itemAdded = false;
-       
-        //private IEntity HitCheck;
+        bool stopMoving = false;
+        int currentPatientNum;
        
         public Player()
         {
             reducedSpeed = speed *= 0.7f;
         }
-        public ITool currentTool { get; private set; }
+        public ITool currentTool { get; set; }
 
-        //public void settHitCheck(IEntity HitCheck)
-        //{
-        //     this.HitCheck = HitCheck;
-        //}
+  
+        public bool Interact { get { return interact; } }
         public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
@@ -41,14 +42,14 @@ namespace PongEx1.Entities
 
         public void onCollide(IEntity entity)
         {
-            entityLocn = tempPos;
-            if(entity is IToolBench)
+            if(entity is IImmovable)
+                entityLocn = tempPos;
+
+            if(entity is Patient)
             {
                 if (interact&&!itemAdded)
                 {
                     itemAdded = true;
-                    currentTool =((IToolBench)entity).getTool("BoneSaw");
-                    Console.WriteLine(currentTool.GetName + " Added");
                 }
             }
         }
@@ -68,9 +69,13 @@ namespace PongEx1.Entities
             }
             
         }
-        public void ActivateTool()
+        public void ActivateTool(int patientNum)
         {
-            currentTool.setActive(true);
+            currentTool.setActive(true,patientNum);
+            currentPatientNum = patientNum;
+            Console.WriteLine(currentTool.GetName + " Used");
+            if (currentTool.GetName == "BoneSaw")
+                stopMoving = true;
         }
         public void OnNewInput(object sender, InputEventArgs args)
         {
@@ -79,7 +84,8 @@ namespace PongEx1.Entities
             keyList = args.PressedKeys;
             tempPos = entityLocn;
             interact = false;
-        
+            
+            if (!stopMoving) {
             if (keyList.Contains(Keys.W))
             {
                 rotation = MathHelper.ToRadians(0f);
@@ -113,7 +119,19 @@ namespace PongEx1.Entities
             {
                 interact = true;
             }
+            }
+        }
 
+        public void OnActivityChange(object sender, IEvent args)
+        {
+            if (!((ActivityEvent)args).Active[(PatientNum)currentPatientNum])
+                stopMoving = false;
+        }
+
+        public void OnDeath(object sender, IEvent args)
+        {
+            if (((DeathEvent)args).Dead[(PatientNum)currentPatientNum])
+                stopMoving = false;
         }
     }
 }

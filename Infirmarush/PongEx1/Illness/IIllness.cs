@@ -9,7 +9,7 @@ namespace PongEx1.Illness
     public interface IIllness
     {
         BodyPart getBodyPart { get; }
-        List<Symptom> getSymptoms { get; }
+        IList<Symptom> getSymptoms { get; }
         void addBodyPart(BodyPart bodyPart);
         void addSymptom(Symptom bodyPart);
     }

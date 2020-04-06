@@ -9,15 +9,7 @@ namespace PongEx1.Game_Engine.EntityManagement
 {
    public interface IEntityManager
     {
-        //Create Ball
-        IEntity createPlayer();
-        IEntity createWall();
-        IEntity createPlayerHitCheck();
-        IEntity createPatient();
-        IEntity createToolBench();
-        IEntity createContainer();
-        IEntity createQTLine();
-        IEntity createQTGreen();
+        IEntity createEntity<T>() where T : IEntity, new();
         //Terminate
         void Terminate(IEntity entity, ISceneManager sceneManager);
     }

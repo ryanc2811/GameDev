@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PongEx1.Tools
+namespace PongEx1.Entities
 {
-    public interface IToolBehaviourFactory
+    interface IImmovable
     {
-        IToolBehaviour<T> Create<T>() where T : class;
     }
 }

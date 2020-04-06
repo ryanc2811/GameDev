@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using PongEx1.Activity;
 using PongEx1.Entities;
+using PongEx1.Entities.PatientStuff;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Input;
 using System;
@@ -12,54 +13,79 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Tools
 {
-    class BoneSawBehaviour:ToolBehaviour,IToolBehaviour<BoneSawBehaviour>,IInputListener
+    class BoneSawBehaviour:ToolBehaviour,IBehaviour,IInputListener
     {
+        //IEntity objects for the quick time activity
         private IEntity QTContainer;
         private IEntity QTLine;
         private IEntity QTGreen;
-        private string RedTexture = "QTLineRed";
-        private string BlackTexture = "QTLine";
+        
+        //boolean for checking if the player has pressed e when the line is in the green area
         bool hitGreen = false;
+        //boolean for checking if the line is in the green area
         bool inGreen = false;
+        //boolean to switch the hasHitGreen method on and off
         bool interact = false;
-        bool initial = false;
+        //boolean for initialising position of the quick time objects
+        
+        //boolean for checking if input has been taken
         bool gotInput = false;
-        //bool hasInteracted = false;
-        Vector2 linePos;
-        Vector2 greenPos;
-        int lineWidth;
-        int lineHeight;
-        int greenWidth;
-        int greenHeight;
+        //boolean for turning the activity off
+        bool activityChanged = false;
+        //integer for counting the number of times that the player has hit the green area with the line
+        int quickTimeCount = 0;
+        /// <summary>
+        /// Setter for the quick time objects
+        /// </summary>
+        /// <param name="QTContainer"></param>
+        /// <param name="QTLine"></param>
+        /// <param name="QTGreen"></param>
         public void SetQTItems(IEntity QTContainer, IEntity QTLine, IEntity QTGreen)
         {
             this.QTContainer= QTContainer;
             this.QTLine=QTLine;
             this.QTGreen= QTGreen;
         }
-        private void SetQTObjPos()
-        {
-            QTContainer.setPosition(100, 300);
-            QTGreen.setPosition(150, 310);
-            QTLine.setPosition(100, 310);
-        }
         public override void Behaviour()
         {
-            //isActive = true;
-            if (!initial)
+            
+            if (hasEnded)
             {
-                initial = true;
-                SetQTObjPos();
+                Console.WriteLine("H");
+                _activityHandler.OnActivityChange(true, (PatientNum)patientNum);
+                isActive = true;
             }
-            //Vector2 linePos = QTLine.getPosition();
-            //Vector2 greenPos = QTGreen.getPosition();
-            //int lineWidth = ((IShape)QTLine).getWidth();
-            //int greenWidth = ((IShape)QTGreen).getWidth();
-            //int lineHeight = ((IShape)QTLine).getHeight();
-            //int greenHeight = ((IShape)QTGreen).getHeight();
-            //Rectangle lineHitBox = new Rectangle((int)linePos.X, (int)linePos.Y, lineWidth, lineHeight);
-            //Rectangle greenHitBox = new Rectangle((int)greenPos.X, (int)greenPos.Y, greenWidth, greenHeight);
-            if (((QTLine)QTLine).gethasHitGreen)
+            if (isActive&&!initial)
+            {
+                Console.WriteLine("HI");
+                initial = true;
+                hasEnded = false;
+                quickTimeCount = 0;
+            }
+            if (quickTimeCount >= 3)
+            {
+                if (activityChanged)
+                {
+                    activityChanged = false;
+                    isActive = false;
+                    initial = false;
+                    hasEnded = true;
+                    _activityHandler.OnActivityChange(false,(PatientNum)patientNum);
+                    Console.WriteLine("Patient is cured");
+                }
+            }
+            else
+            {
+                if (!activityChanged)
+                {
+                    quickTimeCount = 0;
+                    isActive = true;
+                    activityChanged = true;
+                    hasEnded = false;
+                    _activityHandler.OnActivityChange(true, (PatientNum)patientNum);
+                }
+            }   
+            if (((IQTLine)QTLine).gethasHitGreen)
             {
                 inGreen = true;
             }
@@ -67,21 +93,20 @@ namespace PongEx1.Tools
             {
                 inGreen = false;
             }
-                
-            //if not it green, set texture to red
-            if (!inGreen)
-                ((Activity.QTLine)QTLine).setTexture(RedTexture);
-            //if the line is in the green area, set texture to black
-            else
-            {
-                ((Activity.QTLine)QTLine).setTexture(BlackTexture);
-            }
+
             if (Keyboard.GetState().IsKeyUp(Keys.E))
             {
                 interact = false;
                 gotInput = false;
                 hitGreen = false;
             }
+        }
+        private void SetRandomGreenPos()
+        {
+            Random random = new Random();
+            float maxX = QTContainer.getPosition().X +((IShape)QTContainer).getWidth();
+            float x = random.Next((int)QTContainer.getPosition().X,(int)maxX);
+            QTGreen.setPosition(x, QTGreen.getPosition().Y);
         }
        /// <summary>
        /// Checks to see if the quick time line is in the green area when e is pressed
@@ -94,22 +119,26 @@ namespace PongEx1.Tools
                 if (!hitGreen)
                 {
                     hitGreen = true;
-                    Console.WriteLine("ding");
+                    if (quickTimeCount < 3)
+                    {
+                        SetRandomGreenPos();
+                        Console.WriteLine("ding");
+                        //add one to the counter
+                        quickTimeCount += 1;
+                    }
                 }
             }
             else
             {
-                Console.WriteLine("OW"); 
-                
+                Console.WriteLine("OW");
+                _damageHandler.OnTakeDamage(20,(PatientNum)patientNum);
             }
         }
         public void OnNewInput(object sender, InputEventArgs args)
         {
-          
-            if (args.PressedKeys.Contains(Keys.E)&&!gotInput)
+            if (args.PressedKeys.Contains(Keys.E)&&!gotInput&&isActive)
             {
                 gotInput = true;
-                
                 if (!interact&&!hitGreen)
                 {
                     hitGreenCheck();

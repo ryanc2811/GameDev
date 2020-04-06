@@ -16,11 +16,13 @@ namespace PongEx1.Game_Engine.Input
         private Vector2 mousePos;
         //DECLARE boolean to check if left button was used
         private bool leftClicked;
+        private bool leftReleased;
         //DECLARE boolean to check if right button was used
         private bool rightClicked;
         #region Getters and Setters
         public Vector2 MousePos { get { return mousePos; } set { mousePos = value; } }
         public bool LeftClicked { get { return leftClicked; } set { leftClicked = value; } }
+        public bool LeftReleased { get { return leftReleased; } set { leftReleased = value; } }
         public bool RightClicked { get { return rightClicked; } set { rightClicked = value; } }
         public IList<Keys> PressedKeys { get { return pressedKeys; } set{pressedKeys=value;} }
         #endregion

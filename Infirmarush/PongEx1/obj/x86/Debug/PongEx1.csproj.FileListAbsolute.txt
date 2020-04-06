@@ -379,4 +379,5 @@ C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTContainer.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTGreen.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTLine.xnb
-C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\QTLineRed.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\cursor.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\BoneSaw.xnb

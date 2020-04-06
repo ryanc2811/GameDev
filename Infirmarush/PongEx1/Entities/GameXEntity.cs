@@ -11,6 +11,7 @@ namespace PongEx1
      class GameXEntity : Entity
     {
         #region Variables
+        protected Color spriteColour=Color.AntiqueWhite;
         //DECLARE vector2 used to store the location of each 2d entity, call it entityLocn
         protected Vector2 entityLocn;
         //DECLARE Texture2D used to store the texture of each 2d entity, call it texture
@@ -47,7 +48,7 @@ namespace PongEx1
         public override void draw(SpriteBatch pSpriteBatch)
         {
             //draw the entity using the spritebatch
-            pSpriteBatch.Draw(texture, entityLocn, null,Color.AntiqueWhite,rotation,spriteOrigin,1f,SpriteEffects.None,0);
+            pSpriteBatch.Draw(texture, entityLocn, null,spriteColour,rotation,spriteOrigin,1f,SpriteEffects.None,0);
 
         }
         #endregion

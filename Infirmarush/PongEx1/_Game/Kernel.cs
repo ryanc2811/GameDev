@@ -11,6 +11,11 @@ using PongEx1.Game_Engine.Input;
 using PongEx1.Entities;
 using PongEx1.Tools;
 using PongEx1.Activity;
+using PongEx1.Entities.Button;
+using PongEx1.Entities.Damage;
+using PongEx1._Game.Events;
+using PongEx1.Entities.PatientStuff;
+using PongEx1.Entities.Mouse;
 
 namespace PongEx1
 {
@@ -32,18 +37,45 @@ namespace PongEx1
         IEntityManager entityManager;
         //DECLARE Collision Manager
         private ICollisionManager collisionManager;
-        //DECLARE Input Menager
+        //DECLARE Input Manager
         private IInputManager inputManager;
+        //DECLARE IEventManager
+        private IEventManager eventManager;
+        //DECLARE IEntity for player object
         private IEntity player;
-        private IEntity patient;
-        private IEntity playerHitCheck;
+        //DECLARE IEntity for toolbench object
         private IEntity toolBench;
-        private IEntity QTContainer;
-        private IEntity QTLine;
-        private IEntity QTGreen;
+        //DECLARE IEntity for boneSaw Button
+        private IEntity boneSawButton;
+        //DECLARE IEntity for mouse object
+        private IEntity mouse;
+        //DECLARE IToolFactory for creating tools
         private IToolFactory toolFactory;
-        private IToolBehaviourFactory toolBehaviourFactory;
+        //DECLARE IToolBehaviourFactory for creating tool behaviours
+        private IBehaviourFactory toolBehaviourFactory;
+        //DECLARE list of IEntity for walls
         private List<IEntity> Walls;
+        //DECLARE list of IEntity for patients
+        private List<IEntity> Patients;
+        //DECLARE an IList of IEntity for all the quick time containers
+        private IList<IEntity> QTContainers;
+        //DECLARE an IList of IEntity for all the quick time green rectangle object
+        private IList<IEntity> QTGreens;
+        //DECLARE an IList of IEntity for all the quick time lines
+        private IList<IEntity> QTLines;
+        //DECLARE an IList of IEventHandler for storing death handlers
+        private IList<IEventHandler> deathHandlers;
+        //DECLARE an IList of IEventHandler for storing damage handlers
+        private IList<IEventHandler> damageHandlers;
+        //DECLARE an IList of IEventHandler for storing activity handlers
+        private IList<IEventHandler> activityHandlers;
+        //DECLARE an IList of IToolBehaviours for storing tool behaviours
+        private IList<IBehaviour> toolBehaviours;
+        //DECLARE an ITool for the bone saw object
+        private ITool boneSaw;
+        private Vector2[] QTContainerPos ={ new Vector2(100, 300),new Vector2(1300, 300) };
+        private Vector2[] QTLinePos ={ new Vector2(100, 310), new Vector2(1300, 310) };
+        private Vector2[] QTGreenPos = { new Vector2(150, 310), new Vector2(1350, 310) };
         #endregion
 
         #region Constructor
@@ -72,42 +104,277 @@ namespace PongEx1
             // TODO: Add your initialization logic here
             ScreenHeight = GraphicsDevice.Viewport.Height;
             ScreenWidth = GraphicsDevice.Viewport.Width;
-            //initialise SceneManager
+            //INSTANTIATE SceneManager
             sceneManager = new SceneManager();
-            //initialise EntityManager
+            //INSTANTIATEEntityManager
             entityManager = new EntityManager();
-            //initialize Sprite Batch
+            //INSTANTIATE Sprite Batch
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //initialise SceneManager
+            //INSTANTIATE SceneManager
             sceneManager = new SceneManager();
-            //initialize Collision Manager
+            //INSTANTIATE Collision Manager
             collisionManager = new CollisionManager();
-            //initialize Input Manager
+            //INSTANTIATE Input Manager
             inputManager = new InputManager();
+            //INSTANTIATE ToolFactory
             toolFactory = new ToolFactory();
+            //INSTANTIATE ToolBehaviourFactory
             toolBehaviourFactory = new ToolBehaviourFactory();
-            Walls = new List<IEntity>(4);
-            //initialise reference Entities
-            player = entityManager.createPlayer();
-            patient = entityManager.createPatient();
-            toolBench = entityManager.createToolBench();
-            QTContainer = entityManager.createContainer();
-            QTLine = entityManager.createQTLine();
-            QTGreen = entityManager.createQTGreen();
-            ITool boneSaw = toolFactory.create("BoneSaw");
-            IToolBehaviour<ToolBehaviour> boneSawBehaviour = toolBehaviourFactory.Create<BoneSawBehaviour>() as BoneSawBehaviour;
-            ((BoneSawBehaviour)boneSawBehaviour).SetQTItems(QTContainer, QTLine, QTGreen);
-            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)boneSawBehaviour).OnNewInput);
-            boneSaw.receiveJob(boneSawBehaviour);
+            //INSTANTIATE patients list
+            Patients = new List<IEntity>(2);
+            //create tools
+            boneSaw = toolFactory.create("BoneSaw");
+            eventManager = new EventManager();
+            deathHandlers = new List<IEventHandler>();
+            damageHandlers= new List<IEventHandler>();
+            activityHandlers=new List<IEventHandler>();
+            
+            
+            //initialise All Entities
+            InitialiseEventHandlers();
+            InitialiseQuickTimeObjects();
+            InitialiseToolBehaviours();
+            InitialisePlayer();
+            InitialiseButtons();
+            InitialiseToolBench();
+            InitialiseMouseObj();
+            InitialiseWalls();
+            InitialisePatients();
+            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)boneSaw).OnDeath);
+            //Assign spritebatch from Scene Manager
+            ((SceneManager)sceneManager).spriteBatch = spriteBatch;
+          
+            //INITIALIZE
+            base.Initialize();
+            
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialisePlayer()
+        {
+            //create player object
+            player = entityManager.createEntity<Player>();
+            //add player to scene
+            sceneManager.addEntity(player);
+            //subscribe player to Collision publisher
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)player);
+            //add player to input manager as an input listener object
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)player).OnNewInput);
+            //add player to the event manager as an activity event listener
+            eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)player).OnActivityChange);
+            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)player).OnDeath);
+            //set the players initial position
+            player.setPosition(800, 800);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialiseToolBench()
+        {
+            //create the tool bench object
+            toolBench = entityManager.createEntity<ToolBench>();
+            //add the bonesaw tool to the tools list inside tool bench
             ((IToolBench)toolBench).addTool(boneSaw);
-            //playerHitCheck = entityManager.createPlayerHitCheck();
+            //add the bonesaw button to the tool bench
+            ((IToolBench)toolBench).SetToolButtons((IButton)boneSawButton);
+            //subscribe the toolbench as a collidable object
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)toolBench);
+            //add the tool bench to the scene
+            sceneManager.addEntity(toolBench);
+            //set the tool bench's initial position
+            toolBench.setPosition(725, 100);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialiseButtons()
+        {
+            //create a bonesaw button
+            boneSawButton = entityManager.createEntity<Button>();
+            //subscribe the button as a collidable object
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)boneSawButton);
+            //add the button to the inputmanager class as a mouse input listener object
+            inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)boneSawButton).OnNewInput);
+            //add the button to the scene
+            sceneManager.addEntity(boneSawButton);
+            //set the buttons initial position
+            boneSawButton.setPosition(1700, 1125);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialiseMouseObj()
+        {
+            //create the mouse IEntity object
+            mouse = entityManager.createEntity<MouseEntity>();
+            //subscribe the mouse as a collidable object
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)mouse);
+            //add the mouse to the input manager class as a mouse input listener
+            inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)mouse).OnNewInput);
+            //add the mouse to the scene
+            sceneManager.addEntity(mouse);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialiseEventHandlers()
+        {
+            for (int i = 0; i < Patients.Capacity; i++)
+            {
+                //INSTANTIATE and add all handler objects to the event handler
+                IEventHandler deathHandler = new DeathHandler();
+                eventManager.AddEventHandler(deathHandler);
+                IEventHandler damageHandler = new DamageHandler();
+                eventManager.AddEventHandler(damageHandler);
+                IEventHandler activityHandler = new ActivityHandler();
+                eventManager.AddEventHandler(activityHandler);
+            }
+
+            IList<IEventHandler> eventHandlers = eventManager.Handlers;
+
+            foreach (IEventHandler handler in eventHandlers)
+            {
+                if (handler.GetType is EventType.DamageEvent)
+                {
+                    damageHandlers.Add(handler);
+                }
+                if (handler.GetType is EventType.ActivityEvent)
+                {
+                    activityHandlers.Add(handler);
+
+                }
+               if (handler.GetType is EventType.DeathEvent)
+                {
+                    deathHandlers.Add(handler);
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialiseQuickTimeObjects()
+        {
+            //INSTANTIATE quick time event objects lists
+            QTContainers = new List<IEntity>();
+            QTGreens = new List<IEntity>();
+            QTLines = new List<IEntity>();
+            //for every patient in the patients list
+            for (int i = 0; i < Patients.Capacity; i++)
+            {
+                //create quick time objects
+                IEntity QTContainer=entityManager.createEntity<QTContainer>();
+                IEntity QTLine=entityManager.createEntity<QTLine>();
+                IEntity QTGreen=entityManager.createEntity<QTGreen>();
+                //add the objects to the corresponding lists
+                QTContainers.Add(QTContainer);
+                QTLines.Add(QTLine);
+                QTGreens.Add(QTGreen);
+                //set the patient number to which the quick time object belongs to
+                ((IQuickTimeObj)QTLines[i]).SetPatientNum(i);
+                ((IQuickTimeObj)QTGreens[i]).SetPatientNum(i);
+                ((IQuickTimeObj)QTContainers[i]).SetPatientNum(i);
+                ((IQuickTimeObj)QTLines[i]).SetActivePosition(QTLinePos[i]);
+                ((IQuickTimeObj)QTContainers[i]).SetActivePosition(QTContainerPos[i]);
+                ((IQuickTimeObj)QTGreens[i]).SetActivePosition(QTGreenPos[i]);
+                //subscribe the QTLine and QT green objects as a collidable object
+                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTLine);
+                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTGreen);
+                //add the QTLine object to the event manager as an Activity Event Listener
+                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)QTLine).OnActivityChange);
+                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)QTGreen).OnActivityChange);
+                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)QTContainer).OnActivityChange);
+                //add the Quick time objects to the scene
+                sceneManager.addEntity(QTContainer);
+                sceneManager.addEntity(QTGreen);
+                sceneManager.addEntity(QTLine);
+                //set the initial position of all quick time objects (OFF SCREEN)
+                QTContainer.setPosition(1100, 1300);
+                QTGreen.setPosition(1150, 1310);
+                QTLine.setPosition(1100, 1310);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialiseToolBehaviours()
+        {
+            //INSTANTIATE toolbehaviours list
+            toolBehaviours = new List<IBehaviour>();
+            //for every patient in the patients list
+            for (int i = 0; i < Patients.Capacity; i++)
+            {
+                //INSTANTIATE a bonesaw behaviour using the tool behaviour factory
+                IBehaviour boneSawBehaviour = toolBehaviourFactory.Create<BoneSawBehaviour>();
+                //add the Quick time event object to the bonesaw behaviour class
+                ((BoneSawBehaviour)boneSawBehaviour).SetQTItems(QTContainers[i], QTLines[i], QTGreens[i]);
+                //add a damage handler to the bonesawbehaviour class
+                boneSawBehaviour.AddDamageHandler((IDamageHandler)damageHandlers[i]);
+                //add an activity handler to the bonesawbehaviour class
+                boneSawBehaviour.AddActivityHandler((IActivityHandler)activityHandlers[i]);
+                //subscribe the bonesawbehaviour class to the inputmanager as a keyboard input listener
+                inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)boneSawBehaviour).OnNewInput);
+                //subscribe the bonesawbehaviour class to the eventmanager as a DeathListener object
+                eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)boneSawBehaviour).OnDeath);
+                //add the behaviour to the bonesaw tool object with reference to the patient number that owns it
+                boneSaw.receiveJob(boneSawBehaviour, i);
+                //add the behaviour to the local toolbehaviour list
+                toolBehaviours.Add(boneSawBehaviour);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialisePatients()
+        {
+            for (int i = 0; i < Patients.Capacity; i++)
+            {
+                //create a patient
+                IEntity patient = entityManager.createEntity<Patient>();
+                //add the patient to the local patients list
+                Patients.Add(patient);
+                //add the patient to the collision manager as a collidable object
+                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)Patients[i]);
+                //add the death handler object to the patient
+                ((Patient)patient).AddDeathHandler((IDeathHandler)deathHandlers[i]);
+                //set the patient number of the patient
+                ((Patient)patient).SetPatientNum((PatientNum)i);
+                //add the patient to the event manager class as a damage listener object
+                eventManager.AddEventListener(EventType.DamageEvent, ((IDamageListener)Patients[i]).OnDamageTaken);
+                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)Patients[i]).OnActivityChange);
+                //add entities to list
+                sceneManager.addEntity(Patients[i]);
+                if (i == 0)
+                {
+                    //set starting position of left Patient
+                    Patients[i].setPosition(100, 400);
+                }
+                if (i == 1)
+                {
+                    //set starting position of right Patient
+                    Patients[i].setPosition(1400, 400);
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitialiseWalls()
+        {
+            //INSTANTIATE the walls list
+            Walls = new List<IEntity>(4);
             for (int i = 0; i < Walls.Capacity; i++)
             {
-                IEntity Wall = entityManager.createWall();
+                //create a wall
+                IEntity Wall = entityManager.createEntity<Wall>();
+                //add wall to walls list
                 Walls.Add(Wall);
+                //subscribe the wall the the collision publisher as a collidable object
                 ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)Walls[i]);
-                //add entities to list
+                //add wall to scene
                 sceneManager.addEntity(Walls[i]);
+                //set the position of each wall depending on the i variable
                 if (i == 0)
                 {
                     //set starting position of left wall
@@ -130,40 +397,6 @@ namespace PongEx1
                 }
 
             }
-            //Add all entities to collision Manager 
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)player);
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)patient);
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)toolBench);
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTLine);
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTGreen);
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTContainer);
-            //((ICollisionPublisher)collisionManager).Subscribe((ICollidable)playerHitCheck);
-            //Add all entieties to Input Manager
-            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)player).OnNewInput);
-           // inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)playerHitCheck).OnNewInput);
-            //add entities to list
-            sceneManager.addEntity(player);
-            sceneManager.addEntity(patient);
-            sceneManager.addEntity(toolBench);
-            sceneManager.addEntity(QTContainer);
-            sceneManager.addEntity(QTGreen);
-            sceneManager.addEntity(QTLine);
-            //sceneManager.addEntity(playerHitCheck);
-            //Assign spritebatch from Scene Manager
-            ((SceneManager)sceneManager).spriteBatch = spriteBatch;
-            //set starting position of player
-            player.setPosition(800, 800);
-            patient.setPosition(100, 400);
-            toolBench.setPosition(725, 100);
-            QTContainer.setPosition(100, 300);
-            QTGreen.setPosition(150, 310);
-            QTLine.setPosition(100, 310);
-            ((QTLine)QTLine).setContent(Content);
-            //playerHitCheck.setPosition(player.getPosition().X, player.getPosition().Y);
-            //((Player)player).settHitCheck(playerHitCheck);
-            //INITIALIZE
-            base.Initialize();
-            
         }
         #endregion
 
@@ -176,18 +409,31 @@ namespace PongEx1
         {
             //load texture for entities
             player.setTexture(Content.Load<Texture2D>("square"));
-            patient.setTexture(Content.Load<Texture2D>("Patient"));
             toolBench.setTexture(Content.Load<Texture2D>("ToolBench"));
-            QTContainer.setTexture(Content.Load<Texture2D>("QTContainer"));
-            QTGreen.setTexture(Content.Load<Texture2D>("QTGreen"));
-            QTLine.setTexture(Content.Load<Texture2D>("QTLine"));
-            //playerHitCheck.setTexture(Content.Load<Texture2D>("PlayerHitDetection"));
+            boneSawButton.setTexture(Content.Load<Texture2D>("BoneSaw"));
+            mouse.setTexture(Content.Load<Texture2D>("cursor"));
             for (int i = 0; i < Walls.Capacity; i++)
             {
                 if(i==0||i==1)
                     Walls[i].setTexture(Content.Load<Texture2D>("WallVertical"));
                 if(i==2||i==3)
                     Walls[i].setTexture(Content.Load<Texture2D>("WallHorizontal"));
+            }
+            for (int i = 0; i < Patients.Capacity; i++)
+            {
+                Patients[i].setTexture(Content.Load<Texture2D>("Patient"));
+            }
+            for (int i = 0; i < QTContainers.Count; i++)
+            {
+                QTContainers[i].setTexture(Content.Load<Texture2D>("QTContainer"));
+            }
+            for (int i = 0; i < QTGreens.Count; i++)
+            {
+                QTGreens[i].setTexture(Content.Load<Texture2D>("QTGreen"));
+            }
+            for (int i = 0; i < QTLines.Count; i++)
+            {
+                QTLines[i].setTexture(Content.Load<Texture2D>("QTLine"));
             }
         }
         #endregion
@@ -226,8 +472,6 @@ namespace PongEx1
             collisionManager.Update();
             //update Input Manager
             inputManager.Update();
-            
-            
         }
         #endregion
 

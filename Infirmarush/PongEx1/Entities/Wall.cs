@@ -9,7 +9,7 @@ using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Collision;
 namespace PongEx1.Entities
 {
-    class Wall : GameXEntity, ICollidable
+    class Wall : GameXEntity, ICollidable,IImmovable
     {
         public Rectangle getHitBox()
         {

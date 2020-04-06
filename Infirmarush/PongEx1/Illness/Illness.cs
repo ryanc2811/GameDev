@@ -8,11 +8,11 @@ namespace PongEx1.Illness
 {
     public class Illness:IIllness
     {
-        private List<Symptom> symptoms;
+        private IList<Symptom> symptoms;
         private BodyPart bodyPart;
 
         public BodyPart getBodyPart { get { return bodyPart; } }
-        public List<Symptom> getSymptoms { get { return symptoms; } }
+        public IList<Symptom> getSymptoms { get { return symptoms; } }
 
         public Illness()
         {

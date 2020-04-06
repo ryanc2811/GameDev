@@ -15,6 +15,7 @@ namespace PongEx1.Game_Engine.Input
         private Vector2 mousePos;
         //DECLARE left button
         private bool leftClicked;
+        private bool leftReleased;
         //DECLARE right button
         private bool rightClicked;
         //DECLARE Event Handler 
@@ -35,23 +36,25 @@ namespace PongEx1.Game_Engine.Input
             mousePos =new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y);
             //Update if left button is pressed 
             leftClicked = Mouse.GetState().LeftButton == ButtonState.Pressed;
+            leftReleased = Mouse.GetState().LeftButton == ButtonState.Released;
             //Update if right button is pressed 
             rightClicked = Mouse.GetState().RightButton == ButtonState.Pressed;
 
             if (mousePos!=null)
             {
-                OnEvent(leftClicked,rightClicked,mousePos);
+                OnEvent(leftClicked,leftReleased,rightClicked,mousePos);
             }
         }
         #endregion
 
         #region On Event
-        public virtual void OnEvent(bool leftClicked,bool rightClicked,Vector2 mousePos)
+        public virtual void OnEvent(bool leftClicked,bool leftReleased,bool rightClicked,Vector2 mousePos)
         {
             if (InputEvent != null)
             {
                 InputEventArgs eventData = new InputEventArgs();
                 eventData.LeftClicked = leftClicked;
+                eventData.LeftReleased = leftReleased;
                 eventData.RightClicked = rightClicked;
                 eventData.MousePos = mousePos;
                 InputEvent(this, eventData);

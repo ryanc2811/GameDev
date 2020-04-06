@@ -9,8 +9,8 @@ namespace PongEx1.Tools
     public interface ITool
     {
         string GetName { get; }
-        void setActive(bool active);
-        void receiveJob(IToolBehaviour<ToolBehaviour> behaviour);
+        void setActive(bool active,int PatientNum);
+        void receiveJob(IBehaviour behaviour,int patientNum);
         void Update();
     }
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PongEx1.Tools
+namespace PongEx1._Game.Events
 {
-    public interface IToolBehaviour<T>
+    public interface IEvent
     {
-       void Behaviour();
     }
 }

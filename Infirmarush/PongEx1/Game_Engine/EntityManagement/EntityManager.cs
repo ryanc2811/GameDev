@@ -8,8 +8,14 @@ using PongEx1.Entities;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Scene;
 using PongEx1.Tools;
+using PongEx1.Entities.Button;
+using PongEx1.Entities.Mouse;
+using PongEx1.Entities.PatientStuff;
 namespace PongEx1.Game_Engine.EntityManagement
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class EntityManager:IEntityManager
     {
         #region Variables
@@ -17,81 +23,21 @@ namespace PongEx1.Game_Engine.EntityManagement
         ISceneManager sceneManager;
         #endregion
 
-        #region Create Player
-        //Creates a IEntity object with a dynamic type of ball.
-        public IEntity createPlayer()
-        {
-            IEntity player = new Player();
-            //give the object a UID
-            player.id = generateID();
-            return player;
-        }
-        #endregion
-        #region Create Wall
-        //Creates a IEntity object with a dynamic type of ball.
-        public IEntity createWall()
-        {
-            IEntity wall = new Wall();
-            //give the object a UID
-            wall.id = generateID();
-            return wall;
-        }
-        #endregion
-        #region Create HitCheck
-        //Creates a IEntity object with a dynamic type of ball.
-        public IEntity createPlayerHitCheck()
-        {
-            IEntity HitCheck = new PlayerHitCheck();
-            //give the object a UID
-            HitCheck.id = generateID();
-            return HitCheck;
-        }
-        #endregion
-        #region Create Patient
-        //Creates a IEntity object with a dynamic type of ball.
-        public IEntity createPatient()
-        {
-            IEntity patient = new Patient();
-            //give the object a UID
-            patient.id = generateID();
-            return patient;
-        }
-        #endregion
-        #region Create ToolBench
-        //Creates a IEntity object with a dynamic type of ball.
-        public IEntity createToolBench()
-        {
-            IEntity toolBench = new ToolBench();
-            //give the object a UID
-            toolBench.id = generateID();
-            return toolBench;
-        }
-        #endregion
-        #region QuickTime
-        public IEntity createContainer()
-        {
-            IEntity container = new Container();
-            //give the object a UID
-            container.id = generateID();
-            return container;
-        }
+        #region Create Entity
 
-        public IEntity createQTLine()
+        /// <summary>
+        /// Generic Factory for IEntity
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IEntity createEntity<T>() where T : IEntity, new()
         {
-            IEntity QTLine = new QTLine();
-            //give the object a UID
-            QTLine.id = generateID();
-            return QTLine;
-        }
-
-        public IEntity createQTGreen()
-        {
-            IEntity QTGreen = new QTGreen();
-            //give the object a UID
-            QTGreen.id = generateID();
-            return QTGreen;
+            IEntity entity = new T();
+            entity.id = generateID();
+            return entity;
         }
         #endregion
+
         #region ID
         //Generate a unique ID for an Entity
         public string generateID()
@@ -106,8 +52,7 @@ namespace PongEx1.Game_Engine.EntityManagement
         {
             sceneManager = pSceneManager;
             sceneManager.removeEntity(entity);
-
-            }
+        }
         #endregion
     }
 }

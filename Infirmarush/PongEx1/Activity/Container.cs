@@ -9,21 +9,26 @@ using System.Text;
 using System.Threading.Tasks;
 namespace PongEx1.Activity
 {
-    class Container : GameXEntity,ICollidable
+    class Container : GameXEntity,IShape
     {
-        public Rectangle getHitBox()
+        public int getHeight()
         {
-            return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
+            throw new NotImplementedException();
         }
+
+        //public Rectangle getHitBox()
+        //{
+        //    return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
+        //}
 
         public int getWidth()
         {
             return texture.Width;
         }
 
-        public void onCollide(IEntity entity)
-        {
+        //public void onCollide(IEntity entity)
+        //{
             
-        }
+        //}
     }
 }

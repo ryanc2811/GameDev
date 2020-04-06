@@ -41,16 +41,41 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Activity\ActivityEvent.cs" />
+    <Compile Include="Activity\ActivityHandler.cs" />
     <Compile Include="Activity\Container.cs" />
+    <Compile Include="Activity\IActivityHandler.cs" />
+    <Compile Include="Activity\IActivityListener.cs" />
+    <Compile Include="Activity\IQTLine.cs" />
+    <Compile Include="Activity\QTContainer.cs" />
     <Compile Include="Activity\QTLine.cs" />
     <Compile Include="Activity\QTGreen.cs" />
+    <Compile Include="Activity\IQuickTimeObj.cs" />
+    <Compile Include="Entities\Button\Button.cs" />
+    <Compile Include="Entities\Button\IButton.cs" />
+    <Compile Include="Entities\Damage\DamageHandler.cs" />
+    <Compile Include="Entities\Damage\IDamageHandler.cs" />
+    <Compile Include="Entities\Damage\IDamageListener.cs" />
     <Compile Include="Entities\GameXEntity.cs" />
+    <Compile Include="Entities\IImmovable.cs" />
+    <Compile Include="Entities\IPlayer.cs" />
     <Compile Include="Entities\IShape.cs" />
-    <Compile Include="Entities\Patient.cs" />
+    <Compile Include="Entities\PatientStuff\DeathEvent.cs" />
+    <Compile Include="Entities\PatientStuff\DeathHandler.cs" />
+    <Compile Include="Entities\PatientStuff\IDeathHandler.cs" />
+    <Compile Include="Entities\PatientStuff\IDeathListener.cs" />
+    <Compile Include="Entities\PatientStuff\Patient.cs" />
+    <Compile Include="Entities\PatientStuff\PatientNum.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\HitCheck.cs" />
-    <Compile Include="Entities\PlayerHitCheck.cs" />
     <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Entities\Mouse\MouseEntity.cs" />
+    <Compile Include="Entities\Damage\ReceiveDamageEvent.cs" />
+    <Compile Include="_Game\Events\EventType.cs" />
+    <Compile Include="_Game\Events\EvntHndlr.cs" />
+    <Compile Include="_Game\Events\EventManager.cs" />
+    <Compile Include="_Game\Events\IEventHandler.cs" />
+    <Compile Include="_Game\Events\IEventManager.cs" />
+    <Compile Include="_Game\Events\IEvent.cs" />
     <Compile Include="_Game\State\IState.cs" />
     <Compile Include="Game_Engine\Collision\CollisionManager.cs" />
     <Compile Include="Game_Engine\Entities\Entity.cs" />
@@ -82,8 +107,8 @@
     <Compile Include="Game_Engine\Scene\SceneManager.cs" />
     <Compile Include="Tools\BoneSawBehaviour.cs" />
     <Compile Include="Tools\ITool.cs" />
-    <Compile Include="Tools\IToolBehaviour.cs" />
-    <Compile Include="Tools\IToolBehaviourFactory.cs" />
+    <Compile Include="Tools\IBehaviour.cs" />
+    <Compile Include="Tools\IBehaviourFactory.cs" />
     <Compile Include="Tools\IToolBench.cs" />
     <Compile Include="Tools\IToolFactory.cs" />
     <Compile Include="Tools\Tool.cs" />

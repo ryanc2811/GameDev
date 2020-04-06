@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Tools
 {
-    class ToolBehaviourFactory : IToolBehaviourFactory
+    class ToolBehaviourFactory : IBehaviourFactory
     {
-        public IToolBehaviour<T> Create<T>() where T : class
+        public IBehaviour Create<T>() where T : IBehaviour, new()
         {
-            if (typeof(T) == typeof(BoneSawBehaviour))
-            {
-                return (IToolBehaviour<T>)new BoneSawBehaviour();
-            }
-            else
-                throw new NotSupportedException();
+            return new T();
         }
     }
 }
