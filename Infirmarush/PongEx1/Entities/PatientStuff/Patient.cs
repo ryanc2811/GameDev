@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using PongEx1._Game.Events;
 using PongEx1.Activity;
 using PongEx1.Entities.Damage;
@@ -110,12 +111,18 @@ namespace PongEx1.Entities.PatientStuff
                 Console.WriteLine(patientNum+" is Dead");
             }
 
-            if (isDead&&!newIllness)
+            if (isDead)
             {
                 //setPosition(1000, 1000);
-                newIllness = true;
+                isDead = false;
                 CreateNewIllness();
                 death.OnDeath(false,patientNum);
+                health = maxHealth;
+            }
+
+            if (Keyboard.GetState().IsKeyUp(Keys.F))
+            {
+                hasCollided = false;
             }
         }
 

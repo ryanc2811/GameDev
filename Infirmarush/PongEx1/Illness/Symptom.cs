@@ -9,8 +9,8 @@ namespace PongEx1.Illness
     public enum Symptom
     {
         infection,
-        ouch,
-        booboo,
+        //ouch,
+        //booboo,
         nausea
     }
 }
