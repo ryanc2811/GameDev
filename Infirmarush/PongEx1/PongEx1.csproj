@@ -62,6 +62,8 @@
     <Compile Include="Entities\IShape.cs" />
     <Compile Include="Entities\PatientStuff\DeathEvent.cs" />
     <Compile Include="Entities\PatientStuff\DeathHandler.cs" />
+    <Compile Include="Entities\PatientStuff\Health_Bar\HealthBar.cs" />
+    <Compile Include="Entities\PatientStuff\Health_Bar\IHealthBar.cs" />
     <Compile Include="Entities\PatientStuff\IDeathHandler.cs" />
     <Compile Include="Entities\PatientStuff\IDeathListener.cs" />
     <Compile Include="Entities\PatientStuff\IPatientHandler.cs" />

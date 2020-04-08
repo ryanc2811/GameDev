@@ -11,13 +11,13 @@ namespace PongEx1.Entities.Damage
     public class ReceiveDamageEvent : EventArgs, IEvent
     {
      
-        private IDictionary<PatientNum, int> damage = new Dictionary<PatientNum, int>();
-        public IDictionary<PatientNum, int> Damage { get { return damage; } set { damage = value; } }
+        private IDictionary<PatientNum, double> damage = new Dictionary<PatientNum, double>();
+        public IDictionary<PatientNum, double> Damage { get { return damage; } set { damage = value; } }
         public ReceiveDamageEvent()
         {
             foreach (PatientNum num in Enum.GetValues(typeof(PatientNum)))
             {
-                damage.Add(num, 0);
+                damage.Add(num, 0.0);
             }
         }
         

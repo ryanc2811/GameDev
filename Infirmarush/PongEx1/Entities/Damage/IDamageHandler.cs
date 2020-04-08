@@ -9,6 +9,6 @@ namespace PongEx1.Entities.Damage
 {
     public interface IDamageHandler
     {
-        void OnTakeDamage(int damage,PatientNum patientNum);
+        void OnTakeDamage(double damage,PatientNum patientNum);
     }
 }

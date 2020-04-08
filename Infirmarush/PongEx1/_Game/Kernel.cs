@@ -9,6 +9,7 @@ using PongEx1.Entities.Button;
 using PongEx1.Entities.Damage;
 using PongEx1.Entities.Mouse;
 using PongEx1.Entities.PatientStuff;
+using PongEx1.Entities.PatientStuff.Health_Bar;
 using PongEx1.Game_Engine.Collision;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.EntityManagement;
@@ -58,6 +59,7 @@ namespace PongEx1
         private List<IEntity> Walls;
         //DECLARE list of IEntity for patients
         private List<IEntity> Patients;
+        private IList<IEntity> healthBars;
         //DECLARE an IList of IEntity for all the quick time containers
         private IList<IEntity> QTContainers;
         //DECLARE an IList of IEntity for all the quick time green rectangle object
@@ -333,33 +335,40 @@ namespace PongEx1
             patientHandler = new PatientHandler();
             patientHandler.AddGameTimer((IGameTimer)gameTimer);
             eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)patientHandler).OnDeath);
+            healthBars = new List<IEntity>();
             for (int i = 0; i < Patients.Capacity; i++)
             {
                 //create a patient
                 IEntity patient = entityManager.createEntity<Patient>();
+                IEntity healthBar = entityManager.createEntity<HealthBar>();
                 //add the patient to the local patients list
                 Patients.Add(patient);
+                healthBars.Add(healthBar);
                 //add the patient to the collision manager as a collidable object
-                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)Patients[i]);
+                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)patient);
                 //add the death handler object to the patient
                 ((Patient)patient).AddDeathHandler((IDeathHandler)deathHandlers[i]);
                 //set the patient number of the patient
                 ((Patient)patient).SetPatientNum((PatientNum)i);
+                ((Patient)patient).SetHealthBar((IHealthBar)healthBar);
                 //add the patient to the event manager class as a damage listener object
-                eventManager.AddEventListener(EventType.DamageEvent, ((IDamageListener)Patients[i]).OnDamageTaken);
-                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)Patients[i]).OnActivityChange);
-                eventManager.AddEventListener(EventType.TimerEvent, ((IGameTimerListener)Patients[i]).OnTimerStart);
+                eventManager.AddEventListener(EventType.DamageEvent, ((IDamageListener)patient).OnDamageTaken);
+                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)patient).OnActivityChange);
+                eventManager.AddEventListener(EventType.TimerEvent, ((IGameTimerListener)patient).OnTimerStart);
                 //add entities to list
-                sceneManager.addEntity(Patients[i]);
+                sceneManager.addEntity(patient);
+                sceneManager.addEntity(healthBar);
                 if (i == 0)
                 {
                     //set starting position of left Patient
-                    Patients[i].setPosition(100, 400);
+                    patient.setPosition(100, 400);
+                    healthBar.setPosition(50, 365);
                 }
                 if (i == 1)
                 {
                     //set starting position of right Patient
-                    Patients[i].setPosition(1400, 400);
+                    patient.setPosition(1400, 400);
+                    healthBar.setPosition(1450, 365);
                 }
             }
         }
@@ -440,6 +449,10 @@ namespace PongEx1
             for (int i = 0; i < QTLines.Count; i++)
             {
                 QTLines[i].setTexture(Content.Load<Texture2D>("QTLine"));
+            }
+            for (int i = 0; i < healthBars.Count; i++)
+            {
+                healthBars[i].setTexture(Content.Load<Texture2D>("HealthBar"));
             }
         }
         #endregion

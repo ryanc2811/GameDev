@@ -19,6 +19,7 @@ namespace PongEx1
         //DECLARE Vector2 used to change the velocity of entities, call it velocity
         protected Vector2 velocity;
         protected float rotation;
+        protected Vector2 scale=new Vector2(1f,1f);
         protected Vector2 spriteOrigin;
         //DECLARE Id
         public override string id { get; set; }
@@ -48,7 +49,7 @@ namespace PongEx1
         public override void draw(SpriteBatch pSpriteBatch)
         {
             //draw the entity using the spritebatch
-            pSpriteBatch.Draw(texture, entityLocn, null,spriteColour,rotation,spriteOrigin,1f,SpriteEffects.None,0);
+            pSpriteBatch.Draw(texture, entityLocn, null,spriteColour,rotation,spriteOrigin,scale,SpriteEffects.None,0);
 
         }
         #endregion

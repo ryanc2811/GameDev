@@ -11,6 +11,7 @@ using PongEx1._Game.Events;
 using PongEx1._Game.Timer;
 using PongEx1.Activity;
 using PongEx1.Entities.Damage;
+using PongEx1.Entities.PatientStuff.Health_Bar;
 using PongEx1.Game_Engine.Collision;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Illness;
@@ -19,7 +20,6 @@ namespace PongEx1.Entities.PatientStuff
 {
     class Patient : GameXEntity,ICollidable,IDamageListener,IImmovable,IActivityListener,IGameTimerListener
     {
-
         PatientNum patientNum;
         IDeathHandler death;
         //DECLARE an IIllnessFactory for creating new illnesses, call it illnessFactory
@@ -30,8 +30,9 @@ namespace PongEx1.Entities.PatientStuff
         IList<Symptom> symptoms;
         //DECLARE a reference to BodyPart
         BodyPart bodyPart;
-        int health;
-        int maxHealth = 100;
+        IHealthBar healthBar;
+        double health;
+        double maxHealth = 1.0;
         bool isDead = false;
         Vector2 startPosition;
         //TEST BOOL FOR COLLIDING
@@ -43,10 +44,15 @@ namespace PongEx1.Entities.PatientStuff
             illnessFactory = new IllnessFactory();
             CreateNewIllness();
             health = maxHealth;
+            
         }
         public PatientNum GetPatientNum
         {
             get { return patientNum; }
+        }
+        public void SetHealthBar(IHealthBar healthBar)
+        {
+            this.healthBar = healthBar;
         }
         public void SetPatientNum(PatientNum patientNum)
         {
@@ -98,8 +104,11 @@ namespace PongEx1.Entities.PatientStuff
         public void OnDamageTaken(object sender, IEvent args)
         {
             if (health > 0)
+            {
                 health -= ((ReceiveDamageEvent)args).Damage[patientNum];
-
+                healthBar.UpdateHealth(health);
+            }
+               
             Console.WriteLine(health + " " + patientNum);
         }
 
@@ -112,6 +121,7 @@ namespace PongEx1.Entities.PatientStuff
                 death.OnDeath(false, patientNum);
                 health = maxHealth;
                 entityLocn = startPosition;
+                healthBar.UpdateHealth(health);
             }
         }
         public override void Update()
@@ -120,6 +130,7 @@ namespace PongEx1.Entities.PatientStuff
             {
                 initial = true;
                 startPosition = entityLocn;
+                healthBar.UpdateHealth(health);
             }
                 
            if (health <= 0&&!isDead)

@@ -131,7 +131,7 @@ namespace PongEx1.Tools
             else
             {
                 Console.WriteLine("OW");
-                _damageHandler.OnTakeDamage(20,(PatientNum)patientNum);
+                _damageHandler.OnTakeDamage(0.25,(PatientNum)patientNum);
             }
         }
         public void OnNewInput(object sender, InputEventArgs args)

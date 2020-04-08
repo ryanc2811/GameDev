@@ -16,12 +16,13 @@ namespace PongEx1.Entities.Damage
             eventType = EventType.DamageEvent;
         }
         #region OnEvent
-        public void OnTakeDamage(int damage,PatientNum patientNum)
+        public void OnTakeDamage(double damage,PatientNum patientNum)
         {
             if (Event != null)
             {
                 IEvent eventData = new ReceiveDamageEvent();
-                IDictionary<PatientNum, int> dictDamage = ((ReceiveDamageEvent)eventData).Damage;
+                IDictionary<PatientNum, double> dictDamage = ((ReceiveDamageEvent)eventData).Damage;
+                damage=Math.Round(damage, 2);
                 dictDamage[patientNum] = damage;
                 ((ReceiveDamageEvent)eventData).Damage=dictDamage;
                 Event(this, eventData);
