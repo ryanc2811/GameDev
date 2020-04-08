@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using PongEx1._Game.Events;
+using PongEx1._Game.Timer;
 using PongEx1.Activity;
 using PongEx1.Entities.Damage;
 using PongEx1.Game_Engine.Collision;
@@ -14,7 +17,7 @@ using PongEx1.Illness;
 
 namespace PongEx1.Entities.PatientStuff
 {
-    class Patient : GameXEntity,ICollidable,IDamageListener,IImmovable,IActivityListener
+    class Patient : GameXEntity,ICollidable,IDamageListener,IImmovable,IActivityListener,IGameTimerListener
     {
 
         PatientNum patientNum;
@@ -30,9 +33,10 @@ namespace PongEx1.Entities.PatientStuff
         int health;
         int maxHealth = 100;
         bool isDead = false;
-        bool newIllness = false;
+        Vector2 startPosition;
         //TEST BOOL FOR COLLIDING
         bool hasCollided = false;
+        bool initial = false;
         public Patient()
         {
             //INSTANTIATE a new illness factory
@@ -86,7 +90,6 @@ namespace PongEx1.Entities.PatientStuff
                             Console.WriteLine("Wrong Tool, Sorry");
                         }
                     }
-
                 }
             }
         }
@@ -98,26 +101,34 @@ namespace PongEx1.Entities.PatientStuff
                 health -= ((ReceiveDamageEvent)args).Damage[patientNum];
 
             Console.WriteLine(health + " " + patientNum);
-           
         }
 
+        private void Respawn()
+        {
+            if (isDead)
+            {
+                isDead = false;
+                CreateNewIllness();
+                death.OnDeath(false, patientNum);
+                health = maxHealth;
+                entityLocn = startPosition;
+            }
+        }
         public override void Update()
         {
+            if (!initial)
+            {
+                initial = true;
+                startPosition = entityLocn;
+            }
+                
            if (health <= 0&&!isDead)
             {
                 isDead = true;
                 hasCollided = false;
                 death.OnDeath(true,patientNum);
                 Console.WriteLine(patientNum+" is Dead");
-            }
-
-            if (isDead)
-            {
-                //setPosition(1000, 1000);
-                isDead = false;
-                CreateNewIllness();
-                death.OnDeath(false,patientNum);
-                health = maxHealth;
+                setPosition(1111, 1111);
             }
 
             if (Keyboard.GetState().IsKeyUp(Keys.F))
@@ -132,6 +143,12 @@ namespace PongEx1.Entities.PatientStuff
             {
                 hasCollided = false;
             }
+        }
+
+        public void OnTimerStart(object sender, IEvent args)
+        {
+            if (((TimerEvent)args).TimerEnd)
+                Respawn();
         }
     }
 }

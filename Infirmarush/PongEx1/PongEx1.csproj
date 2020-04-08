@@ -64,7 +64,9 @@
     <Compile Include="Entities\PatientStuff\DeathHandler.cs" />
     <Compile Include="Entities\PatientStuff\IDeathHandler.cs" />
     <Compile Include="Entities\PatientStuff\IDeathListener.cs" />
+    <Compile Include="Entities\PatientStuff\IPatientHandler.cs" />
     <Compile Include="Entities\PatientStuff\Patient.cs" />
+    <Compile Include="Entities\PatientStuff\PatientHandler.cs" />
     <Compile Include="Entities\PatientStuff\PatientNum.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Wall.cs" />
@@ -116,6 +118,10 @@
     <Compile Include="Tools\ToolBehaviourFactory.cs" />
     <Compile Include="Tools\ToolBench.cs" />
     <Compile Include="Tools\ToolFactory.cs" />
+    <Compile Include="_Game\Timer\GameTimer.cs" />
+    <Compile Include="_Game\Timer\IGameTimer.cs" />
+    <Compile Include="_Game\Timer\IGameTimerListener.cs" />
+    <Compile Include="_Game\Timer\TimerEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

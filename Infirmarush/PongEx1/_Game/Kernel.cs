@@ -1,21 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System;
+using PongEx1._Game.Events;
+using PongEx1._Game.Timer;
+using PongEx1.Activity;
+using PongEx1.Entities;
+using PongEx1.Entities.Button;
+using PongEx1.Entities.Damage;
+using PongEx1.Entities.Mouse;
+using PongEx1.Entities.PatientStuff;
 using PongEx1.Game_Engine.Collision;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.EntityManagement;
-using PongEx1.Game_Engine.Scene;
 using PongEx1.Game_Engine.Input;
-using PongEx1.Entities;
+using PongEx1.Game_Engine.Scene;
 using PongEx1.Tools;
-using PongEx1.Activity;
-using PongEx1.Entities.Button;
-using PongEx1.Entities.Damage;
-using PongEx1._Game.Events;
-using PongEx1.Entities.PatientStuff;
-using PongEx1.Entities.Mouse;
+using System;
+using System.Collections.Generic;
 
 namespace PongEx1
 {
@@ -71,6 +72,8 @@ namespace PongEx1
         private IList<IEventHandler> activityHandlers;
         //DECLARE an IList of IToolBehaviours for storing tool behaviours
         private IList<IBehaviour> toolBehaviours;
+        private IEventHandler gameTimer;
+        private IPatientHandler patientHandler;
         //DECLARE an ITool for the bone saw object
         private ITool boneSaw;
         private Vector2[] QTContainerPos ={ new Vector2(100, 300),new Vector2(1300, 300) };
@@ -128,8 +131,6 @@ namespace PongEx1
             deathHandlers = new List<IEventHandler>();
             damageHandlers= new List<IEventHandler>();
             activityHandlers=new List<IEventHandler>();
-            
-            
             //initialise All Entities
             InitialiseEventHandlers();
             InitialiseQuickTimeObjects();
@@ -148,9 +149,9 @@ namespace PongEx1
             base.Initialize();
             
         }
-        
+
         /// <summary>
-        /// 
+        /// Initialises Player
         /// </summary>
         private void InitialisePlayer()
         {
@@ -169,7 +170,7 @@ namespace PongEx1
             player.setPosition(800, 800);
         }
         /// <summary>
-        /// 
+        /// Initialises Tool Bench
         /// </summary>
         private void InitialiseToolBench()
         {
@@ -187,7 +188,7 @@ namespace PongEx1
             toolBench.setPosition(725, 100);
         }
         /// <summary>
-        /// 
+        /// Initialises Buttons
         /// </summary>
         private void InitialiseButtons()
         {
@@ -203,7 +204,7 @@ namespace PongEx1
             boneSawButton.setPosition(1700, 1125);
         }
         /// <summary>
-        /// 
+        /// Initialises Mouse object
         /// </summary>
         private void InitialiseMouseObj()
         {
@@ -217,7 +218,7 @@ namespace PongEx1
             sceneManager.addEntity(mouse);
         }
         /// <summary>
-        /// 
+        /// Initialises Event Handlers
         /// </summary>
         private void InitialiseEventHandlers()
         {
@@ -231,7 +232,8 @@ namespace PongEx1
                 IEventHandler activityHandler = new ActivityHandler();
                 eventManager.AddEventHandler(activityHandler);
             }
-
+            gameTimer = new GameTimer();
+            eventManager.AddEventHandler(gameTimer);
             IList<IEventHandler> eventHandlers = eventManager.Handlers;
 
             foreach (IEventHandler handler in eventHandlers)
@@ -252,7 +254,7 @@ namespace PongEx1
             }
         }
         /// <summary>
-        /// 
+        /// Initialises Quick Time Objects
         /// </summary>
         private void InitialiseQuickTimeObjects()
         {
@@ -296,7 +298,7 @@ namespace PongEx1
             }
         }
         /// <summary>
-        /// 
+        /// Initialises ToolBehaviours
         /// </summary>
         private void InitialiseToolBehaviours()
         {
@@ -324,10 +326,13 @@ namespace PongEx1
             }
         }
         /// <summary>
-        /// 
+        /// Initialises Patients
         /// </summary>
         private void InitialisePatients()
         {
+            patientHandler = new PatientHandler();
+            patientHandler.AddGameTimer((IGameTimer)gameTimer);
+            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)patientHandler).OnDeath);
             for (int i = 0; i < Patients.Capacity; i++)
             {
                 //create a patient
@@ -343,6 +348,7 @@ namespace PongEx1
                 //add the patient to the event manager class as a damage listener object
                 eventManager.AddEventListener(EventType.DamageEvent, ((IDamageListener)Patients[i]).OnDamageTaken);
                 eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)Patients[i]).OnActivityChange);
+                eventManager.AddEventListener(EventType.TimerEvent, ((IGameTimerListener)Patients[i]).OnTimerStart);
                 //add entities to list
                 sceneManager.addEntity(Patients[i]);
                 if (i == 0)
@@ -358,7 +364,7 @@ namespace PongEx1
             }
         }
         /// <summary>
-        /// 
+        /// Initialises walls
         /// </summary>
         private void InitialiseWalls()
         {
@@ -472,6 +478,7 @@ namespace PongEx1
             collisionManager.Update();
             //update Input Manager
             inputManager.Update();
+            ((IGameTimer)gameTimer).Update(gameTime);
         }
         #endregion
 

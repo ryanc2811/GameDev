@@ -104,7 +104,7 @@ namespace PongEx1.Tools
         private void SetRandomGreenPos()
         {
             Random random = new Random();
-            float maxX = QTContainer.getPosition().X +((IShape)QTContainer).getWidth();
+            float maxX = QTContainer.getPosition().X +((IShape)QTContainer).getWidth()-((IShape)QTGreen).getWidth();
             float x = random.Next((int)QTContainer.getPosition().X,(int)maxX);
             QTGreen.setPosition(x, QTGreen.getPosition().Y);
         }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PongEx1.Activity
+namespace PongEx1._Game.Timer
 {
-    public interface IActivityListener
+    public interface IGameTimerListener
     {
         //On Activity Change event
-        void OnActivityChange(object sender, IEvent args);
+        void OnTimerStart(object sender, IEvent args);
     }
 }

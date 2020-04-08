@@ -10,6 +10,7 @@ namespace PongEx1._Game.Events
     {
         ActivityEvent,
         DamageEvent,
-        DeathEvent
+        DeathEvent,
+        TimerEvent
     }
 }
