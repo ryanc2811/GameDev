@@ -12,11 +12,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Activity
 {
-    class QTGreen : GameXEntity, IShape,ICollidable,IQuickTimeObj,IActivityListener
+    class QTGreen : GameXEntity, IShape,ICollidable,IQuickTimeObj
     {
         Vector2 startPos;
-        bool isActive = false;
-        PatientNum patientNum;
         public int getWidth()
         {
             return texture.Width;
@@ -41,18 +39,12 @@ namespace PongEx1.Activity
             startPos = position;
         }
 
-        public void OnActivityChange(object sender, IEvent args)
+        public void SetActive(bool active)
         {
-            isActive=((ActivityEvent)args).Active[patientNum];
-            if (isActive)
+            if (active)
                 setPosition(startPos.X, startPos.Y);
             else
                 setPosition(1111, 2222);
-        }
-
-        public void SetPatientNum(int patientNum)
-        {
-            this.patientNum = (PatientNum)patientNum;
         }
     }
 }

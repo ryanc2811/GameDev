@@ -1,12 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PongEx1._Game.Behaviour;
 using PongEx1._Game.Events;
 using PongEx1._Game.Timer;
 using PongEx1.Activity;
 using PongEx1.Entities;
 using PongEx1.Entities.Button;
 using PongEx1.Entities.Damage;
+using PongEx1.Entities.Healing;
+using PongEx1.Entities.Interacted;
 using PongEx1.Entities.Mouse;
 using PongEx1.Entities.PatientStuff;
 using PongEx1.Entities.PatientStuff.Health_Bar;
@@ -16,6 +19,7 @@ using PongEx1.Game_Engine.EntityManagement;
 using PongEx1.Game_Engine.Input;
 using PongEx1.Game_Engine.Scene;
 using PongEx1.Tools;
+using PongEx1.Tools.Tool_Behaviour;
 using System;
 using System.Collections.Generic;
 
@@ -49,6 +53,7 @@ namespace PongEx1
         private IEntity toolBench;
         //DECLARE IEntity for boneSaw Button
         private IEntity boneSawButton;
+        private IEntity leechButton;
         //DECLARE IEntity for mouse object
         private IEntity mouse;
         //DECLARE IToolFactory for creating tools
@@ -70,14 +75,18 @@ namespace PongEx1
         private IList<IEventHandler> deathHandlers;
         //DECLARE an IList of IEventHandler for storing damage handlers
         private IList<IEventHandler> damageHandlers;
+        private IList<IEventHandler> healHandlers;
         //DECLARE an IList of IEventHandler for storing activity handlers
         private IList<IEventHandler> activityHandlers;
         //DECLARE an IList of IToolBehaviours for storing tool behaviours
         private IList<IBehaviour> toolBehaviours;
-        private IEventHandler gameTimer;
+        private IEventHandler deathTimer;
+        private IList<IEventHandler> leechTimers;
         private IPatientHandler patientHandler;
+        private IEventHandler interactHandler;
         //DECLARE an ITool for the bone saw object
         private ITool boneSaw;
+        private ITool Leech;
         private Vector2[] QTContainerPos ={ new Vector2(100, 300),new Vector2(1300, 300) };
         private Vector2[] QTLinePos ={ new Vector2(100, 310), new Vector2(1300, 310) };
         private Vector2[] QTGreenPos = { new Vector2(150, 310), new Vector2(1350, 310) };
@@ -124,15 +133,18 @@ namespace PongEx1
             //INSTANTIATE ToolFactory
             toolFactory = new ToolFactory();
             //INSTANTIATE ToolBehaviourFactory
-            toolBehaviourFactory = new ToolBehaviourFactory();
+            toolBehaviourFactory = new BehaviourFactory();
             //INSTANTIATE patients list
             Patients = new List<IEntity>(2);
             //create tools
             boneSaw = toolFactory.create("BoneSaw");
+            Leech = toolFactory.create("Leech");
             eventManager = new EventManager();
             deathHandlers = new List<IEventHandler>();
             damageHandlers= new List<IEventHandler>();
+            healHandlers = new List<IEventHandler>();
             activityHandlers=new List<IEventHandler>();
+            leechTimers = new List<IEventHandler>();
             //initialise All Entities
             InitialiseEventHandlers();
             InitialiseQuickTimeObjects();
@@ -168,6 +180,7 @@ namespace PongEx1
             //add player to the event manager as an activity event listener
             eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)player).OnActivityChange);
             eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)player).OnDeath);
+            ((IPlayer)player).AddInteractHandler((IInteractHandler)interactHandler);
             //set the players initial position
             player.setPosition(800, 800);
         }
@@ -180,8 +193,9 @@ namespace PongEx1
             toolBench = entityManager.createEntity<ToolBench>();
             //add the bonesaw tool to the tools list inside tool bench
             ((IToolBench)toolBench).addTool(boneSaw);
+            ((IToolBench)toolBench).addTool(Leech);
             //add the bonesaw button to the tool bench
-            ((IToolBench)toolBench).SetToolButtons((IButton)boneSawButton);
+            ((IToolBench)toolBench).SetToolButtons((IButton)boneSawButton,(IButton)leechButton);
             //subscribe the toolbench as a collidable object
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)toolBench);
             //add the tool bench to the scene
@@ -196,14 +210,19 @@ namespace PongEx1
         {
             //create a bonesaw button
             boneSawButton = entityManager.createEntity<Button>();
+            leechButton = entityManager.createEntity<Button>();
             //subscribe the button as a collidable object
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)boneSawButton);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)leechButton);
             //add the button to the inputmanager class as a mouse input listener object
             inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)boneSawButton).OnNewInput);
+            inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)leechButton).OnNewInput);
             //add the button to the scene
             sceneManager.addEntity(boneSawButton);
+            sceneManager.addEntity(leechButton);
             //set the buttons initial position
             boneSawButton.setPosition(1700, 1125);
+            leechButton.setPosition(1900, 1125);
         }
         /// <summary>
         /// Initialises Mouse object
@@ -231,11 +250,14 @@ namespace PongEx1
                 eventManager.AddEventHandler(deathHandler);
                 IEventHandler damageHandler = new DamageHandler();
                 eventManager.AddEventHandler(damageHandler);
+                IEventHandler healHandler = new HealHandler();
+                eventManager.AddEventHandler(healHandler);
                 IEventHandler activityHandler = new ActivityHandler();
                 eventManager.AddEventHandler(activityHandler);
+                IEventHandler leechTimer = new GameTimer();
+                eventManager.AddEventHandler(leechTimer);
             }
-            gameTimer = new GameTimer();
-            eventManager.AddEventHandler(gameTimer);
+            
             IList<IEventHandler> eventHandlers = eventManager.Handlers;
 
             foreach (IEventHandler handler in eventHandlers)
@@ -249,11 +271,23 @@ namespace PongEx1
                     activityHandlers.Add(handler);
 
                 }
-               if (handler.GetType is EventType.DeathEvent)
+                if (handler.GetType is EventType.DeathEvent)
                 {
                     deathHandlers.Add(handler);
                 }
+                if (handler.GetType is EventType.TimerEvent)
+                {
+                    leechTimers.Add(handler);
+                }
+                if (handler.GetType is EventType.HealEvent)
+                {
+                    healHandlers.Add(handler);
+                }
             }
+            deathTimer = new GameTimer();
+            eventManager.AddEventHandler(deathTimer);
+            interactHandler = new InteractHandler();
+            eventManager.AddEventHandler(interactHandler);
         }
         /// <summary>
         /// Initialises Quick Time Objects
@@ -275,20 +309,13 @@ namespace PongEx1
                 QTContainers.Add(QTContainer);
                 QTLines.Add(QTLine);
                 QTGreens.Add(QTGreen);
-                //set the patient number to which the quick time object belongs to
-                ((IQuickTimeObj)QTLines[i]).SetPatientNum(i);
-                ((IQuickTimeObj)QTGreens[i]).SetPatientNum(i);
-                ((IQuickTimeObj)QTContainers[i]).SetPatientNum(i);
                 ((IQuickTimeObj)QTLines[i]).SetActivePosition(QTLinePos[i]);
                 ((IQuickTimeObj)QTContainers[i]).SetActivePosition(QTContainerPos[i]);
                 ((IQuickTimeObj)QTGreens[i]).SetActivePosition(QTGreenPos[i]);
                 //subscribe the QTLine and QT green objects as a collidable object
                 ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTLine);
                 ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTGreen);
-                //add the QTLine object to the event manager as an Activity Event Listener
-                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)QTLine).OnActivityChange);
-                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)QTGreen).OnActivityChange);
-                eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)QTContainer).OnActivityChange);
+
                 //add the Quick time objects to the scene
                 sceneManager.addEntity(QTContainer);
                 sceneManager.addEntity(QTGreen);
@@ -306,25 +333,40 @@ namespace PongEx1
         {
             //INSTANTIATE toolbehaviours list
             toolBehaviours = new List<IBehaviour>();
+            
             //for every patient in the patients list
             for (int i = 0; i < Patients.Capacity; i++)
             {
                 //INSTANTIATE a bonesaw behaviour using the tool behaviour factory
                 IBehaviour boneSawBehaviour = toolBehaviourFactory.Create<BoneSawBehaviour>();
+                IBehaviour leechBehaviour = toolBehaviourFactory.Create<LeechBehaviour>();
                 //add the Quick time event object to the bonesaw behaviour class
                 ((BoneSawBehaviour)boneSawBehaviour).SetQTItems(QTContainers[i], QTLines[i], QTGreens[i]);
                 //add a damage handler to the bonesawbehaviour class
-                boneSawBehaviour.AddDamageHandler((IDamageHandler)damageHandlers[i]);
+                ((IToolBehaviour)boneSawBehaviour).AddDamageHandler((IDamageHandler)damageHandlers[i]);
+                
                 //add an activity handler to the bonesawbehaviour class
-                boneSawBehaviour.AddActivityHandler((IActivityHandler)activityHandlers[i]);
+                ((IToolBehaviour)boneSawBehaviour).AddActivityHandler((IActivityHandler)activityHandlers[i]);
+                //add a damage handler to the bonesawbehaviour class
+                ((IToolBehaviour)leechBehaviour).AddDamageHandler((IDamageHandler)damageHandlers[i]);
+                ((IToolBehaviour)leechBehaviour).AddHealHandler((IHealHandler)healHandlers[i]);
+                //add an activity handler to the bonesawbehaviour class
+                ((IToolBehaviour)leechBehaviour).AddActivityHandler((IActivityHandler)activityHandlers[i]);
+                ((LeechBehaviour)leechBehaviour).AddGameTimer((IGameTimer)leechTimers[i]);
+                eventManager.AddEventListener(EventType.TimerEvent, ((IGameTimerListener)leechBehaviour).OnTimerStart);
                 //subscribe the bonesawbehaviour class to the inputmanager as a keyboard input listener
                 inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)boneSawBehaviour).OnNewInput);
                 //subscribe the bonesawbehaviour class to the eventmanager as a DeathListener object
                 eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)boneSawBehaviour).OnDeath);
+                //subscribe the bonesawbehaviour class to the eventmanager as a DeathListener object
+                eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)leechBehaviour).OnDeath);
+                eventManager.AddEventListener(EventType.InteractEvent, ((IInteractListener)leechBehaviour).OnInteract);
                 //add the behaviour to the bonesaw tool object with reference to the patient number that owns it
                 boneSaw.receiveJob(boneSawBehaviour, i);
+                Leech.receiveJob(leechBehaviour, i);
                 //add the behaviour to the local toolbehaviour list
                 toolBehaviours.Add(boneSawBehaviour);
+                toolBehaviours.Add(leechBehaviour);
             }
         }
         /// <summary>
@@ -333,7 +375,7 @@ namespace PongEx1
         private void InitialisePatients()
         {
             patientHandler = new PatientHandler();
-            patientHandler.AddGameTimer((IGameTimer)gameTimer);
+            patientHandler.AddGameTimer((IGameTimer)deathTimer);
             eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)patientHandler).OnDeath);
             healthBars = new List<IEntity>();
             for (int i = 0; i < Patients.Capacity; i++)
@@ -353,6 +395,7 @@ namespace PongEx1
                 ((Patient)patient).SetHealthBar((IHealthBar)healthBar);
                 //add the patient to the event manager class as a damage listener object
                 eventManager.AddEventListener(EventType.DamageEvent, ((IDamageListener)patient).OnDamageTaken);
+                eventManager.AddEventListener(EventType.HealEvent, ((IHealListener)patient).OnHeal);
                 eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)patient).OnActivityChange);
                 eventManager.AddEventListener(EventType.TimerEvent, ((IGameTimerListener)patient).OnTimerStart);
                 //add entities to list
@@ -426,6 +469,7 @@ namespace PongEx1
             player.setTexture(Content.Load<Texture2D>("square"));
             toolBench.setTexture(Content.Load<Texture2D>("ToolBench"));
             boneSawButton.setTexture(Content.Load<Texture2D>("BoneSaw"));
+            leechButton.setTexture(Content.Load<Texture2D>("Leech"));
             mouse.setTexture(Content.Load<Texture2D>("cursor"));
             for (int i = 0; i < Walls.Capacity; i++)
             {
@@ -491,7 +535,11 @@ namespace PongEx1
             collisionManager.Update();
             //update Input Manager
             inputManager.Update();
-            ((IGameTimer)gameTimer).Update(gameTime);
+            ((IGameTimer)deathTimer).Update(gameTime);
+            for (int i = 0; i < leechTimers.Count; i++)
+            {
+                ((IGameTimer)leechTimers[i]).Update(gameTime);
+            }
         }
         #endregion
 

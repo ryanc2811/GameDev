@@ -11,6 +11,8 @@ namespace PongEx1._Game.Events
         ActivityEvent,
         DamageEvent,
         DeathEvent,
-        TimerEvent
+        TimerEvent,
+        HealEvent,
+        InteractEvent
     }
 }

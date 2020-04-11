@@ -1,4 +1,5 @@
-﻿using PongEx1.Tools;
+﻿using PongEx1.Entities.Interacted;
+using PongEx1.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace PongEx1.Entities
         void ActivateTool(int patientNum);
         ITool currentTool { get; set; }
         bool Interact { get; }
+        void AddInteractHandler(IInteractHandler interact);
     }
 }

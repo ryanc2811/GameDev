@@ -15,6 +15,7 @@ namespace PongEx1.Tools
     {
         IList<ITool> tools;
         IButton boneSawButton;
+        IButton leechButton;
         IEntity player;
         
         public ToolBench()
@@ -31,7 +32,8 @@ namespace PongEx1.Tools
             if(entity is Player)
             {
                 player = entity;
-                ((IEntity)boneSawButton).setPosition(entityLocn.X - 25, entityLocn.Y - 75);
+                ((IEntity)boneSawButton).setPosition(entityLocn.X, entityLocn.Y - 75);
+                ((IEntity)leechButton).setPosition(entityLocn.X+85, entityLocn.Y - 75);
             }
         }
         public void addTool(ITool tool)
@@ -62,6 +64,7 @@ namespace PongEx1.Tools
                 if (distanceFromPlayer.Y > 100f)
                 {
                     ((IEntity)boneSawButton).setPosition(1700, 1125);
+                    ((IEntity)leechButton).setPosition(1700, 1125);
                 }
                 if (boneSawButton.clicked)
                 {
@@ -76,12 +79,26 @@ namespace PongEx1.Tools
                         Console.WriteLine("Bone Saw Tool Added");
                     }
                 }
+                if (leechButton.clicked)
+                {
+                    if (((IPlayer)player).currentTool == null)
+                    {
+                        ((IPlayer)player).currentTool = getTool("Leech");
+                        Console.WriteLine("Leeches Added");
+                    }
+                    else if (((IPlayer)player).currentTool.GetName != "Leech" && ((IPlayer)player).currentTool != null)
+                    {
+                        ((IPlayer)player).currentTool = getTool("Leech");
+                        Console.WriteLine("Leeches Added");
+                    }
+                }
             }
         }
 
-        public void SetToolButtons(IButton BoneSawButton)
+        public void SetToolButtons(IButton BoneSawButton,IButton LeechButton)
         {
             boneSawButton = BoneSawButton;
+            leechButton = LeechButton;
         }
     }
 }

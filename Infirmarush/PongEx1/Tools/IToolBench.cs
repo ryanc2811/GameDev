@@ -6,6 +6,6 @@ namespace PongEx1.Tools
     {
         void addTool(ITool tool);
         ITool getTool(string name);
-        void SetToolButtons(IButton BoneSawButton);
+        void SetToolButtons(IButton boneSawButton, IButton leechButton);
     }
 }

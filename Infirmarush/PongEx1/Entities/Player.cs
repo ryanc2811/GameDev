@@ -12,6 +12,7 @@ using PongEx1.Tools;
 using PongEx1.Entities.PatientStuff;
 using PongEx1.Activity;
 using PongEx1._Game.Events;
+using PongEx1.Entities.Interacted;
 
 namespace PongEx1.Entities
 {
@@ -19,6 +20,7 @@ namespace PongEx1.Entities
     {
         //DECLARE Array List for Input
         private IList<Keys> keyList;
+        private IInteractHandler _InteractHandler;
         private float speed=10f;
         private float reducedSpeed;
         private Vector2 tempPos;
@@ -26,7 +28,9 @@ namespace PongEx1.Entities
         private bool itemAdded = false;
         bool stopMoving = false;
         int currentPatientNum;
-       
+        bool gotInput = false;
+        
+
         public Player()
         {
             reducedSpeed = speed *= 0.7f;
@@ -51,6 +55,10 @@ namespace PongEx1.Entities
                 {
                     itemAdded = true;
                 }
+                if (interact)
+                {
+                    _InteractHandler.OnInteract(true,((Patient)entity).GetPatientNum);
+                }
             }
         }
         public override void Update()
@@ -67,7 +75,17 @@ namespace PongEx1.Entities
             {
                 speed = 10;
             }
-            
+            if (Keyboard.GetState().IsKeyUp(Keys.F))
+            {
+                gotInput = false;
+            }
+            if (!interact)
+            {
+                foreach(PatientNum num in Enum.GetValues(typeof(PatientNum)))
+                {
+                    _InteractHandler.OnInteract(false, num);
+                }
+            }
         }
         public void ActivateTool(int patientNum)
         {
@@ -84,44 +102,48 @@ namespace PongEx1.Entities
             keyList = args.PressedKeys;
             tempPos = entityLocn;
             interact = false;
-            
+
             if (!stopMoving) {
-            if (keyList.Contains(Keys.W))
-            {
+                if (keyList.Contains(Keys.W))
+                {
                 rotation = MathHelper.ToRadians(0f);
                 velocity.Y -= speed;
                 //update the paddles position
                 entityLocn.Y += velocity.Y;
-            }
-            else if (keyList.Contains(Keys.S))
-            {
-                rotation = MathHelper.ToRadians(180f);
-                velocity.Y += speed;
-                //update the paddles position
-                entityLocn.Y += velocity.Y;
-            }
-            if (keyList.Contains(Keys.A))
-            {
-                rotation = MathHelper.ToRadians(270f);
-                velocity.X -= speed;
-                //update the paddles position
-                entityLocn.X += velocity.X;
-            }
+                }
+                else if (keyList.Contains(Keys.S))
+                {
+                    rotation = MathHelper.ToRadians(180f);
+                    velocity.Y += speed;
+                    //update the paddles position
+                    entityLocn.Y += velocity.Y;
+                }
+                if (keyList.Contains(Keys.A))
+                {
+                    rotation = MathHelper.ToRadians(270f);
+                    velocity.X -= speed;
+                    //update the paddles position
+                    entityLocn.X += velocity.X;
+                }
 
-            else if (keyList.Contains(Keys.D))
-            {
-                rotation = MathHelper.ToRadians(90f);
-                velocity.X += speed;
-                //update the paddles position
-                entityLocn.X += velocity.X;
-            }
-            if (keyList.Contains(Keys.F))
-            {
-                interact = true;
-            }
+                else if (keyList.Contains(Keys.D))
+                {
+                    rotation = MathHelper.ToRadians(90f);
+                    velocity.X += speed;
+                    //update the paddles position
+                    entityLocn.X += velocity.X;
+                }
+                if (keyList.Contains(Keys.F) && !gotInput)
+                {
+                    interact = true;
+                    gotInput = true;
+                }
             }
         }
-
+        public void AddInteractHandler(IInteractHandler interact)
+        {
+            _InteractHandler = interact;
+        }
         public void OnActivityChange(object sender, IEvent args)
         {
             if (!((ActivityEvent)args).Active[(PatientNum)currentPatientNum])

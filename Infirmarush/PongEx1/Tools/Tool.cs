@@ -1,6 +1,8 @@
-﻿using PongEx1._Game.Events;
+﻿using PongEx1._Game.Behaviour;
+using PongEx1._Game.Events;
 using PongEx1.Activity;
 using PongEx1.Entities.PatientStuff;
+using PongEx1.Tools.Tool_Behaviour;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,36 +39,29 @@ namespace PongEx1.Tools
         public void receiveJob(IBehaviour behaviour,int patientNum)
         {
             toolBehaviours.Add((PatientNum)patientNum,behaviour);
-            behaviour.SetPatientNum(patientNum);
+            ((IToolBehaviour)behaviour).SetPatientNum(patientNum);
         }
 
         public void Update()
         {
             foreach (PatientNum num in Enum.GetValues(typeof(PatientNum)))
             {
-                
-
                 if (toolBehaviours[num] != null && activeBehaviours[num]==true)
                     toolBehaviours[num].Behaviour();
-                if (toolBehaviours[num] != null && toolBehaviours[num].HasEnded)
+                if (toolBehaviours[num] != null && ((IToolBehaviour)toolBehaviours[num]).HasEnded)
                 {
                     activeBehaviours[num] = false;
-                }
-                    
+                }           
             }
         }
 
         public void OnDeath(object sender, IEvent args)
-        {
-            
+        {  
             foreach (PatientNum num in Enum.GetValues(typeof(PatientNum)))
             {
-                
                 if (((DeathEvent)args).Dead[num])
                     activeBehaviours[num] = false;
             }
         }
-
-        
     }
 }

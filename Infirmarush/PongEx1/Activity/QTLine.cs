@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Activity
 {
-    class QTLine : GameXEntity, IQTLine, ICollidable,IActivityListener,IQuickTimeObj
+    class QTLine : GameXEntity, IQTLine, ICollidable,IQuickTimeObj
     {
         private Vector2 startPos;
         private float offset = 190f;
@@ -20,8 +20,7 @@ namespace PongEx1.Activity
         private float speed = 3.5f;
         private bool hasHitGreen = false;
         private bool isActive = false;
-       // private bool initial = false;
-        PatientNum patientNum;
+        //private bool initial = false;
         public bool gethasHitGreen{get{ return hasHitGreen; } }
         IEntity QTGreen;
         
@@ -81,23 +80,20 @@ namespace PongEx1.Activity
                 }
             }
         }
-        public void OnActivityChange(object sender, IEvent args)
+        
+        public void SetActivePosition(Vector2 position)
         {
-            isActive = ((ActivityEvent)args).Active[patientNum];
+            startPos = position;
+        }
+
+        public void SetActive(bool active)
+        {
+            isActive = active;
+            
             if (isActive)
                 setPosition(startPos.X, startPos.Y);
             else
                 setPosition(1111, 2222);
-        }
-
-        public void SetPatientNum(int patientNum)
-        {
-            this.patientNum = (PatientNum)patientNum;
-        }
-
-        public void SetActivePosition(Vector2 position)
-        {
-            startPos = position;
         }
     }
 }

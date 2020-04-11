@@ -1,19 +1,15 @@
 ﻿using PongEx1.Activity;
 using PongEx1.Entities.Damage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PongEx1.Entities.Healing;
 
-namespace PongEx1.Tools
+namespace PongEx1.Tools.Tool_Behaviour
 {
-    public interface IBehaviour
+    public interface IToolBehaviour
     {
-        void Behaviour();
         void AddDamageHandler(IDamageHandler pDamageHandler);
+        void AddHealHandler(IHealHandler pHealHandler);
         void AddActivityHandler(IActivityHandler handler);
         void SetPatientNum(int patientNum);
-        bool HasEnded { get; set; }
+        bool HasEnded { get; }
     }
 }

@@ -11,6 +11,7 @@ using PongEx1._Game.Events;
 using PongEx1._Game.Timer;
 using PongEx1.Activity;
 using PongEx1.Entities.Damage;
+using PongEx1.Entities.Healing;
 using PongEx1.Entities.PatientStuff.Health_Bar;
 using PongEx1.Game_Engine.Collision;
 using PongEx1.Game_Engine.Entities;
@@ -18,7 +19,7 @@ using PongEx1.Illness;
 
 namespace PongEx1.Entities.PatientStuff
 {
-    class Patient : GameXEntity,ICollidable,IDamageListener,IImmovable,IActivityListener,IGameTimerListener
+    class Patient : GameXEntity,ICollidable,IDamageListener,IImmovable,IActivityListener,IGameTimerListener,IHealListener
     {
         PatientNum patientNum;
         IDeathHandler death;
@@ -87,15 +88,21 @@ namespace PongEx1.Entities.PatientStuff
                     Console.WriteLine(symptoms[i]);
                     if (((IPlayer)entity).currentTool != null)
                     {
-                        if (symptoms[i] == Symptom.infection && ((IPlayer)entity).currentTool.GetName == "BoneSaw")
-                        {
-                            ((IPlayer)entity).ActivateTool((int)patientNum);
+                            if (symptoms[i] == Symptom.infection && ((IPlayer)entity).currentTool.GetName == "BoneSaw")
+                            {
+                                ((IPlayer)entity).ActivateTool((int)patientNum);
+                            }
+                            else if (symptoms[i] == Symptom.nausea && ((IPlayer)entity).currentTool.GetName == "Leech")
+                            {
+                                ((IPlayer)entity).ActivateTool((int)patientNum);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Wrong Tool, Sorry");
+                            }
+                            //if (((IPlayer)entity).currentTool.GetName == "Leech")
+                            //    ((IPlayer)entity).ActivateTool((int)patientNum);
                         }
-                        else
-                        {
-                            Console.WriteLine("Wrong Tool, Sorry");
-                        }
-                    }
                 }
             }
         }
@@ -109,7 +116,7 @@ namespace PongEx1.Entities.PatientStuff
                 healthBar.UpdateHealth(health);
             }
                
-            Console.WriteLine(health + " " + patientNum);
+            //Console.WriteLine(health + " " + patientNum);
         }
 
         private void Respawn()
@@ -160,6 +167,15 @@ namespace PongEx1.Entities.PatientStuff
         {
             if (((TimerEvent)args).TimerEnd)
                 Respawn();
+        }
+
+        public void OnHeal(object sender, IEvent args)
+        {
+            if (health < maxHealth)
+            {
+                health += ((ReceiveHealEvent)args).Heal[patientNum];
+                healthBar.UpdateHealth(health);
+            }
         }
     }
 }

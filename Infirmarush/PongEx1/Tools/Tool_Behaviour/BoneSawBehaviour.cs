@@ -6,14 +6,12 @@ using PongEx1.Entities.PatientStuff;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PongEx1._Game.Behaviour;
+using PongEx1._Game.Events;
 
-namespace PongEx1.Tools
+namespace PongEx1.Tools.Tool_Behaviour
 {
-    class BoneSawBehaviour:ToolBehaviour,IBehaviour,IInputListener
+    class BoneSawBehaviour:ToolBehaviour,IInputListener,IDeathListener
     {
         //IEntity objects for the quick time activity
         private IEntity QTContainer;
@@ -46,21 +44,26 @@ namespace PongEx1.Tools
             this.QTLine=QTLine;
             this.QTGreen= QTGreen;
         }
+        private void SetQTItemActive(bool active)
+        {
+            ((IQuickTimeObj)QTContainer).SetActive(active);
+            ((IQuickTimeObj)QTLine).SetActive(active);
+            ((IQuickTimeObj)QTGreen).SetActive(active);
+            
+        }
         public override void Behaviour()
         {
-            
             if (hasEnded)
             {
-                Console.WriteLine("H");
                 _activityHandler.OnActivityChange(true, (PatientNum)patientNum);
                 isActive = true;
             }
-            if (isActive&&!initial)
+            if (isActive && !initial)
             {
-                Console.WriteLine("HI");
                 initial = true;
                 hasEnded = false;
                 quickTimeCount = 0;
+                SetQTItemActive(true);
             }
             if (quickTimeCount >= 3)
             {
@@ -70,7 +73,8 @@ namespace PongEx1.Tools
                     isActive = false;
                     initial = false;
                     hasEnded = true;
-                    _activityHandler.OnActivityChange(false,(PatientNum)patientNum);
+                    _activityHandler.OnActivityChange(false, (PatientNum)patientNum);
+                    SetQTItemActive(false);
                     Console.WriteLine("Patient is cured");
                 }
             }
@@ -83,8 +87,9 @@ namespace PongEx1.Tools
                     activityChanged = true;
                     hasEnded = false;
                     _activityHandler.OnActivityChange(true, (PatientNum)patientNum);
+                    SetQTItemActive(true);
                 }
-            }   
+            }
             if (((IQTLine)QTLine).gethasHitGreen)
             {
                 inGreen = true;
@@ -100,6 +105,7 @@ namespace PongEx1.Tools
                 gotInput = false;
                 hitGreen = false;
             }
+            
         }
         private void SetRandomGreenPos()
         {
@@ -145,6 +151,18 @@ namespace PongEx1.Tools
                 }
             }
             
+        }
+        public override void OnDeath(object sender, IEvent args)
+        {
+            
+            if (((DeathEvent)args).Dead[(PatientNum)patientNum])
+            {
+                Console.WriteLine((PatientNum)patientNum);
+                _activityHandler.OnActivityChange(false, (PatientNum)patientNum);
+                SetQTItemActive(false);
+                hasEnded = true;
+                initial = false;
+            }
         }
     }
 }

@@ -9,28 +9,19 @@ using PongEx1.Entities.PatientStuff;
 
 namespace PongEx1.Activity
 {
-    class QTContainer : Container, IQuickTimeObj,IActivityListener
+    class QTContainer : Container, IQuickTimeObj
     {
         Vector2 startPos;
-        PatientNum patientNum;
-        bool isActive = false;
-        public void OnActivityChange(object sender, IEvent args)
+        public void SetActive(bool active)
         {
-            isActive = ((ActivityEvent)args).Active[patientNum];
-            if (isActive)
+            if (active)
                 setPosition(startPos.X, startPos.Y);
             else
                 setPosition(1111, 2222);
         }
-
         public void SetActivePosition(Vector2 position)
         {
             startPos = position;
-        }
-
-        public void SetPatientNum(int patientNum)
-        {
-            this.patientNum = (PatientNum)patientNum;
         }
     }
 }

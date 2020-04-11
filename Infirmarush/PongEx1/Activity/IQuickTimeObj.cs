@@ -10,6 +10,6 @@ namespace PongEx1.Activity
     public interface IQuickTimeObj
     {
         void SetActivePosition(Vector2 position);
-        void SetPatientNum(int patientNum);
+        void SetActive(bool active);
     }
 }
