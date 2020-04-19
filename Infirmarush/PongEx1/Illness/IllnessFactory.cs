@@ -23,7 +23,7 @@ namespace PongEx1.Illness
                 do
                 {
                     randSymptom = rand.Next(symptoms.Count);
-                } while (symptoms[randSymptom] == Symptom.nausea && bodyParts[randBodyPart] == BodyPart.arm || symptoms[randSymptom] == Symptom.nausea && bodyParts[randBodyPart] == BodyPart.leg);
+                } while (symptoms[randSymptom] == Symptom.nausea && bodyParts[randBodyPart] == BodyPart.arm || symptoms[randSymptom] == Symptom.nausea && bodyParts[randBodyPart] == BodyPart.leg|| symptoms[randSymptom] == Symptom.infection && bodyParts[randBodyPart] == BodyPart.head);
                 illness.addSymptom(symptoms[randSymptom]);
             }
             return illness;

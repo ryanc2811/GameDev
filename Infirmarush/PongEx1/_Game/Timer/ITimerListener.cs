@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PongEx1._Game.Timer
 {
-    public interface IGameTimerListener
+    public interface ITimerListener
     {
         //On Activity Change event
         void OnTimerStart(object sender, IEvent args);

@@ -9,7 +9,7 @@ namespace PongEx1.Activity
 {
     public interface IActivityHandler
     {
-       
-        void OnActivityChange(bool isActive,PatientNum patientNum);
+
+        void OnActivityEnd(bool ended, PatientNum patientNum);
     }
 }

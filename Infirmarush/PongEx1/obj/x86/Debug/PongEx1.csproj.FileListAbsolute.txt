@@ -383,3 +383,13 @@ C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\BoneSaw.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\HealthBar.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Leech.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\SymbolContainer.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\HandBook.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Infection.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Leg.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Nausea.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\HandBookButton.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Head.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Reset.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Arm.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Infirmarush\PongEx1\bin\Windows\x86\Debug\Content\Text\Score.xnb

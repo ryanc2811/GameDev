@@ -21,6 +21,7 @@ namespace PongEx1.Tools
         public ToolBench()
         {
             tools = new List<ITool>();
+            layerDepth = 0.2f;
         }
         public Rectangle getHitBox()
         {
@@ -66,7 +67,7 @@ namespace PongEx1.Tools
                     ((IEntity)boneSawButton).setPosition(1700, 1125);
                     ((IEntity)leechButton).setPosition(1700, 1125);
                 }
-                if (boneSawButton.clicked)
+                if (boneSawButton.Clicked)
                 {
                     if(((IPlayer)player).currentTool == null)
                     {
@@ -79,7 +80,7 @@ namespace PongEx1.Tools
                         Console.WriteLine("Bone Saw Tool Added");
                     }
                 }
-                if (leechButton.clicked)
+                if (leechButton.Clicked)
                 {
                     if (((IPlayer)player).currentTool == null)
                     {

@@ -11,24 +11,17 @@ namespace PongEx1.Activity
 {
     class Container : GameXEntity,IShape
     {
+       
+       
         public int getHeight()
         {
             throw new NotImplementedException();
         }
-
-        //public Rectangle getHitBox()
-        //{
-        //    return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
-        //}
-
         public int getWidth()
         {
             return texture.Width;
         }
 
-        //public void onCollide(IEntity entity)
-        //{
-            
-        //}
+        
     }
 }

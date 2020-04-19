@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using PongEx1._Game.Events;
 using PongEx1.Entities.PatientStuff;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace PongEx1._Game.Timer
         void OnTimerStart(float time);
         void OnTimerPause(bool pause);
         void OnTimerStart(float time, PatientNum patientNum);
+        void SetEventType(EventType eventType);
     }
 }

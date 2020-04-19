@@ -6,15 +6,17 @@ using PongEx1.Tools.Tool_Behaviour;
 using PongEx1._Game.Behaviour;
 using PongEx1.Entities.Healing;
 using System;
+using PongEx1._Game.GameEnd;
 
 namespace PongEx1.Tools.Tool_Behaviour
 {
-    public abstract class ToolBehaviour : IBehaviour,IDeathListener,IToolBehaviour
+    public abstract class ToolBehaviour : IBehaviour,IDeathListener,IToolBehaviour,IGameEndListener
     {
         protected bool isActive = false;
         protected int patientNum;
         protected bool hasEnded = false;
         protected bool initial = false;
+        protected bool isDead = false;
         protected IDamageHandler _damageHandler;
         protected IActivityHandler _activityHandler;
         protected IHealHandler _healHandler;
@@ -42,12 +44,18 @@ namespace PongEx1.Tools.Tool_Behaviour
         
         public virtual void OnDeath(object sender, IEvent args)
         {
+            isDead = ((DeathEvent)args).Dead[(PatientNum)patientNum];
             if (((DeathEvent)args).Dead[(PatientNum)patientNum])
             {
-                _activityHandler.OnActivityChange(false, (PatientNum)patientNum);
                 hasEnded = true;
                 initial = false;
             }
+        }
+
+        public virtual void OnGameEnd(object sender, IEvent args)
+        {
+            hasEnded = true;
+            initial = false;
         }
     }
 }

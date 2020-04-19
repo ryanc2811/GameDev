@@ -9,6 +9,7 @@ namespace PongEx1.Entities.Button
 {
     public interface IButton
     {
-        bool clicked { get; }
+        bool Clicked { get; }
+        bool Released { get; }
     }
 }

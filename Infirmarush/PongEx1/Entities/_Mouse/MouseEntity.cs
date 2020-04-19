@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PongEx1.Entities.Mouse
+namespace PongEx1.Entities._Mouse
 {
     class MouseEntity : GameXEntity, ICollidable,IInputListener
     {

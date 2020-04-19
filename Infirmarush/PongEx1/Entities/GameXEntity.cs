@@ -21,6 +21,7 @@ namespace PongEx1
         protected float rotation;
         protected Vector2 scale=new Vector2(1f,1f);
         protected Vector2 spriteOrigin;
+        protected float layerDepth = 0f;
         //DECLARE Id
         public override string id { get; set; }
         #endregion
@@ -49,7 +50,7 @@ namespace PongEx1
         public override void draw(SpriteBatch pSpriteBatch)
         {
             //draw the entity using the spritebatch
-            pSpriteBatch.Draw(texture, entityLocn, null,spriteColour,rotation,spriteOrigin,scale,SpriteEffects.None,0);
+            pSpriteBatch.Draw(texture, entityLocn, null,spriteColour,rotation,spriteOrigin,scale,SpriteEffects.None,layerDepth);
 
         }
         #endregion

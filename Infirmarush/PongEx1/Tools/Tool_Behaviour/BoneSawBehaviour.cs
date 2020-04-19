@@ -55,7 +55,6 @@ namespace PongEx1.Tools.Tool_Behaviour
         {
             if (hasEnded)
             {
-                _activityHandler.OnActivityChange(true, (PatientNum)patientNum);
                 isActive = true;
             }
             if (isActive && !initial)
@@ -64,6 +63,7 @@ namespace PongEx1.Tools.Tool_Behaviour
                 hasEnded = false;
                 quickTimeCount = 0;
                 SetQTItemActive(true);
+                _activityHandler.OnActivityEnd(false, (PatientNum)patientNum);
             }
             if (quickTimeCount >= 3)
             {
@@ -73,7 +73,7 @@ namespace PongEx1.Tools.Tool_Behaviour
                     isActive = false;
                     initial = false;
                     hasEnded = true;
-                    _activityHandler.OnActivityChange(false, (PatientNum)patientNum);
+                    _activityHandler.OnActivityEnd(true, (PatientNum)patientNum);
                     SetQTItemActive(false);
                     Console.WriteLine("Patient is cured");
                 }
@@ -86,7 +86,6 @@ namespace PongEx1.Tools.Tool_Behaviour
                     isActive = true;
                     activityChanged = true;
                     hasEnded = false;
-                    _activityHandler.OnActivityChange(true, (PatientNum)patientNum);
                     SetQTItemActive(true);
                 }
             }
@@ -158,11 +157,17 @@ namespace PongEx1.Tools.Tool_Behaviour
             if (((DeathEvent)args).Dead[(PatientNum)patientNum])
             {
                 Console.WriteLine((PatientNum)patientNum);
-                _activityHandler.OnActivityChange(false, (PatientNum)patientNum);
                 SetQTItemActive(false);
                 hasEnded = true;
                 initial = false;
             }
+        }
+        public override void OnGameEnd(object sender, IEvent args)
+        {
+            hasEnded = true;
+            initial = false;
+            SetQTItemActive(false);
+            
         }
     }
 }

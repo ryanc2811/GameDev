@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using PongEx1._Game.Events;
 using PongEx1._Game.Timer;
 using PongEx1.Activity;
+using PongEx1.Entities._Symbols;
 using PongEx1.Entities.Damage;
 using PongEx1.Entities.Healing;
 using PongEx1.Entities.PatientStuff.Health_Bar;
@@ -19,7 +20,7 @@ using PongEx1.Illness;
 
 namespace PongEx1.Entities.PatientStuff
 {
-    class Patient : GameXEntity,ICollidable,IDamageListener,IImmovable,IActivityListener,IGameTimerListener,IHealListener
+    class Patient : GameXEntity,ICollidable,IDamageListener,IImmovable,IActivityListener,ITimerListener,IHealListener
     {
         PatientNum patientNum;
         IDeathHandler death;
@@ -32,20 +33,28 @@ namespace PongEx1.Entities.PatientStuff
         //DECLARE a reference to BodyPart
         BodyPart bodyPart;
         IHealthBar healthBar;
+        ISymbolManager symbolManager;
         double health;
         double maxHealth = 1.0;
         bool isDead = false;
+        bool activityEnded = false;
         Vector2 startPosition;
-        //TEST BOOL FOR COLLIDING
+        //DECLARE BOOL FOR COLLIDING
         bool hasCollided = false;
         bool initial = false;
         public Patient()
         {
             //INSTANTIATE a new illness factory
             illnessFactory = new IllnessFactory();
+            //Generate a new illness for the patient
             CreateNewIllness();
+            //set health to max health
             health = maxHealth;
             
+        }
+        public void AddSymbolManager(ISymbolManager pSymbolManager)
+        {
+            symbolManager = pSymbolManager;
         }
         public PatientNum GetPatientNum
         {
@@ -58,6 +67,7 @@ namespace PongEx1.Entities.PatientStuff
         public void SetPatientNum(PatientNum patientNum)
         {
             this.patientNum = patientNum;
+            
         }
         public Rectangle getHitBox()
         {
@@ -75,6 +85,7 @@ namespace PongEx1.Entities.PatientStuff
             symptoms = illness.getSymptoms;
             //add the the body part from illness and set local body part to it
             bodyPart = illness.getBodyPart;
+            Console.WriteLine(bodyPart);
         }
         public void onCollide(IEntity entity)
         {
@@ -113,6 +124,8 @@ namespace PongEx1.Entities.PatientStuff
             if (health > 0)
             {
                 health -= ((ReceiveDamageEvent)args).Damage[patientNum];
+                if(symptoms.Count>1)
+                    health -= ((ReceiveDamageEvent)args).Damage[patientNum];
                 healthBar.UpdateHealth(health);
             }
                
@@ -125,10 +138,22 @@ namespace PongEx1.Entities.PatientStuff
             {
                 isDead = false;
                 CreateNewIllness();
+                symbolManager.AddIllness(illness, patientNum);
                 death.OnDeath(false, patientNum);
                 health = maxHealth;
                 entityLocn = startPosition;
                 healthBar.UpdateHealth(health);
+                ((IEntity)healthBar).setPosition(healthBar.StartPos.X,healthBar.StartPos.Y);
+            }
+            if (activityEnded)
+            {
+                activityEnded = false;
+                CreateNewIllness();
+                symbolManager.AddIllness(illness, patientNum);
+                health = maxHealth;
+                entityLocn = startPosition;
+                healthBar.UpdateHealth(health);
+                ((IEntity)healthBar).setPosition(healthBar.StartPos.X, healthBar.StartPos.Y);
             }
         }
         public override void Update()
@@ -138,8 +163,9 @@ namespace PongEx1.Entities.PatientStuff
                 initial = true;
                 startPosition = entityLocn;
                 healthBar.UpdateHealth(health);
+                symbolManager.AddIllness(illness, patientNum);
             }
-                
+              
            if (health <= 0&&!isDead)
             {
                 isDead = true;
@@ -147,6 +173,7 @@ namespace PongEx1.Entities.PatientStuff
                 death.OnDeath(true,patientNum);
                 Console.WriteLine(patientNum+" is Dead");
                 setPosition(1111, 1111);
+                ((IEntity)healthBar).setPosition(1111, 1111);
             }
 
             if (Keyboard.GetState().IsKeyUp(Keys.F))
@@ -155,17 +182,21 @@ namespace PongEx1.Entities.PatientStuff
             }
         }
 
-        public void OnActivityChange(object sender, IEvent args)
+        public void OnActivityEnd(object sender, IEvent args)
         {
-            if (!((ActivityEvent)args).Active[patientNum])
+            if (((ActivityEvent)args).Ended[patientNum])
             {
                 hasCollided = false;
+                activityEnded = true;
+                setPosition(1111, 1111);
+                ((IEntity)healthBar).setPosition(1111, 1111);
             }
+        
         }
 
         public void OnTimerStart(object sender, IEvent args)
         {
-            if (((TimerEvent)args).TimerEnd)
+            if (((TimerEvent)args).DictTimerEnd[patientNum])
                 Respawn();
         }
 

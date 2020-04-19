@@ -9,6 +9,6 @@ namespace PongEx1.Entities.PatientStuff
 {
     public interface IPatientHandler
     {
-        void AddGameTimer(IGameTimer gameTimer);
+        void AddGameTimer(IGameTimer gameTimer, PatientNum num);
     }
 }

@@ -57,6 +57,10 @@
     <Compile Include="Entities\Damage\IDamageHandler.cs" />
     <Compile Include="Entities\Damage\IDamageListener.cs" />
     <Compile Include="Entities\GameXEntity.cs" />
+    <Compile Include="Entities\Hand_Book\HandBook.cs" />
+    <Compile Include="Entities\Hand_Book\IHandBook.cs" />
+    <Compile Include="Entities\Hand_Book\IIllnessCalculator.cs" />
+    <Compile Include="Entities\Hand_Book\IllnessCalculator.cs" />
     <Compile Include="Entities\Healing\HealHandler.cs" />
     <Compile Include="Entities\Healing\IHealHandler.cs" />
     <Compile Include="Entities\Healing\IHealListener.cs" />
@@ -80,8 +84,21 @@
     <Compile Include="Entities\PatientStuff\PatientNum.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Wall.cs" />
-    <Compile Include="Entities\Mouse\MouseEntity.cs" />
+    <Compile Include="Entities\_Mouse\MouseEntity.cs" />
     <Compile Include="Entities\Damage\ReceiveDamageEvent.cs" />
+    <Compile Include="Entities\_Symbols\BodyPartSymbol.cs" />
+    <Compile Include="Entities\_Symbols\IBodyPartSymbol.cs" />
+    <Compile Include="Entities\_Symbols\ISymbol.cs" />
+    <Compile Include="Entities\_Symbols\ISymbolHandler.cs" />
+    <Compile Include="Entities\_Symbols\ISymbolManager.cs" />
+    <Compile Include="Entities\_Symbols\ISymptomSymbol.cs" />
+    <Compile Include="Entities\_Symbols\IToolSymbol.cs" />
+    <Compile Include="Entities\_Symbols\Symbol.cs" />
+    <Compile Include="Entities\_Symbols\SymbolHandler.cs" />
+    <Compile Include="Entities\_Symbols\SymbolManager.cs" />
+    <Compile Include="Entities\_Symbols\SymptomSymbol.cs" />
+    <Compile Include="Entities\_Symbols\ToolSymbol.cs" />
+    <Compile Include="Tools\Tools.cs" />
     <Compile Include="Tools\Tool_Behaviour\IToolBehaviour.cs" />
     <Compile Include="Tools\Tool_Behaviour\LeechBehaviour.cs" />
     <Compile Include="_Game\Events\EventType.cs" />
@@ -90,6 +107,18 @@
     <Compile Include="_Game\Events\IEventHandler.cs" />
     <Compile Include="_Game\Events\IEventManager.cs" />
     <Compile Include="_Game\Events\IEvent.cs" />
+    <Compile Include="_Game\GameEnd\GameEndEvent.cs" />
+    <Compile Include="_Game\GameEnd\GameEndHandler.cs" />
+    <Compile Include="_Game\GameEnd\IGameEndListener.cs" />
+    <Compile Include="_Game\Game_UI\GameUI.cs" />
+    <Compile Include="_Game\Game_UI\IGameUI.cs" />
+    <Compile Include="_Game\Game_UI\IScore.cs" />
+    <Compile Include="_Game\Game_UI\ITextEntity.cs" />
+    <Compile Include="_Game\Game_UI\ITimerEntity.cs" />
+    <Compile Include="_Game\Game_UI\Score.cs" />
+    <Compile Include="_Game\Game_UI\TextEntity.cs" />
+    <Compile Include="_Game\Game_UI\TimerUI.cs" />
+    <Compile Include="_Game\GameEnd\IGameEndHandler.cs" />
     <Compile Include="_Game\State\IState.cs" />
     <Compile Include="Game_Engine\Collision\CollisionManager.cs" />
     <Compile Include="Game_Engine\Entities\Entity.cs" />
@@ -132,7 +161,7 @@
     <Compile Include="Tools\ToolFactory.cs" />
     <Compile Include="_Game\Timer\GameTimer.cs" />
     <Compile Include="_Game\Timer\IGameTimer.cs" />
-    <Compile Include="_Game\Timer\IGameTimerListener.cs" />
+    <Compile Include="_Game\Timer\ITimerListener.cs" />
     <Compile Include="_Game\Timer\TimerEvent.cs" />
   </ItemGroup>
   <ItemGroup>

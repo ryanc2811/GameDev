@@ -18,10 +18,7 @@ namespace PongEx1._Game.Timer
         bool timerPaused = false;
         PatientNum patientNum;
         public override event EventHandler<IEvent> Event;
-        public GameTimer()
-        {
-            eventType = EventType.TimerEvent;
-        }
+        
         private void OnTimerEnd()
         {
             IEvent eventData = new TimerEvent();
@@ -51,21 +48,11 @@ namespace PongEx1._Game.Timer
                 Console.WriteLine("timer Start");
                 timerStart = true;
                 totalTime = time;
-                Timer= (float)Time.TotalGameTime.TotalSeconds;
+                if (Time != null)
+                    Timer = (float)Time.TotalGameTime.TotalSeconds;
             }
         }
-
-        public void OnTimerPause(bool pause)
-        {
-            if (Event != null)
-            {
-                timerPaused = pause;
-                IEvent eventData = new TimerEvent();
-                ((TimerEvent)eventData).TimerPaused = timerPaused;
-                Event(this, eventData);
-            }
-        }
-        public void OnTimerStart(float time,PatientNum patientNum)
+        public void OnTimerStart(float time, PatientNum patientNum)
         {
             if (Event != null)
             {
@@ -76,11 +63,11 @@ namespace PongEx1._Game.Timer
                 this.patientNum = patientNum;
                 timerStart = true;
                 totalTime = time;
-                Timer = (float)Time.TotalGameTime.TotalSeconds;
+                if(Time!=null)
+                    Timer = (float)Time.TotalGameTime.TotalSeconds;
             }
         }
-
-        public void OnTimerPause(bool pause, PatientNum patientNum)
+        public void OnTimerPause(bool pause)
         {
             if (Event != null)
             {
@@ -90,6 +77,12 @@ namespace PongEx1._Game.Timer
                 Event(this, eventData);
             }
         }
+
+        public void SetEventType(EventType eventType)
+        {
+            this.eventType = eventType;
+        }
+
         #endregion
     }
 }

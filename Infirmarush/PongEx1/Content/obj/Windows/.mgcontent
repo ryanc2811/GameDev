@@ -18,5 +18,15 @@
     <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/BoneSaw.png</File>
     <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/HealthBar.png</File>
     <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Leech.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/SymbolContainer.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Infection.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Leg.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/HandBook.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Nausea.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/HandBookButton.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Head.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Reset.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Arm.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Text/Score.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

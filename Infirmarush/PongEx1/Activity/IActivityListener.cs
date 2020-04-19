@@ -10,6 +10,6 @@ namespace PongEx1.Activity
     public interface IActivityListener
     {
         //On Activity Change event
-        void OnActivityChange(object sender, IEvent args);
+        void OnActivityEnd(object sender, IEvent args);
     }
 }

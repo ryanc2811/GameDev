@@ -15,16 +15,16 @@ namespace PongEx1.Activity
         {
             eventType = EventType.ActivityEvent;
         }
-        #region OnEvent
-        public void OnActivityChange(bool isActive,PatientNum patientNum)
+        #region OnEvent 
+        public void OnActivityEnd(bool ended, PatientNum patientNum)
         {
             if (Event != null)
             {
                 IEvent eventData = new ActivityEvent();
-                IDictionary<PatientNum, bool> dictActive;
-                dictActive = ((ActivityEvent)eventData).Active;
-                dictActive[patientNum] = isActive;
-                ((ActivityEvent)eventData).Active = dictActive;
+                IDictionary<PatientNum, bool> dictEnded;
+                dictEnded = ((ActivityEvent)eventData).Ended;
+                dictEnded[patientNum] = ended;
+                ((ActivityEvent)eventData).Ended = dictEnded;
                 Event(this, eventData);
             }
         }

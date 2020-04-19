@@ -23,7 +23,6 @@ namespace PongEx1.Activity
         //private bool initial = false;
         public bool gethasHitGreen{get{ return hasHitGreen; } }
         IEntity QTGreen;
-        
         public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);

@@ -33,6 +33,7 @@ namespace PongEx1.Entities
 
         public Player()
         {
+            layerDepth = 0.2f;
             reducedSpeed = speed *= 0.7f;
         }
         public ITool currentTool { get; set; }
@@ -55,9 +56,12 @@ namespace PongEx1.Entities
                 {
                     itemAdded = true;
                 }
-                if (interact)
+                if (currentTool != null)
                 {
-                    _InteractHandler.OnInteract(true,((Patient)entity).GetPatientNum);
+                    if (interact && currentTool.GetName == "Leech")
+                    {
+                        _InteractHandler.OnInteract(true, ((Patient)entity).GetPatientNum);
+                    }
                 }
             }
         }
@@ -144,15 +148,19 @@ namespace PongEx1.Entities
         {
             _InteractHandler = interact;
         }
-        public void OnActivityChange(object sender, IEvent args)
+        public void RemoveInteractHandler()
         {
-            if (!((ActivityEvent)args).Active[(PatientNum)currentPatientNum])
-                stopMoving = false;
+            _InteractHandler = null;
         }
-
         public void OnDeath(object sender, IEvent args)
         {
             if (((DeathEvent)args).Dead[(PatientNum)currentPatientNum])
+                stopMoving = false;
+        }
+
+        public void OnActivityEnd(object sender, IEvent args)
+        {
+            if (((ActivityEvent)args).Ended[(PatientNum)currentPatientNum])
                 stopMoving = false;
         }
     }

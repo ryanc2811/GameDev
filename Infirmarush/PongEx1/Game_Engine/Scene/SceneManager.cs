@@ -34,7 +34,6 @@ namespace PongEx1.Game_Engine.Scene
         public void removeEntity(IEntity entity)
         {   //remove entities from the List
             EntityList.Remove(entity);
-
         }
         #endregion
         #region Draw

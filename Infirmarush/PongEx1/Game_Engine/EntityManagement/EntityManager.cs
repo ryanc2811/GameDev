@@ -9,7 +9,7 @@ using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Scene;
 using PongEx1.Tools;
 using PongEx1.Entities.Button;
-using PongEx1.Entities.Mouse;
+using PongEx1.Entities._Mouse;
 using PongEx1.Entities.PatientStuff;
 namespace PongEx1.Game_Engine.EntityManagement
 {

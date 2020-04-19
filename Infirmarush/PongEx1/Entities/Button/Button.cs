@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using PongEx1.Game_Engine.Collision;
 using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Input;
-using PongEx1.Entities.Mouse;
+using PongEx1.Entities._Mouse;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,11 +15,13 @@ namespace PongEx1.Entities.Button
 {
     class Button : GameXEntity,ICollidable,IInputListener,IButton
     {
-        protected bool isHovering=false;
-        protected bool gotInput = false;
+        private bool isHovering=false;
+        private bool gotInput = false;
+        private bool released = false;
         private int offset = 10;
 
-        public bool clicked { get { return gotInput; } }
+        public bool Clicked { get { return gotInput; } }
+        public bool Released { get { return released; } }
 
         public Rectangle getHitBox()
         {
@@ -44,13 +46,13 @@ namespace PongEx1.Entities.Button
                 spriteColour = Color.AntiqueWhite;
             }
             isHovering = false;
-            //draw the entity using the spritebatch
             
         }   
         public void OnNewInput(object sender, InputEventArgs args)
         {
+            
             bool clicked = args.LeftClicked;
-            bool released = args.LeftReleased;
+            released = args.LeftReleased;
             if (isHovering && clicked)
             {
                 spriteColour = Color.DarkGray;

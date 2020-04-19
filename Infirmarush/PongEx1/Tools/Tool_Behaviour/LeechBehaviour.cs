@@ -12,46 +12,37 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Tools.Tool_Behaviour
 {
-    class LeechBehaviour : ToolBehaviour,IGameTimerListener,IInteractListener
+    class LeechBehaviour : ToolBehaviour,IInteractListener
     {
-        IGameTimer Timer;
-        bool timerEnded=false;
         int timeBetweenDamage = 0;
         int timeBetweenHeal = 0;
         int leechPoints = 0;
         bool interacted = false;
-        bool timerPaused = false;
-        
-        public void AddGameTimer(IGameTimer gameTimer)
-        {
-            Timer = gameTimer;
-        }
+        bool leechActive = false;
+        bool gotInput = false;
+        int maxLeechPoints = 1600;
         public override void Behaviour()
         {
-
-            
-            //
             if (!initial)
             {
                 leechPoints = 0;
                 //timer starts
-                Timer.OnTimerStart(15f, (PatientNum)patientNum);
                 initial = true;
                 hasEnded = false;
-                _activityHandler.OnActivityChange(true, (PatientNum)patientNum);
-                timerPaused = true;
+                _activityHandler.OnActivityEnd(false, (PatientNum)patientNum);
+                leechActive = false;
             }
-           
-            if (leechPoints > 4000)
+            
+            if (leechPoints > maxLeechPoints)
             {
                 isActive = false;
                 initial = false;
                 hasEnded = true;
-                _activityHandler.OnActivityChange(false, (PatientNum)patientNum);
+                _activityHandler.OnActivityEnd(true, (PatientNum)patientNum);
                 Console.WriteLine((PatientNum) patientNum+" is Cured");
             }
             
-            if (!timerEnded&&!timerPaused)
+            if (leechActive)
             {
                 leechPoints++;
                 
@@ -61,11 +52,11 @@ namespace PongEx1.Tools.Tool_Behaviour
                 }
                 else
                 {
-                    _damageHandler.OnTakeDamage(0.01, (PatientNum)patientNum);
+                    _damageHandler.OnTakeDamage(0.015, (PatientNum)patientNum);
                     timeBetweenDamage = 0;
                 }  
             }
-            else if(timerEnded||timerPaused)
+            else if(!leechActive && !isDead)
             {
                 if (timeBetweenHeal < 30)
                 {
@@ -77,28 +68,27 @@ namespace PongEx1.Tools.Tool_Behaviour
                     timeBetweenHeal = 0;
                 }
             }
-            if (interacted && !timerEnded)
+            if (interacted&&!gotInput)
             {
-                timerPaused = !timerPaused;
-                Timer.OnTimerPause(timerPaused);
+                leechActive = !leechActive;
+                gotInput = true;
             }
-            else if (interacted && timerEnded)
+            if (Keyboard.GetState().IsKeyUp(Keys.F))
             {
-                Timer.OnTimerStart(15f,(PatientNum)patientNum);
-                Timer.OnTimerPause(false);
+                gotInput = false;
             }
-            
-
         }
 
         public void OnInteract(object sender, IEvent args)
         {
-            interacted=((InteractedEvent)args).Interacted[(PatientNum)patientNum];
+            interacted =((InteractedEvent)args).Interacted[(PatientNum)patientNum];
         }
-
-        public void OnTimerStart(object sender, IEvent args)
+        public override void OnGameEnd(object sender, IEvent args)
         {
-            timerEnded = ((TimerEvent)args).DictTimerEnd[(PatientNum)patientNum];
+            base.OnGameEnd(sender, args);
+            leechPoints = 0;
+            leechActive = false;
+            isActive = false;
         }
     }
 }

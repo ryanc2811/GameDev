@@ -10,8 +10,20 @@ namespace PongEx1.Entities.PatientStuff.Health_Bar
     class HealthBar:GameXEntity,IHealthBar
     {
         Color healthBarGreen = new Color(34, 160, 76);
+        private bool initial;
+        private Vector2 startPos;
+        public Vector2 StartPos { get { return startPos; } }
+        public override void Update()
+        {
+            if (!initial)
+            {
+                initial = true;
+                startPos = entityLocn;
+            }
+        }
         public void UpdateHealth(double health)
         {
+            
             scale = new Vector2(1f, (float)health);
             if (health > .7f)
                 spriteColour = healthBarGreen;
