@@ -167,7 +167,6 @@ namespace PongEx1.Tools.Tool_Behaviour
             hasEnded = true;
             initial = false;
             SetQTItemActive(false);
-            
         }
     }
 }

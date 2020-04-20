@@ -33,7 +33,7 @@ namespace PongEx1
     // This is the main type for your game.
     public class Kernel : Game,IGameEndListener
     {
-        #region Variables
+        #region Data member Variables
         //DECLARE Graphics Device Manager 
         GraphicsDeviceManager graphics;
         //DECLARE Sprite Batch
@@ -56,15 +56,23 @@ namespace PongEx1
         private IEntity player;
         //DECLARE IEntity for toolbench object
         private IEntity toolBench;
+        //DECLARE IEntity for the Score text object
         private IEntity score;
+        //DECLARE an IEntity for displaying the Time left in the game
         private IEntity gameTimerEntity;
-        //DECLARE IEntity for boneSaw Button
+        //DECLARE IEntity for the Button that adds a bone saw tool the player
         private IEntity boneSawButton;
+        //DECLARE IEntity for the Button that adds a leech tool the player
         private IEntity leechButton;
+        //DECLARE IEntity for the Button that enables and disables the handbook
         private IEntity handBookButton;
+        //DECLARE IEntity for the Button that resets the calculator on the handbook
         private IEntity resetButton;
+        //DECLARE IEntity for the handbook entity
         private IEntity handBook;
+        //DECLARE IEntity for the bonesaw symbol entity which is added to the calculator
         private IEntity boneSawSymbol;
+        //DECLARE IEntity for the leech symbol entity which is added to the calculator
         private IEntity leechSymbol;
         //DECLARE IEntity for mouse object
         private IEntity mouse;
@@ -76,6 +84,7 @@ namespace PongEx1
         private List<IEntity> Walls;
         //DECLARE list of IEntity for patients
         private List<IEntity> Patients;
+        //DECLARE IList of IEntity for healthbars
         private IList<IEntity> healthBars;
         //DECLARE an IList of IEntity for all the quick time containers
         private IList<IEntity> QTContainers;
@@ -83,31 +92,46 @@ namespace PongEx1
         private IList<IEntity> QTGreens;
         //DECLARE an IList of IEntity for all the quick time lines
         private IList<IEntity> QTLines;
+        //DECLARE an IList of IEntity for the containers that sit underneath the symbols
         private IList<IEntity> symbolContainers;
+        //DECLARE an IList of IEntity for holding all the symbols 
         private IList<IEntity> symbols;
         //DECLARE an IList of IEventHandler for storing death handlers
         private IList<IEventHandler> deathHandlers;
         //DECLARE an IList of IEventHandler for storing damage handlers
         private IList<IEventHandler> damageHandlers;
+        //DECLARE an IList of IEventHandler for storing heal handlers
         private IList<IEventHandler> healHandlers;
+        //DECLARE an IList of IEventHandler for storing death timers
         private IList<IEventHandler> deathTimers;
         //DECLARE an IList of IEventHandler for storing activity handlers
         private IList<IEventHandler> activityHandlers;
         //DECLARE an IList of IToolBehaviours for storing tool behaviours
         private IList<IBehaviour> toolBehaviours;
+        //DECLARE an IList of IEntity for storing buttons for each symptom
         private IList<IEntity> symptomButtons;
+        //DECLARE an IList of IEntity for storing buttons for each bodypart
         private IList<IEntity> bodyPartButtons;
+        //DECLARE an IEventHandler for the game timer
         private IEventHandler gameTimer;
+        //DECLARE an IPatientHandler for handling the respawning of patients
         private IPatientHandler patientHandler;
+        //DECLARE an IEventHandler for handling the interact event
         private IEventHandler interactHandler;
+        //DECLARE an ISymbolHandler storing a reference to each symbol
         private ISymbolHandler symbolHandler;
+        //DECLARE an IEventHandler for handling the game end event
         private IEventHandler gameEndHandler;
-        ISymbolManager symbolManager;
-        IGameUI gameUI;
+        //DECLARE an ISymbolManager for managing each symbol
+        private ISymbolManager symbolManager;
+        //DECLARE an IGameUI for handling the UI for score and the Game timer
+        private IGameUI gameUI;
         //DECLARE an ITool for the bone saw object
         private ITool boneSaw;
+        //DECLARE an ITool for the leech object
         private ITool Leech;
 
+        //DECLARE a Vector2 array for storing the positions for each quick time object
         private Vector2[] QTContainerPos ={ new Vector2(125, 275),new Vector2(1275, 275) };
         private Vector2[] QTLinePos ={ new Vector2(125, 285), new Vector2(1275, 285) };
         private Vector2[] QTGreenPos = { new Vector2(175, 285), new Vector2(1325, 285) };
@@ -119,7 +143,6 @@ namespace PongEx1
         private Vector2 bodyPartPosCalc = new Vector2(1058, 240);
         private Vector2 toolPos = new Vector2(1200, 240);
         #endregion
-
         #region Constructor
         public Kernel()
         {
@@ -133,7 +156,6 @@ namespace PongEx1
             Content.RootDirectory = "Content";
         }
         #endregion
-
         #region Initialize
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -162,43 +184,45 @@ namespace PongEx1
             toolFactory = new ToolFactory();
             //INSTANTIATE ToolBehaviourFactory
             toolBehaviourFactory = new BehaviourFactory();
-            //create tools
+            //INSTANTIATE patients list with a capacity of 2
             Patients = new List<IEntity>(2);
-            boneSaw = toolFactory.create("BoneSaw");
-            Leech = toolFactory.create("Leech");
+            //INSTANTIATE event Manager
             eventManager = new EventManager();
+            //INSTANTIATE death handlers list
             deathHandlers = new List<IEventHandler>();
+            //INSTANTIATE damage handlers list
             damageHandlers = new List<IEventHandler>();
+            //INSTANTIATE death timers list
             deathTimers = new List<IEventHandler>();
+            //INSTANTIATE heal handlers list
             healHandlers = new List<IEventHandler>();
+            //INSTANTIATE activity handlers list
             activityHandlers = new List<IEventHandler>();
+            //INSTANTIATE symbol handler
             symbolHandler = new SymbolHandler();
+            //Initialise symbol containers
             InitialiseSymbolContainers();
+            //Initialise symbols
             InitialiseSymbols();
-            symbolManager = new SymbolManager();
-            symbolManager.AddSymbols(symbolHandler);
+            //Initialise walls
             InitialiseWalls();
-           
+            //Initialise buttons
             InitialiseButtons();
+            //Initialise event handlers
             InitialiseEventHandlers();
+            //Initialise tools
+            InitialiseTools();
+            //Initialise handbook
             InitialiseHandBook();
-            patientHandler = new PatientHandler();
-            for (int i = 0; i < Patients.Capacity; i++)
-            {
-                patientHandler.AddGameTimer((IGameTimer)deathTimers[i],(PatientNum)i);
-            }
-            
-            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)patientHandler).OnDeath);
-            eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)patientHandler).OnActivityEnd);
+            //Initialise patient handler
+            InitialisePatientHandler();
+            //Initialise entities that will be recycled on restart
             InitialiseEntities();
-            
+            //Initialise tool bench
             InitialiseToolBench();
+            //Initialise mouse object
             InitialiseMouseObj();
-            
-            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)boneSaw).OnDeath);
-            eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)boneSaw).OnGameEnd);
-            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)Leech).OnDeath);
-            eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)Leech).OnGameEnd);
+            //subscribe the kernel as a IGameEndListener
             eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)this).OnGameEnd);
             //Assign spritebatch from Scene Manager
             ((SceneManager)sceneManager).spriteBatch = spriteBatch;
@@ -207,6 +231,12 @@ namespace PongEx1
             base.Initialize();
             
         }
+
+        
+        #region Entities that are recycled after restart
+        /// <summary>
+        /// This method initialises all the entities that will need to be initialised again on restart
+        /// </summary>
         private void InitialiseEntities()
         {
             //initialise All Entities
@@ -216,60 +246,107 @@ namespace PongEx1
             InitialiseToolBehaviours();
             InitialisePatients();
         }
+        #endregion
         #region Restart Game
+        /// <summary>
+        /// This method handles the removing of certain entities from the game world and unsubscribes them from any events that they are linked to
+        /// </summary>
         private void RestartGame()
         {
+            //Removes the player from the scene manager
             sceneManager.removeEntity(player);
+            //removes the player from input listeners
             inputManager.removeEventListener(InputDevice.Keyboard,((IInputListener)player).OnNewInput);
+            //unsubscribes the player from collision
             ((ICollisionPublisher)collisionManager).Unsubscribe((ICollidable)player);
+            //Removes the player as an Activity Event listener
             eventManager.RemoveEventListener(EventType.ActivityEvent,((IActivityListener)player).OnActivityEnd);
+            //Removes the player as a Death Event listener
             eventManager.RemoveEventListener(EventType.DeathEvent, ((IDeathListener)player).OnDeath);
-            ((IPlayer)player).RemoveInteractHandler();
+            //set the player to null
             player = null;
+            //removes the score entity from the scene manager
             sceneManager.removeEntity(score);
+            //set score entity to null
             score = null;
+            //removes the game timer entity from the scene manager
             sceneManager.removeEntity(gameTimerEntity);
+            //removes the game timer entity from a timer event listener
             eventManager.RemoveEventListener(EventType.GameTimerEvent, ((ITimerListener)gameTimerEntity).OnTimerStart);
+            //sets the game timer to null
             gameTimerEntity = null;
+            //sets the game ui to null
             gameUI = null;
+            //for every patient in the patient list
             for (int i = 0; i < Patients.Count; i++)
             {
+                //remove patient from scene manager
                 sceneManager.removeEntity(Patients[i]);
+                //remove patient as a damage event listener
                 eventManager.RemoveEventListener(EventType.DamageEvent, ((IDamageListener)Patients[i]).OnDamageTaken);
+                //remove the patient as a heal listener
                 eventManager.RemoveEventListener(EventType.HealEvent, ((IHealListener)Patients[i]).OnHeal);
+                //remove the patient as a activity event listener
                 eventManager.RemoveEventListener(EventType.ActivityEvent, ((IActivityListener)Patients[i]).OnActivityEnd);
+                //remove the patient as a death timer listener
                 eventManager.RemoveEventListener(EventType.DeathTimerEvent, ((ITimerListener)Patients[i]).OnTimerStart);
+                //remove the patient as a collision subscriber
                 ((ICollisionPublisher)collisionManager).Unsubscribe((ICollidable)Patients[i]);
+                //set the patient to null
                 Patients[i] = null;
+                //remove the health bar from the scene manager
                 sceneManager.removeEntity(healthBars[i]);
+                //set the health bar to null
                 healthBars[i] = null;
+                //remove the Qt container from scenemanager
                 sceneManager.removeEntity(QTContainers[i]);
+                //set the qt container to null
                 QTContainers[i] = null;
+                //remove the Quick time green area from scene manager
                 sceneManager.removeEntity(QTGreens[i]);
+                //set the Quick time green area to null
                 QTGreens[i] = null;
+                //remove the QT line from the scenemanager
                 sceneManager.removeEntity(QTLines[i]);
+                //set the Qt line to null
                 QTLines[i] = null;
-                
             }
+            //for each tool behaviour in tool behaviours
             for (int i = 0; i < toolBehaviours.Count; i++)
             {
+                //remove the tool behaviour as a death event listener
                 eventManager.RemoveEventListener(EventType.DeathEvent, ((IDeathListener)toolBehaviours[i]).OnDeath);
+                //if the behaviour is an input listener then remove it as a keyboard event listener
                 if(toolBehaviours[i]is IInputListener)
                     inputManager.removeEventListener(InputDevice.Keyboard, ((IInputListener)toolBehaviours[i]).OnNewInput);
+                //if the tool behaviour is an interact listener, then remove it from event manager as an interact listener
                 if (toolBehaviours[i] is IInteractListener)
                     eventManager.RemoveEventListener(EventType.InteractEvent, ((IInteractListener)toolBehaviours[i]).OnInteract);
+                //remove the tool behaviour as a game end event listener
                 eventManager.RemoveEventListener(EventType.GameEndEvent, ((IGameEndListener)toolBehaviours[i]).OnGameEnd);
+                //set tool behaviour to null
+                toolBehaviours[i] = null;
             }
+            //clear the patients list
             Patients.Clear();
+            //intialise entities
             InitialiseEntities();
-            LoadContent();
+            //reload content
+            base.Initialize();
             
         }
+        /// <summary>
+        /// method for listening to the game end event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void OnGameEnd(object sender, IEvent args)
         {
+            //if the game has ended, restart the game
             RestartGame();
         }
         #endregion
+        #region Player
         /// <summary>
         /// Initialises Player
         /// </summary>
@@ -285,58 +362,59 @@ namespace PongEx1
             inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)player).OnNewInput);
             //add player to the event manager as an activity event listener
             eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)player).OnActivityEnd);
+            //add player to the event manager as a death event listener
             eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)player).OnDeath);
+            //add interact handler to the player
             ((IPlayer)player).AddInteractHandler((IInteractHandler)interactHandler);
             //set the players initial position
             player.setPosition(800, 800);
         }
+        #endregion
+        #region GameUI
+        /// <summary>
+        /// initialises the UI for the game(score and timer)
+        /// </summary>
         private void InitialiseGameUI()
         {
+            //INSTANTIATE GameUI
             gameUI = new GameUI();
+            //add game ui as an activity event listener
             eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)gameUI).OnActivityEnd);
+            //create the score entity 
             score = entityManager.createEntity<Score>();
+            //create the game timer entity
             gameTimerEntity = entityManager.createEntity<TimerUI>();
+            //Add the game end handler to the game timer entity
             ((ITimerEntity)gameTimerEntity).AddGameEndHandler((IGameEndHandler)gameEndHandler);
+            //Add game timer entity as a game timer event listener
             eventManager.AddEventListener(EventType.GameTimerEvent, ((ITimerListener)gameTimerEntity).OnTimerStart);
+            //add score to the game UI
             gameUI.AddUIElement(score);
+            //Add the game timer handler to the game ui
             gameUI.AddGameTimer((IGameTimer)gameTimer);
+            //add the game timer entity to the scene manager
             sceneManager.addEntity(gameTimerEntity);
+            //add the score entity to the scene manager
             sceneManager.addEntity(score);
+            //set the initial position of the score
             score.setPosition(100, 50);
+            //set the initial position of the game timer entity
             gameTimerEntity.setPosition(1300, 50);
             
         }
-            /// <summary>
-            /// Initialises Tool Bench
-            /// </summary>
-        private void InitialiseToolBench()
-        {
-            //create the tool bench object
-            toolBench = entityManager.createEntity<ToolBench>();
-            //add the bonesaw tool to the tools list inside tool bench
-            ((IToolBench)toolBench).addTool(boneSaw);
-            ((IToolBench)toolBench).addTool(Leech);
-            //add the bonesaw button to the tool bench
-            ((IToolBench)toolBench).SetToolButtons((IButton)boneSawButton,(IButton)leechButton);
-            //subscribe the toolbench as a collidable object
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)toolBench);
-            //add the tool bench to the scene
-            sceneManager.addEntity(toolBench);
-            //set the tool bench's initial position
-            toolBench.setPosition(725, 100);
-        }
+        #endregion
         #region Buttons
         /// <summary>
         /// Initialises Buttons
         /// </summary>
         private void InitialiseButtons()
         {
-            //create a bonesaw button
+            //create Buttons
             boneSawButton = entityManager.createEntity<Button>();
             leechButton = entityManager.createEntity<Button>();
             handBookButton = entityManager.createEntity<Button>();
             resetButton = entityManager.createEntity<Button>();
-            //subscribe the button as a collidable object
+            //subscribe the buttons as a collidable object
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)boneSawButton);
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)leechButton);
             ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)handBookButton);
@@ -356,23 +434,37 @@ namespace PongEx1
             leechButton.setPosition(1900, 1125);
             handBookButton.setPosition(1500, 50);
             resetButton.setPosition(1111, 1111);
+            //INTANTIATE symptom buttons list
             symptomButtons = new List<IEntity>();
+            //INTANTIATE body part buttons list
             bodyPartButtons = new List<IEntity>();
+            //iterate over each symptom in the symptom enum
             foreach (Symptom symptom in Enum.GetValues(typeof(Symptom)))
             {
+                //create a button
                 IEntity button = entityManager.createEntity<Button>();
+                //subscribe the button as a collidable object
                 ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)button);
+                //add the button as a mouse input listener
                 inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)button).OnNewInput);
+                //add the button to the symptoms button list
                 symptomButtons.Add(button);
+                //add the button to the scene manager
                 sceneManager.addEntity(button);
                 
             }
+            //iterate over each bodypart in the bodypart enum
             foreach (BodyPart bodyPart in Enum.GetValues(typeof(BodyPart)))
             {
+                //create a button
                 IEntity button = entityManager.createEntity<Button>();
+                //subscribe the button as a collidable object
                 ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)button);
+                //add the button as a mouse input listener
                 inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)button).OnNewInput);
+                //add the button to the bodypart button list
                 bodyPartButtons.Add(button);
+                //add the button to the scene manager
                 sceneManager.addEntity(button);
             }
         }
@@ -405,6 +497,7 @@ namespace PongEx1
                 IEventHandler deathHandler = new DeathHandler();
                 eventManager.AddEventHandler(deathHandler);
                 IEventHandler deathTimer = new GameTimer();
+                //set the event type of the death timer to death timer event
                 ((IGameTimer)deathTimer).SetEventType(EventType.DeathTimerEvent);
                 eventManager.AddEventHandler(deathTimer);
                 IEventHandler damageHandler = new DamageHandler();
@@ -414,18 +507,26 @@ namespace PongEx1
                 IEventHandler activityHandler = new ActivityHandler();
                 eventManager.AddEventHandler(activityHandler);
             }
-  
+            //INSTANTIATE a game timer
             gameTimer = new GameTimer();
+            //Set the event type to game timer event
             ((IGameTimer)gameTimer).SetEventType(EventType.GameTimerEvent);
+            //add the game timer to the event manager
             eventManager.AddEventHandler(gameTimer);
+            //INSTANTIATE an interact handler
             interactHandler = new InteractHandler();
+            //add the handler to the event manager
             eventManager.AddEventHandler(interactHandler);
+            //INSTANTIATE an game end handler
             gameEndHandler = new GameEndHandler();
+            //add the handler to the event manager
             eventManager.AddEventHandler(gameEndHandler);
+            //set the list of event handlers from event manager locally
             IList<IEventHandler> eventHandlers = eventManager.Handlers;
-
+            //iterate over each handler in event handlers list
             foreach (IEventHandler handler in eventHandlers)
             {
+                //add each handler to their corresponding list
                 if (handler.GetType is EventType.DamageEvent)
                 {
                     damageHandlers.Add(handler);
@@ -450,43 +551,46 @@ namespace PongEx1
             
         }
         #endregion
-        #region Quick-Time Objects
+        #region ToolBench
         /// <summary>
-        /// Initialises Quick Time Objects
+        /// Initialises Tool Bench
         /// </summary>
-        private void InitialiseQuickTimeObjects()
+        private void InitialiseToolBench()
         {
-            //INSTANTIATE quick time event objects lists
-            QTContainers = new List<IEntity>();
-            QTGreens = new List<IEntity>();
-            QTLines = new List<IEntity>();
-            //for every patient in the patients list
-            for (int i = 0; i < Patients.Capacity; i++)
-            {
-                //create quick time objects
-                IEntity QTContainer=entityManager.createEntity<QTContainer>();
-                IEntity QTLine=entityManager.createEntity<QTLine>();
-                IEntity QTGreen=entityManager.createEntity<QTGreen>();
-                //add the objects to the corresponding lists
-                QTContainers.Add(QTContainer);
-                QTLines.Add(QTLine);
-                QTGreens.Add(QTGreen);
-                ((IQuickTimeObj)QTLines[i]).SetActivePosition(QTLinePos[i]);
-                ((IQuickTimeObj)QTContainers[i]).SetActivePosition(QTContainerPos[i]);
-                ((IQuickTimeObj)QTGreens[i]).SetActivePosition(QTGreenPos[i]);
-                //subscribe the QTLine and QT green objects as a collidable object
-                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTLine);
-                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTGreen);
-
-                //add the Quick time objects to the scene
-                sceneManager.addEntity(QTContainer);
-                sceneManager.addEntity(QTGreen);
-                sceneManager.addEntity(QTLine);
-                //set the initial position of all quick time objects (OFF SCREEN)
-                QTContainer.setPosition(1100, 1300);
-                QTGreen.setPosition(1150, 1310);
-                QTLine.setPosition(1100, 1310);
-            }
+            //create the tool bench object
+            toolBench = entityManager.createEntity<ToolBench>();
+            //add the bonesaw tool to the tools list inside tool bench
+            ((IToolBench)toolBench).addTool(boneSaw);
+            //add the leech tool to the tools list inside tool bench
+            ((IToolBench)toolBench).addTool(Leech);
+            //add the bonesaw button to the tool bench
+            ((IToolBench)toolBench).SetToolButtons((IButton)boneSawButton, (IButton)leechButton);
+            //subscribe the toolbench as a collidable object
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)toolBench);
+            //add the tool bench to the scene
+            sceneManager.addEntity(toolBench);
+            //set the tool bench's initial position
+            toolBench.setPosition(725, 100);
+        }
+        #endregion
+        #region Tools
+        /// <summary>
+        /// Initialise Tools 
+        /// </summary>
+        private void InitialiseTools()
+        {
+            //Create a tool for bonesaw
+            boneSaw = toolFactory.create("BoneSaw");
+            //create a leech tool
+            Leech = toolFactory.create("Leech");
+            //Add the tool to the event manager as a death listener
+            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)boneSaw).OnDeath);
+            //Add the tool to the event manager as a game end listener
+            eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)boneSaw).OnGameEnd);
+            //Add the tool to the event manager as a death listener
+            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)Leech).OnDeath);
+            //Add the tool to the event manager as a game end listener
+            eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)Leech).OnGameEnd);
         }
         #endregion
         #region Tool Behaviours
@@ -503,6 +607,7 @@ namespace PongEx1
             {
                 //INSTANTIATE a bonesaw behaviour using the tool behaviour factory
                 IBehaviour boneSawBehaviour = toolBehaviourFactory.Create<BoneSawBehaviour>();
+                //INSTANTIATE a leech behaviour using the tool behaviour factory
                 IBehaviour leechBehaviour = toolBehaviourFactory.Create<LeechBehaviour>();
                 //add the Quick time event object to the bonesaw behaviour class
                 ((BoneSawBehaviour)boneSawBehaviour).SetQTItems(QTContainers[i], QTLines[i], QTGreens[i]);
@@ -523,7 +628,9 @@ namespace PongEx1
                 eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)leechBehaviour).OnDeath);
                 //subscribe the leechBehaviour class to the eventmanager as a InteractListener object
                 eventManager.AddEventListener(EventType.InteractEvent, ((IInteractListener)leechBehaviour).OnInteract);
+                //subscribe the bonesawbehaviour class to the eventmanager as a game end listener object
                 eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)boneSawBehaviour).OnGameEnd);
+                //subscribe the leechBehaviour class to the eventmanager as a game end listener object
                 eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)leechBehaviour).OnGameEnd);
                 //add the behaviour to the bonesaw tool object with reference to the patient number that owns it
                 boneSaw.receiveJob(boneSawBehaviour, i);
@@ -532,6 +639,66 @@ namespace PongEx1
                 toolBehaviours.Add(boneSawBehaviour);
                 toolBehaviours.Add(leechBehaviour);
             }
+        }
+        #endregion
+        #region Quick-Time Objects
+        /// <summary>
+        /// Initialises Quick Time Objects
+        /// </summary>
+        private void InitialiseQuickTimeObjects()
+        {
+            //INSTANTIATE quick time event objects lists
+            QTContainers = new List<IEntity>();
+            QTGreens = new List<IEntity>();
+            QTLines = new List<IEntity>();
+            //for every patient in the patients list
+            for (int i = 0; i < Patients.Capacity; i++)
+            {
+                //create quick time objects
+                IEntity QTContainer = entityManager.createEntity<QTContainer>();
+                IEntity QTLine = entityManager.createEntity<QTLine>();
+                IEntity QTGreen = entityManager.createEntity<QTGreen>();
+                //add the objects to the corresponding lists
+                QTContainers.Add(QTContainer);
+                QTLines.Add(QTLine);
+                QTGreens.Add(QTGreen);
+                //set the position of the quick time objects for when they are active
+                ((IQuickTimeObj)QTLines[i]).SetActivePosition(QTLinePos[i]);
+                ((IQuickTimeObj)QTContainers[i]).SetActivePosition(QTContainerPos[i]);
+                ((IQuickTimeObj)QTGreens[i]).SetActivePosition(QTGreenPos[i]);
+                //subscribe the QTLine and QT green objects as a collidable object
+                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTLine);
+                ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)QTGreen);
+
+                //add the Quick time objects to the scene
+                sceneManager.addEntity(QTContainer);
+                sceneManager.addEntity(QTGreen);
+                sceneManager.addEntity(QTLine);
+                //set the initial position of all quick time objects (OFF SCREEN)
+                QTContainer.setPosition(1100, 1300);
+                QTGreen.setPosition(1150, 1310);
+                QTLine.setPosition(1100, 1310);
+            }
+        }
+        #endregion
+        #region PatientHandler
+        /// <summary>
+        /// Initialise the patient handler which handles when a patient can respawn
+        /// </summary>
+        private void InitialisePatientHandler()
+        {
+            //INSTANTIATE patient handler
+            patientHandler = new PatientHandler();
+            //for each patient in patients list
+            for (int i = 0; i < Patients.Capacity; i++)
+            {
+                //add a death timer to the patient handler
+                patientHandler.AddGameTimer((IGameTimer)deathTimers[i], (PatientNum)i);
+            }
+            //add patient handler as a death listener
+            eventManager.AddEventListener(EventType.DeathEvent, ((IDeathListener)patientHandler).OnDeath);
+            //add patient handler as a activity event
+            eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)patientHandler).OnActivityEnd);
         }
         #endregion
         #region Patient
@@ -561,10 +728,13 @@ namespace PongEx1
                 ((Patient)patient).AddSymbolManager(symbolManager);
                 //add the patient to the event manager class as a damage listener object
                 eventManager.AddEventListener(EventType.DamageEvent, ((IDamageListener)patient).OnDamageTaken);
+                //add the patient to the event manager class as a heal listener object
                 eventManager.AddEventListener(EventType.HealEvent, ((IHealListener)patient).OnHeal);
+                //add the patient to the event manager class as an activity listener object
                 eventManager.AddEventListener(EventType.ActivityEvent, ((IActivityListener)patient).OnActivityEnd);
+                //add the patient to the event manager class as a death timer listener object
                 eventManager.AddEventListener(EventType.DeathTimerEvent, ((ITimerListener)patient).OnTimerStart);
-                //add entities to list
+                //add entities to scene manager
                 sceneManager.addEntity(patient);
                 sceneManager.addEntity(healthBar);
                 if (i == 0)
@@ -582,6 +752,7 @@ namespace PongEx1
             }
         }
         #endregion
+        #region Walls
         /// <summary>
         /// Initialises walls
         /// </summary>
@@ -623,27 +794,41 @@ namespace PongEx1
 
             }
         }
+        #endregion
+        #region Symbols
         private void InitialiseSymbols()
         {
+            //INSTANTIATE symbols list of type IEntity
             symbols = new List<IEntity>();
             #region Symbols Next to Patients
+            //iterate over each patient in patients
             for (int i = 0; i < Patients.Capacity; i++)
             {
-                //Create Symptom Symbols
+                //iterate over each symptom in the symptom enum
                 foreach (Symptom symptom in Enum.GetValues(typeof(Symptom)))
                 {
-                    IEntity symbol;
+                    
                     for (int j = 0; j < 2; j++)
                     {
-                        symbol = entityManager.createEntity<SymptomSymbol>();
+                        //create a symptom symbol
+                        IEntity symbol = entityManager.createEntity<SymptomSymbol>();
+                        //set the symbols symptom the current sympom in the loop
                         ((ISymptomSymbol)symbol).Symptom = symptom;
+                        //set the symbol type to symptom
                         ((ISymbol)symbol).SymbolType = SymbolType.Symptom;
+                        //set the patient number of the symbol
                         ((ISymbol)symbol).Patient = (PatientNum)i;
+                        //mark the symbol as not being used in the handbook
                         ((ISymbol)symbol).usedInHandbook = false;
+                        //add the symbol to the symbol list
                         symbols.Add(symbol);
+                        //add the symbol to the scene manager
                         sceneManager.addEntity(symbol);
+                        //add the symbol to the symbol handler
                         symbolHandler.AddSymbol(symbol);
+                        //set the symbol as inactive
                         ((ISymbol)symbol).SetActive(false);
+                        //set the position of each symptom symbol
                         if (i == 0)
                             ((ISymbol)symbol).SetStartPos(symptomPos[i + j]);
 
@@ -651,97 +836,171 @@ namespace PongEx1
                             ((ISymbol)symbol).SetStartPos(symptomPos[1 + i + j]);
                     }
                 }
-                //create Body Part Symbols
+                //iterate over each bodypart in the body part enum
                 foreach (BodyPart bodyPart in Enum.GetValues(typeof(BodyPart)))
                 {
-                    IEntity symbol;
-                    symbol = entityManager.createEntity<BodyPartSymbol>();
+                    //create a body part symbol
+                    IEntity symbol = entityManager.createEntity<BodyPartSymbol>();
+                    //set the body part to the current bodypart in the loop
                     ((IBodyPartSymbol)symbol).BodyPart = bodyPart;
+                    //set the patient number of the symbol
                     ((ISymbol)symbol).Patient = (PatientNum)i;
+                    //set the symbol type to bodypart
                     ((ISymbol)symbol).SymbolType = SymbolType.BodyPart;
+                    //mark the symbol as not being used in the handbook
                     ((ISymbol)symbol).usedInHandbook = false;
+                    //add the symbol to the symbols list
                     symbols.Add(symbol);
+                    //add the symbol to the scenemanager
                     sceneManager.addEntity(symbol);
+                    //add the symbol to the symbol handler
                     symbolHandler.AddSymbol(symbol);
+                    //set the symbol as inactive
                     ((ISymbol)symbol).SetActive(false);
+                    //set the active start position of the symbol
                     ((ISymbol)symbol).SetStartPos(bodyPartPos[i]);
                 }
             }
             #endregion
+            //Symbols being used in the handbook
             #region Handbook Symbols
+            //iterate over each symptom in symptoms enum
             foreach (Symptom symptom in Enum.GetValues(typeof(Symptom)))
             {
-                IEntity symbol;
+                //create two symbols for each symptom
                 for (int j = 0; j < 2; j++)
                 {
-                    symbol = entityManager.createEntity<SymptomSymbol>();
+                    //create symptom symbol 
+                    IEntity symbol = entityManager.createEntity<SymptomSymbol>();
+                    //Set the symbols syptom to the current symptom in the loop
                     ((ISymptomSymbol)symbol).Symptom = symptom;
+                    //set the symbol type symptom
                     ((ISymbol)symbol).SymbolType = SymbolType.Symptom;
+                    //mark the symbol as being used in the handbook
                     ((ISymbol)symbol).usedInHandbook = true;
+                    //add the symbol to the symbols list
                     symbols.Add(symbol);
+                    //add the symbol to the scenemanager
                     sceneManager.addEntity(symbol);
+                    //add the symbol to the symbol handler
                     symbolHandler.AddSymbol(symbol);
+                    //set the symbol as inactive
                     ((ISymbol)symbol).SetActive(false);
+                    //set the start position for when the symbol is active
                     ((ISymbol)symbol).SetStartPos(symptomPosCalc[j]);
                 }
+
             }
-            //create Body Part Symbols
+            //iterate over each bodypart in the body part enum
             foreach (BodyPart bodyPart in Enum.GetValues(typeof(BodyPart)))
             {
-                IEntity symbol;
-                symbol = entityManager.createEntity<BodyPartSymbol>();
+                //create a bodypart symbol
+                IEntity symbol = entityManager.createEntity<BodyPartSymbol>();
+                //set the bodypart of the symbol to the current bodypart in the loop
                 ((IBodyPartSymbol)symbol).BodyPart = bodyPart;
+                //set the symbol type to bodypart
                 ((ISymbol)symbol).SymbolType = SymbolType.BodyPart;
+                //mark the symbol as being used in the handbook
                 ((ISymbol)symbol).usedInHandbook = true;
+                //add the symbol to the symbols list
                 symbols.Add(symbol);
+                //add the symbol to the scene manager
                 sceneManager.addEntity(symbol);
+                //add the symbol to the symbol handler
                 symbolHandler.AddSymbol(symbol);
+                //set the symbol as inactive
                 ((ISymbol)symbol).SetActive(false);
+                //set the position for when the symbol is active
                 ((ISymbol)symbol).SetStartPos(bodyPartPosCalc);
             }
+            //create a symbol for the bone saw
+            boneSawSymbol = entityManager.createEntity<ToolSymbol>();
+            //create a symbol for the leech
+            leechSymbol = entityManager.createEntity<ToolSymbol>();
+            //set the tool type of the tool to bonesaw
+            ((IToolSymbol)boneSawSymbol).Tool = ToolType.bonesaw;
+            //set the tool type of the tool to leech
+            ((IToolSymbol)leechSymbol).Tool = ToolType.leech;
+            //add the symbol to the scenemanager
+            sceneManager.addEntity(boneSawSymbol);
+            //add the symbol to the scenemanager
+            sceneManager.addEntity(leechSymbol);
+            //mark the symbol as inactive
+            ((ISymbol)boneSawSymbol).SetActive(false);
+            ((ISymbol)leechSymbol).SetActive(false);
+            //set the position of the symbol for when the symbol is active
+            ((ISymbol)boneSawSymbol).SetStartPos(toolPos);
+            ((ISymbol)leechSymbol).SetStartPos(toolPos);
+            //INSTANTIATE the symbol manager
+            symbolManager = new SymbolManager();
+            //add the symbol handler to the symbol manager
+            symbolManager.AddSymbols(symbolHandler);
             #endregion
         }
+        #endregion
+        #region Handbook
+        /// <summary>
+        /// initialises the handbook
+        /// </summary>
         private void InitialiseHandBook()
         {
+            //create the handbook entity
             handBook = entityManager.createEntity<HandBook>();
+            //INSTANTIATE a illness calculator
             IIllnessCalculator illnessCalculator = new IllnessCalculator();
-            boneSawSymbol = entityManager.createEntity<ToolSymbol>();
-            leechSymbol = entityManager.createEntity<ToolSymbol>();
-            ((IToolSymbol)boneSawSymbol).Tool = ToolType.bonesaw;
-            ((IToolSymbol)leechSymbol).Tool = ToolType.leech;
             foreach (IEntity button in symptomButtons)
             {
+                //add each symbol to the handbook
                 ((IHandBook)handBook).AddSymbolButton(SymbolType.Symptom, (IButton)button);
+                //set the position of each button to be off screen
                 button.setPosition(1111, 1111);
             }
             foreach (IEntity button in bodyPartButtons)
             {
+                //add each symbol to the handbook
                 ((IHandBook)handBook).AddSymbolButton(SymbolType.BodyPart, (IButton)button);
+                //set the position of each button to be off screen
                 button.setPosition(1111, 1111);
             }
+            //add the symbol handler to the handbook
             ((IHandBook)handBook).AddSymbolHandler(symbolHandler);
+            //add the illness calculator to the handbook
             ((IHandBook)handBook).AddIllnessCalculator(illnessCalculator);
+            //add the tool symbols to the illness calculator
             illnessCalculator.AddToolSymbol(boneSawSymbol);
             illnessCalculator.AddToolSymbol(leechSymbol);
+            //add the handbook button to the handbook ( which enables and disables the handbook)
             ((IHandBook)handBook).AddHandBookButton((IButton)handBookButton);
+            //add the reset button to the handbook
             ((IHandBook)handBook).AddResetButton((IButton)resetButton);
+            //add the handbook to the scenemanager
             sceneManager.addEntity(handBook);
-            sceneManager.addEntity(boneSawSymbol);
-            sceneManager.addEntity(leechSymbol);
+            //set the handbooks position so its off screen
             handBook.setPosition(1111, 1111);
-            boneSawSymbol.setPosition(1111, 1111);
-            leechSymbol.setPosition(1111, 1111);
+            
         }
+        #endregion
+        #region Symbol Containers
+        /// <summary>
+        /// initialies the containers for each symbol
+        /// </summary>
         private void InitialiseSymbolContainers()
         {
+            //INSTANTIATE the symbol containers list
             symbolContainers = new List<IEntity>();
+            //for each patient in the patients list
             for (int i = 0; i < Patients.Capacity; i++)
             {
+                //create 3 symbol containers next to each patient
                 for (int j = 0; j < 3; j++)
                 {
+                    //create a symbol container
                     IEntity symbolContainer = entityManager.createEntity<Container>();
+                    //add the symbol container to the symbol containers list
                     symbolContainers.Add(symbolContainer);
+                    //add the symbol container to the scene manager
                     sceneManager.addEntity(symbolContainer);
+                    //set the position of each symbol container
                     if (i == 0)
                     {
                         if (j == 0)
@@ -778,17 +1037,17 @@ namespace PongEx1
                 
         }
         #endregion
-
-            #region Load Content
-            /// <summary>
-            /// LoadContent will be called once per game and is the place to load
-            /// all of your content.
-            /// </summary>
+        #endregion
+        #region Load Content
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
         protected override void LoadContent()
         {
             //load texture for entities
-            ((ITextEntity)score).setFont(Content.Load<SpriteFont>("Text/Score"));
-            ((ITextEntity)gameTimerEntity).setFont(Content.Load<SpriteFont>("Text/Score"));
+            ((ITextEntity)score).SetFont(Content.Load<SpriteFont>("Text/Score"));
+            ((ITextEntity)gameTimerEntity).SetFont(Content.Load<SpriteFont>("Text/Score"));
             player.setTexture(Content.Load<Texture2D>("square"));
             toolBench.setTexture(Content.Load<Texture2D>("ToolBench"));
             boneSawButton.setTexture(Content.Load<Texture2D>("BoneSaw"));
@@ -868,7 +1127,6 @@ namespace PongEx1
             handBook.setTexture(Content.Load<Texture2D>("HandBook"));
         }
         #endregion
-
         #region UnloadContent
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -880,8 +1138,7 @@ namespace PongEx1
             base.UnloadContent();
         }
         #endregion
-
-        #region update
+        #region Update
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -903,16 +1160,17 @@ namespace PongEx1
             collisionManager.Update();
             //update Input Manager
             inputManager.Update();
+            //Update the death timers
             for (int i = 0; i < deathTimers.Count; i++)
             {
                 ((IGameTimer)deathTimers[i]).Update(gameTime);
             }
-            
+            //update the game timer
             ((IGameTimer)gameTimer).Update(gameTime);
+            //update the game UI
             gameUI.Update();
         }
         #endregion
-
         #region Draw
         /// <summary>
         /// This is called when the game should draw itself.

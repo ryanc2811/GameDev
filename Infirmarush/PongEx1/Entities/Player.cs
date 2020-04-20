@@ -148,10 +148,6 @@ namespace PongEx1.Entities
         {
             _InteractHandler = interact;
         }
-        public void RemoveInteractHandler()
-        {
-            _InteractHandler = null;
-        }
         public void OnDeath(object sender, IEvent args)
         {
             if (((DeathEvent)args).Dead[(PatientNum)currentPatientNum])

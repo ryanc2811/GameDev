@@ -69,6 +69,7 @@ namespace PongEx1.Tools
             foreach (PatientNum num in Enum.GetValues(typeof(PatientNum)))
             {
                 activeBehaviours[num] = false;
+                Console.WriteLine("GAD");
             }
         }
     }

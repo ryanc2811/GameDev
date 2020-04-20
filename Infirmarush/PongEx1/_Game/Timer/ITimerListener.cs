@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace PongEx1._Game.Timer
 {
+    /// <summary>
+    /// interface for the timer listner object
+    /// </summary>
     public interface ITimerListener
     {
-        //On Activity Change event
+        /// <summary>
+        /// listens for the Timer Event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         void OnTimerStart(object sender, IEvent args);
     }
 }

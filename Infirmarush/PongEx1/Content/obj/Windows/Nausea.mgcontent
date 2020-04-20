@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Nausea.png</SourceFile>
-  <SourceTime>2020-04-14T17:55:40.9320887+01:00</SourceTime>
+  <SourceTime>2020-04-19T13:46:09.4244858+01:00</SourceTime>
   <DestFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/bin/Windows/Nausea.xnb</DestFile>
-  <DestTime>2020-04-16T15:04:43.2267348+01:00</DestTime>
+  <DestTime>2020-04-19T13:48:30.9019469+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

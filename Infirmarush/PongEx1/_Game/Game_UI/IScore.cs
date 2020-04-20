@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace PongEx1._Game.Game_UI
 {
+    /// <summary>
+    /// Interface for the Score Text entity
+    /// </summary>
     public interface IScore
     {
+        //Updates the Score Entity
         void UpdateScore();
     }
 }

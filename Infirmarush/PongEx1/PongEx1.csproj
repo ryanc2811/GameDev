@@ -119,7 +119,6 @@
     <Compile Include="_Game\Game_UI\TextEntity.cs" />
     <Compile Include="_Game\Game_UI\TimerUI.cs" />
     <Compile Include="_Game\GameEnd\IGameEndHandler.cs" />
-    <Compile Include="_Game\State\IState.cs" />
     <Compile Include="Game_Engine\Collision\CollisionManager.cs" />
     <Compile Include="Game_Engine\Entities\Entity.cs" />
     <Compile Include="Game_Engine\EntityManagement\EntityManager.cs" />

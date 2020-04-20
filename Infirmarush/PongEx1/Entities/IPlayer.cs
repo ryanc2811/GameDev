@@ -14,6 +14,5 @@ namespace PongEx1.Entities
         ITool currentTool { get; set; }
         bool Interact { get; }
         void AddInteractHandler(IInteractHandler interact);
-        void RemoveInteractHandler();
     }
 }

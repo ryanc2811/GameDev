@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace PongEx1._Game.Game_UI
 {
+    /// <summary>
+    /// Interface for the Text Entity
+    /// </summary>
     public interface ITextEntity
     {
-        void setFont(SpriteFont pSpriteFont);
+        //Sets the Sprite font for the Text entity
+        void SetFont(SpriteFont pSpriteFont);
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1._Game.Events
 {
+    /// <summary>
+    /// Marker interface for an event
+    /// </summary>
     public interface IEvent
     {
     }

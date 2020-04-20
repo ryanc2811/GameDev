@@ -6,11 +6,24 @@ using System.Threading.Tasks;
 
 namespace PongEx1._Game.Events
 {
+    /// <summary>
+    /// Interface for the Event handlers
+    /// </summary>
     public interface IEventHandler
     {
-        //Update 
+        /// <summary>
+        /// Getter for the type of event
+        /// </summary>
         EventType GetType { get; }
-        void AddEventHandler(EventHandler<IEvent> handler);
-        void RemoveEventHandler(EventHandler <IEvent>handler);
+        /// <summary>
+        /// Subscribes the listener to the event
+        /// </summary>
+        /// <param name="handler"></param>
+        void AddEventListener(EventHandler<IEvent> handler);
+        /// <summary>
+        /// Unsubscribes the listener to the event
+        /// </summary>
+        /// <param name="handler"></param>
+        void RemoveEventListener(EventHandler <IEvent>handler);
     }
 }
