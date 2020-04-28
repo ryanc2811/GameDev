@@ -4,29 +4,29 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/paddle.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/square.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/WallVertical.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/WallHorizontal.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/PlayerHitDetection.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Patient.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/ToolBench.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/QTContainer.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/QTGreen.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/QTLine.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/cursor.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/BoneSaw.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/HealthBar.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Leech.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/SymbolContainer.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Infection.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Leg.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/HandBook.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Nausea.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/HandBookButton.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Head.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Reset.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Arm.png</File>
-    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Infirmarush/PongEx1/Content/Text/Score.spritefont</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/paddle.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/square.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/WallVertical.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/WallHorizontal.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/PlayerHitDetection.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Patient.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/ToolBench.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/QTContainer.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/QTGreen.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/QTLine.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/cursor.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/BoneSaw.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/HealthBar.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Leech.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/SymbolContainer.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Infection.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Leg.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/HandBook.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Nausea.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/HandBookButton.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Head.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Reset.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Arm.png</File>
+    <File>C:/Users/ryanc/Downloads/GameDev-master(1)/GameDev-master/Infirmarush/PongEx1/Content/Text/Score.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

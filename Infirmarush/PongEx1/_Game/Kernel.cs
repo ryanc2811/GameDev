@@ -172,10 +172,9 @@ namespace PongEx1
             sceneManager = new SceneManager();
             //INSTANTIATEEntityManager
             entityManager = new EntityManager();
+            entityManager.AddSceneManager(sceneManager);
             //INSTANTIATE Sprite Batch
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //INSTANTIATE SceneManager
-            sceneManager = new SceneManager();
             //INSTANTIATE Collision Manager
             collisionManager = new CollisionManager();
             //INSTANTIATE Input Manager
@@ -254,7 +253,7 @@ namespace PongEx1
         private void RestartGame()
         {
             //Removes the player from the scene manager
-            sceneManager.removeEntity(player);
+            entityManager.Terminate(player);
             //removes the player from input listeners
             inputManager.removeEventListener(InputDevice.Keyboard,((IInputListener)player).OnNewInput);
             //unsubscribes the player from collision
@@ -266,11 +265,12 @@ namespace PongEx1
             //set the player to null
             player = null;
             //removes the score entity from the scene manager
-            sceneManager.removeEntity(score);
+            entityManager.Terminate(score);
             //set score entity to null
             score = null;
             //removes the game timer entity from the scene manager
-            sceneManager.removeEntity(gameTimerEntity);
+            entityManager.Terminate(gameTimerEntity);
+            //sceneManager.removeEntity(gameTimerEntity);
             //removes the game timer entity from a timer event listener
             eventManager.RemoveEventListener(EventType.GameTimerEvent, ((ITimerListener)gameTimerEntity).OnTimerStart);
             //sets the game timer to null
@@ -281,7 +281,7 @@ namespace PongEx1
             for (int i = 0; i < Patients.Count; i++)
             {
                 //remove patient from scene manager
-                sceneManager.removeEntity(Patients[i]);
+                entityManager.Terminate(Patients[i]);
                 //remove patient as a damage event listener
                 eventManager.RemoveEventListener(EventType.DamageEvent, ((IDamageListener)Patients[i]).OnDamageTaken);
                 //remove the patient as a heal listener
@@ -295,19 +295,19 @@ namespace PongEx1
                 //set the patient to null
                 Patients[i] = null;
                 //remove the health bar from the scene manager
-                sceneManager.removeEntity(healthBars[i]);
+                entityManager.Terminate(healthBars[i]);
                 //set the health bar to null
                 healthBars[i] = null;
                 //remove the Qt container from scenemanager
-                sceneManager.removeEntity(QTContainers[i]);
+                entityManager.Terminate(QTContainers[i]);
                 //set the qt container to null
                 QTContainers[i] = null;
                 //remove the Quick time green area from scene manager
-                sceneManager.removeEntity(QTGreens[i]);
+                entityManager.Terminate(QTGreens[i]);
                 //set the Quick time green area to null
                 QTGreens[i] = null;
                 //remove the QT line from the scenemanager
-                sceneManager.removeEntity(QTLines[i]);
+                entityManager.Terminate(QTLines[i]);
                 //set the Qt line to null
                 QTLines[i] = null;
             }

@@ -11,6 +11,7 @@ namespace PongEx1.Game_Engine.EntityManagement
     {
         IEntity createEntity<T>() where T : IEntity, new();
         //Terminate
-        void Terminate(IEntity entity, ISceneManager sceneManager);
+        void Terminate(IEntity entity);
+        void AddSceneManager(ISceneManager pSceneManager);
     }
 }

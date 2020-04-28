@@ -22,7 +22,10 @@ namespace PongEx1.Game_Engine.EntityManagement
         //DECLARE ISceneManager
         ISceneManager sceneManager;
         #endregion
-
+        public void AddSceneManager(ISceneManager pSceneManager)
+        {
+            sceneManager = pSceneManager;
+        }
         #region Create Entity
 
         /// <summary>
@@ -48,9 +51,9 @@ namespace PongEx1.Game_Engine.EntityManagement
 
         #region Terminate
         //Terminate an entity from the game world
-        public void Terminate(IEntity entity, ISceneManager pSceneManager)
+        public void Terminate(IEntity entity)
         {
-            sceneManager = pSceneManager;
+            
             sceneManager.removeEntity(entity);
         }
         #endregion
