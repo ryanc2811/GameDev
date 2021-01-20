@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Entities.Damage
 {
+    /// <summary>
+    /// interface for the entities that listen to the damage event
+    /// </summary>
     public interface IDamageListener
     {
         //On Damage Taken event

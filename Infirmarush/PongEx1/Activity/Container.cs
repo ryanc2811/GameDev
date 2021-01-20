@@ -11,17 +11,10 @@ namespace PongEx1.Activity
 {
     class Container : GameXEntity,IShape
     {
-       
-       
-        public int getHeight()
-        {
-            throw new NotImplementedException();
-        }
+        //Gets the entities width
         public int getWidth()
         {
             return texture.Width;
-        }
-
-        
+        }   
     }
 }

@@ -633,8 +633,8 @@ namespace PongEx1
                 //subscribe the leechBehaviour class to the eventmanager as a game end listener object
                 eventManager.AddEventListener(EventType.GameEndEvent, ((IGameEndListener)leechBehaviour).OnGameEnd);
                 //add the behaviour to the bonesaw tool object with reference to the patient number that owns it
-                boneSaw.receiveJob(boneSawBehaviour, i);
-                Leech.receiveJob(leechBehaviour, i);
+                boneSaw.ReceiveJob(boneSawBehaviour, i);
+                Leech.ReceiveJob(leechBehaviour, i);
                 //add the behaviour to the local toolbehaviour list
                 toolBehaviours.Add(boneSawBehaviour);
                 toolBehaviours.Add(leechBehaviour);

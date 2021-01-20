@@ -25,6 +25,7 @@ namespace PongEx1.Scene
         }
         #endregion
 
+
         #region Add / Remove Entity
         public void addEntity(IEntity entity)
         {   //add entities to List

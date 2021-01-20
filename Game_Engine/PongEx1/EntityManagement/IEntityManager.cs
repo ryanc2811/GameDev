@@ -9,10 +9,9 @@ namespace PongEx1.EntityManagement
 {
    public interface IEntityManager
     {
-        //Create Ball
-        //IEntity createBall();
-        
+        IEntity createEntity<T>() where T : IEntity, new();
         //Terminate
-        void Terminate(IEntity entity, ISceneManager sceneManager);
+        void Terminate(IEntity entity);
+        void AddSceneManager(ISceneManager pSceneManager);
     }
 }

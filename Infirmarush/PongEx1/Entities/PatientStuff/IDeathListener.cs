@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Entities.PatientStuff
 {
+    /// <summary>
+    /// LISTENS FOR THE DEATH EVENT
+    /// </summary>
     public interface IDeathListener
     {
-        //On Actity Change event
+        /// <summary>
+        /// LISTENS FOR THE DEATH EVENT TO BE CALLED
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         void OnDeath(object sender, IEvent args);
     }
 }

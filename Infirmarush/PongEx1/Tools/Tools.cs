@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Tools
 {
+    /// <summary>
+    /// ENUM FOR DIFFERENING BETWEEN EACH TOOL
+    /// </summary>
     public enum ToolType
     {
         bonesaw,

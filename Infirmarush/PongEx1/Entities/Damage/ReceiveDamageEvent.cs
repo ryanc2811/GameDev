@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Entities.Damage
 {
+    /// <summary>
+    /// Stores the arguments for the receieve damage event
+    /// </summary>
     public class ReceiveDamageEvent : EventArgs, IEvent
     {
-     
+        //DECLARE an IDictionary for storing the damage and the patient that the damage corresponds to
         private IDictionary<PatientNum, double> damage = new Dictionary<PatientNum, double>();
         public IDictionary<PatientNum, double> Damage { get { return damage; } set { damage = value; } }
         public ReceiveDamageEvent()

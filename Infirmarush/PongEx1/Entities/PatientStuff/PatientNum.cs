@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Entities.PatientStuff
 {
+    /// <summary>
+    /// ENUM FOR DIFFERING BETWEEN EACH PATIENT
+    /// </summary>
     public enum PatientNum
     {
         Patient1,

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Entities.Healing
 {
+    /// <summary>
+    /// Listens for the heal event to be triggered
+    /// </summary>
     public interface IHealListener
     {
         //On Heal event

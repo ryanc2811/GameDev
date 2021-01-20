@@ -8,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Activity
 {
+    /// <summary>
+    /// The Event args class for storing the arguments of the Activity Event
+    /// </summary>
     public class ActivityEvent:EventArgs,IEvent
     {
-       
-        //private IDictionary<PatientNum, bool> isActive = new Dictionary<PatientNum, bool>();
-        //public IDictionary<PatientNum, bool> Active { get { return isActive; } set { isActive = value; } }
+        //DECLARE an IDictionary for storing the boolean that checks if an activity has ended
         private IDictionary<PatientNum, bool> hasEnded = new Dictionary<PatientNum, bool>();
         public IDictionary<PatientNum, bool> Ended { get { return hasEnded; } set { hasEnded = value; } }
         public ActivityEvent()
         {
+            //iterate over each value in the patient num enum
             foreach (PatientNum num in Enum.GetValues(typeof(PatientNum)))
             {
-                //isActive.Add(num, false);
+                //Intialise the dictionairy with a false boolean
                 hasEnded.Add(num, false);
             }
         }

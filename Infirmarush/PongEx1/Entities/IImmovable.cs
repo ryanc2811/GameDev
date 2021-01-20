@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Entities
 {
+    /// <summary>
+    /// TAG INTERFACE FOR TAGGING AN ENTITY AS AN IMMOVABLE OBJECT
+    /// </summary>
     interface IImmovable
     {
     }

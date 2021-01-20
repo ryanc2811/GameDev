@@ -14,7 +14,6 @@ namespace PongEx1.Game_Engine.Collision
         //DECLARE an IList of type ICollidable for storing a collection of collidable Entities, call it EntityList
         private IList<ICollidable> EntityList;
         #endregion
-
         #region Constructor
         public CollisionManager()
         {
@@ -22,7 +21,6 @@ namespace PongEx1.Game_Engine.Collision
             EntityList = new List<ICollidable>();
         }
         #endregion
-
         #region CollisionManagement
         private void CollideCheck()
         {

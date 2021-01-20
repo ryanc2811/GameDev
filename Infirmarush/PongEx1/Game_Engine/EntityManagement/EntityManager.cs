@@ -22,10 +22,17 @@ namespace PongEx1.Game_Engine.EntityManagement
         //DECLARE ISceneManager
         ISceneManager sceneManager;
         #endregion
+        #region Adds the Scenemanager to entity manager
+        /// <summary>
+        /// Adds the scenemanager to the entity manager so that the entity manager-
+        /// can tell the scene manager to remove the entity from the scene
+        /// </summary>
+        /// <param name="pSceneManager"></param>
         public void AddSceneManager(ISceneManager pSceneManager)
         {
             sceneManager = pSceneManager;
         }
+        #endregion
         #region Create Entity
 
         /// <summary>
@@ -40,7 +47,6 @@ namespace PongEx1.Game_Engine.EntityManagement
             return entity;
         }
         #endregion
-
         #region ID
         //Generate a unique ID for an Entity
         public string generateID()
@@ -48,7 +54,6 @@ namespace PongEx1.Game_Engine.EntityManagement
             return Guid.NewGuid().ToString("N");
         }
         #endregion
-
         #region Terminate
         //Terminate an entity from the game world
         public void Terminate(IEntity entity)

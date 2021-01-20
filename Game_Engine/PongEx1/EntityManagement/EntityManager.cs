@@ -14,19 +14,32 @@ namespace PongEx1.EntityManagement
         ISceneManager sceneManager;
         #endregion
 
-        //#region Create Ball
-        ////Creates a IEntity object with a dynamic type of ball.
-        //public IEntity createBall()
-        //{
-        //    IEntity ball = new Ball();
-        //    //give the object a UID
-        //    ball.id = generateID();
-        //    return ball;
-        //}
-        //#endregion
+        #region Adds the Scenemanager to entity manager
+        /// <summary>
+        /// Adds the scenemanager to the entity manager so that the entity manager-
+        /// can tell the scene manager to remove the entity from the scene
+        /// </summary>
+        /// <param name="pSceneManager"></param>
+        public void AddSceneManager(ISceneManager pSceneManager)
+        {
+            sceneManager = pSceneManager;
+        }
+        #endregion
 
-      
+        #region Create Entity
 
+        /// <summary>
+        /// Generic Factory for IEntity
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IEntity createEntity<T>() where T : IEntity, new()
+        {
+            IEntity entity = new T();
+            entity.id = generateID();
+            return entity;
+        }
+        #endregion
         #region ID
         //Generate a unique ID for an Entity
         public string generateID()
@@ -37,12 +50,10 @@ namespace PongEx1.EntityManagement
 
         #region Terminate
         //Terminate an entity from the game world
-        public void Terminate(IEntity entity, ISceneManager pSceneManager)
+        public void Terminate(IEntity entity)
         {
-            sceneManager = pSceneManager;
             sceneManager.removeEntity(entity);
-
-            }
+        }
         #endregion
     }
 }

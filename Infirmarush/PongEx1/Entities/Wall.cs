@@ -9,8 +9,15 @@ using PongEx1.Game_Engine.Entities;
 using PongEx1.Game_Engine.Collision;
 namespace PongEx1.Entities
 {
+    /// <summary>
+    /// ENTITY FOR THE WALL THAT STOPS THE PLAYER MOVING OUTSIDE THE SCREEN
+    /// </summary>
     class Wall : GameXEntity, ICollidable,IImmovable
     {
+        /// <summary>
+        /// GETS THE HITBOX OF THE WALL
+        /// </summary>
+        /// <returns></returns>
         public Rectangle getHitBox()
         {
             return new Rectangle((int)entityLocn.X, (int)entityLocn.Y, texture.Width, texture.Height);
@@ -18,7 +25,7 @@ namespace PongEx1.Entities
 
         public void onCollide(IEntity entity)
         {
-            
+            //DO NOTHING
         }
     }
 }

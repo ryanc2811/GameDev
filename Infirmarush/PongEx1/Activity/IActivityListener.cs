@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PongEx1.Activity
 {
+    /// <summary>
+    /// Iterface for the entity that listens to the Activity Event
+    /// </summary>
     public interface IActivityListener
     {
         //On Activity Change event

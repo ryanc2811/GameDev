@@ -1,94 +1,128 @@
-﻿using Microsoft.Xna.Framework.Input;
-using PongEx1._Game.Behaviour;
-using PongEx1._Game.Events;
-using PongEx1._Game.Timer;
+﻿using PongEx1._Game.Events;
 using PongEx1.Entities.Interacted;
 using PongEx1.Entities.PatientStuff;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PongEx1.Tools.Tool_Behaviour
 {
+    /// <summary>
+    /// BEHAVIOUR OF THE LEECH TOOL
+    /// </summary>
     class LeechBehaviour : ToolBehaviour,IInteractListener
     {
+        #region DATAMEMBERS
+        //DECLARE AN INT FOR COUNTER THE TIME BETWEEN EACH DAMAGE CALL, SO THAT IT IS NOT CALLED EVERY FRAME
         int timeBetweenDamage = 0;
+        //DECLARE AN INT FOR COUNTER THE TIME BETWEEN EACH HEAL CALL, SO THAT IT IS NOT CALLED EVERY FRAME
         int timeBetweenHeal = 0;
+        //DECLARE AN INT FOR COUNTING THE LEECH POINTS, WHICH ONLY INCREASE WHILE THE PATIENT IS TAKING DAMAGE
         int leechPoints = 0;
-        bool interacted = false;
+        //DECLARE A BOOLEAN FOR CHECKING IF THE LEECH IS ACTIVE
         bool leechActive = false;
-        bool gotInput = false;
-        int maxLeechPoints = 1600;
+        //DECLARE AN INT FOR STORING THE TOTAL SCORE, THAT THE LEECH POINT MUST REACH BEFORE CURING THE PATIENT
+        int maxLeechPoints = 900;
+        #endregion
+        #region BEHAVIOUR
+        /// <summary>
+        /// RUNS THE BEHAVIOUR OF THE LEECH TOOL
+        /// </summary>
         public override void Behaviour()
         {
+            //ON THE FIRST FRAME OF BEHAVIOUR
             if (!initial)
             {
+                //RESET LEECH POINTS
                 leechPoints = 0;
-                //timer starts
                 initial = true;
+                //RESET HAS ENDED BOOLEAN
                 hasEnded = false;
+                //SEND DATA TO THE ACTIVITY HANDLER
                 _activityHandler.OnActivityEnd(false, (PatientNum)patientNum);
-                leechActive = false;
+                //RESET LEECH ACTIVE BOOLEAN
+                leechActive = true;
             }
-            
+            //IF PATIENT IS CURED
             if (leechPoints > maxLeechPoints)
             {
+                //RESET BOOLEANS
                 isActive = false;
                 initial = false;
                 hasEnded = true;
+                //SEND DATA TO ACTIVITY HANDLER
                 _activityHandler.OnActivityEnd(true, (PatientNum)patientNum);
                 Console.WriteLine((PatientNum) patientNum+" is Cured");
             }
-            
+            //IF THE LEECH IS ACTIVE
             if (leechActive)
             {
+                //ADD TO THE LEECH POINTS
                 leechPoints++;
-                
+                //COUNT BETWEEN EACH DAMAGE
                 if (timeBetweenDamage < 30)
                 {
                     timeBetweenDamage++;
                 }
                 else
                 {
-                    _damageHandler.OnTakeDamage(0.015, (PatientNum)patientNum);
+                    //PATIENT TAKES DAMAGE
+                    _damageHandler.OnTakeDamage(0.03, (PatientNum)patientNum);
+                    //RESET COUNTER
                     timeBetweenDamage = 0;
                 }  
             }
+            //IF THE LEECH IS NOT ACTIVE AND THE PATIENT IS NOT DEAD
             else if(!leechActive && !isDead)
             {
+                //COUNT BETWEEN EACH HEAL
                 if (timeBetweenHeal < 30)
                 {
                     timeBetweenHeal++;
                 }
                 else
                 {
-                    _healHandler.OnHeal(0.01, (PatientNum)patientNum);
+                    //HEAL THE PATIENT
+                    _healHandler.OnHeal(0.03, (PatientNum)patientNum);
+                    //RESET THE COUNTER
                     timeBetweenHeal = 0;
                 }
-            }
-            if (interacted&&!gotInput)
-            {
-                leechActive = !leechActive;
-                gotInput = true;
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.F))
-            {
-                gotInput = false;
-            }
+            }   
         }
-
+        /// <summary>
+        /// Set the leech active/inactive
+        /// </summary>
+        private void Interact()
+        {
+            //LEECH ACTIVE IS THE OPPOSITE VALUE OF ITSELF
+            leechActive = !leechActive;
+        }
+        #endregion
+        #region EVENT LISTENERS
+        /// <summary>
+        /// LISTENS FOR THE INTERACT EVENT
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void OnInteract(object sender, IEvent args)
         {
-            interacted =((InteractedEvent)args).Interacted[(PatientNum)patientNum];
+            //SET THE INTERACT BOOLEAN LOCALLY
+            if (((InteractedEvent)args).Interacted[(PatientNum)patientNum])
+                Interact();
         }
+        /// <summary>
+        /// LISTENS FOR THE GAME END EVENT
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public override void OnGameEnd(object sender, IEvent args)
         {
             base.OnGameEnd(sender, args);
+            //RESET LEECH POINTS
             leechPoints = 0;
+            //RESET LEECH BOOLEAN
             leechActive = false;
+            //RESET IS BEHAVIOUR ACTIVE BOOLEAN
             isActive = false;
         }
     }
+    #endregion
 }

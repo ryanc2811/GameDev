@@ -9,6 +9,7 @@ namespace PongEx1.Entities._Symbols
 {
     public interface IBodyPartSymbol
     {
+        //gets the body part type of the symbol
         BodyPart BodyPart { get; set; }
     }
 }
