@@ -26,7 +26,7 @@ namespace GameEngine.Kernel
         //DECLARE Screen Height
         public const int SCREENHEIGHT=900;
 
-        private const float FRAMERATE=10f;
+        private const float FRAMERATE=15f;
         private const int FRAMECOUNT = 6;
         private int currentFrame = 0;
         private float frameTime = 0.0f;
@@ -116,13 +116,13 @@ namespace GameEngine.Kernel
         protected override void Initialize()
         {
             //Add all entities to collision Manager
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)ball);
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleL);
-            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleR);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)ballAI);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleLAI);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleRAI);
             //Add all entities to Input Manager
-            inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)ball).OnNewInput);
-            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleL).OnNewInput);
-            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleR).OnNewInput);
+            inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)ballAI).OnNewInput);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleLAI).OnNewInput);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleRAI).OnNewInput);
             //add entities to list
             sceneManager.AddEntity(ball);
             sceneManager.AddEntity(paddleL);
@@ -135,9 +135,13 @@ namespace GameEngine.Kernel
                 entity.Initialise();
             }
 
-            paddleLAI.SetEntity(paddleL);
-            paddleRAI.SetEntity(paddleR);
-            ballAI.SetEntity(ball);
+            paddleLAI.SetAIUser((IAIUser)paddleL);
+            paddleRAI.SetAIUser((IAIUser)paddleR);
+            ballAI.SetAIUser((IAIUser)ball);
+
+            ballAI.Initialise();
+            paddleLAI.Initialise();
+            paddleRAI.Initialise();
             //set starting position of paddle 1
             paddleL.SetPosition(0, 0);
             //set starting position of paddle 2
@@ -189,16 +193,16 @@ namespace GameEngine.Kernel
                 Exit();
 
 
-            
-            //Update entities in scene manager array
-            sceneManager.Update();
             // TODO: Add your update logic here
             base.Update(gameTime);
-    
+
+            //Update entities in scene manager array
+            sceneManager.Update();
             //update Collision Manager
             collisionManager.Update();
             //update Input Manager
             inputManager.Update();
+            
 
             frameTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -208,15 +212,14 @@ namespace GameEngine.Kernel
                 frameTime -= 1.0f / FRAMERATE;
                 currentFrame = (currentFrame + 1) % FRAMECOUNT;
 
-                componentManager.Update();
+                //componentManager.Update();
+                
                 
                 if (currentFrame == 0)
                 {
                     frameTime = 0;
                 }
             }
-
-
         }
         #endregion
 

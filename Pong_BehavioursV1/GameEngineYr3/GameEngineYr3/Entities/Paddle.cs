@@ -20,6 +20,8 @@ namespace Pong.Entities
         public Vector2 Position { get => position; set => position=value; }
         public Vector2 Velocity { get => velocity; set => velocity=value; }
 
+        public event Action UpdateMind;
+
         //Return Rectangle that will be used as hit box
         public Rectangle GetHitBox()
         {
@@ -58,7 +60,7 @@ namespace Pong.Entities
         #region Update
         public override void Update()
         {
-            
+            UpdateMind?.Invoke();
         }
         #endregion
 
@@ -68,6 +70,7 @@ namespace Pong.Entities
            
         }
 
+     
         #endregion
     }
 

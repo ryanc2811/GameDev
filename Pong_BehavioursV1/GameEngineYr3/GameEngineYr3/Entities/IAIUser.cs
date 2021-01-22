@@ -10,9 +10,12 @@ namespace GameEngine.Entities
 {
     public interface IAIUser
     {
+        event Action UpdateMind;
+        //Property for AIUsers Position
         Vector2 Position { get; set; }
-        Texture2D GetTexture();
-
+        //Property for AIUsers Velocity
         Vector2 Velocity { get; set; }
+        //Getter for Getting AIUsers Texture
+        Texture2D GetTexture();
     }
 }

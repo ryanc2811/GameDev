@@ -1,5 +1,6 @@
 ﻿using GameEngine.BehaviourManagement;
 using GameEngine.Entities;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,35 @@ using System.Threading.Tasks;
 
 namespace Pong.EntityMinds
 {
-    abstract class PongAI : IAIComponent
+    class PongAI : AIComponent
     {
-        public abstract void SetEntity(IEntity entity);
+        protected IAIUser gameObject;
+        public override void Update()
+        {
+            //DO NOTHING
+        }
+        public override void SetAIUser(IAIUser aiUser)
+        {
+            gameObject = aiUser;
+        }
+        public override void Initialise()
+        {
+            //DO NOTHING
+        }
 
-        public abstract void Update();
+        public override Vector2 GetPosition()
+        {
+            return gameObject.Position;
+        }
+
+        public override int Height()
+        {
+            return gameObject.GetTexture().Height;
+        }
+
+        public override int Width()
+        {
+            return gameObject.GetTexture().Width;
+        }
     }
 }
