@@ -23,12 +23,16 @@ namespace Pong.EntityMinds
         private IList<Keys> keyList;
         //DECLARE boolean called gotInput, for flagging when input has been taken
         bool gotInput = false;
-        private Keys lastMovementKey;
+        private IList<Keys> previousKeyList= new List<Keys>();
         bool stateChange = false;
         public TopDownCharacterAI()
         {
-            stateMachine = new StateMachine();
+            
             speed = 2;
+        }
+        public override void Initialise()
+        {
+            
         }
         public Rectangle GetHitBox()
         {
@@ -44,12 +48,14 @@ namespace Pong.EntityMinds
         }
         public override void OnContentLoad()
         {
-            //ADD CHARACTER STATES TO STATEMACHINE
-            stateMachine.AddState(States.DEFAULT, new CharacterIdleState(((IAnimatedSprite)gameObject).GetAnimationManager()));
-            stateMachine.AddState(States.MOVING, new CharacterMoveState(((IAnimatedSprite)gameObject).GetAnimationManager()));
-            //SET DEFAULT STATE
-            stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, GetPosition()));
-            
+            ////ADD CHARACTER STATES TO STATEMACHINE
+            //stateMachine.AddState(States.DEFAULT, new CharacterIdleState(((IAnimatedSprite)gameObject).GetAnimationManager()));
+            //stateMachine.AddState(States.MOVING, new CharacterMoveState(((IAnimatedSprite)gameObject).GetAnimationManager()));
+            ////SET DEFAULT STATE
+            //stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, GetPosition()));
+            IAnimationManager animationManager = ((IAnimatedSprite)gameObject).GetAnimationManager();
+            stateMachine = new CharacterStateMachine(animationManager);
+
         }
         public void OnCollide(IAIComponent entity)
         {
@@ -60,70 +66,42 @@ namespace Pong.EntityMinds
         {
             keyList = args.PressedKeys;
             velocity = Vector2.Zero;
+            //Pass Input data to statemachine
+            stateMachine.HandleInput(this, args);
 
-            if (!gotInput)
+            //If any movement keys are pressed
+            if (keyList.Contains(Keys.W))
             {
-                if (keyList.Contains(Keys.W))
-                {
-                    lastMovementKey = Keys.W;
-                    velocity.Y -= speed;
-                    gotInput = true;
-                }
-                else if (keyList.Contains(Keys.S))
-                {
-                    lastMovementKey = Keys.S;
-                    velocity.Y += speed;
-                    gotInput = true;
-                }
-                else if (keyList.Contains(Keys.A))
-                {
-                    lastMovementKey = Keys.A;
-                    velocity.X -= speed;
-                    gotInput = true;
-                }
-                else if (keyList.Contains(Keys.D))
-                {
-                    lastMovementKey = Keys.D;
-                    velocity.X += speed;
-                    gotInput = true;
-                }
+                velocity.Y -= speed;
             }
-            if (!keyList.Contains(lastMovementKey))
+            else if (keyList.Contains(Keys.S) & !previousKeyList.Contains(Keys.S))
             {
-                gotInput = false;
-                stateChange = false;
+                velocity.Y += speed;
             }
-            //Change state if new input has been taken
-            if (gotInput&&!stateChange)
+            else if (keyList.Contains(Keys.A) & !previousKeyList.Contains(Keys.A))
             {
-                stateChange = true;
-                stateMachine.ChangeState(States.MOVING, new MoveCommand(gameObject, velocity));
+                velocity.X -= speed;
             }
-            if (keyList.Contains(Keys.Back))
+            else if (keyList.Contains(Keys.D) & !previousKeyList.Contains(Keys.D))
             {
-                //Reverse  movement command command
-                stateMachine.PreviousState();
+                velocity.X += speed;
             }
+            //Store reference to old keylist
+            previousKeyList = keyList;
         }
         public override void Update()
         {
-            if(Keyboard.GetState().IsKeyUp(Keys.W)&& Keyboard.GetState().IsKeyUp(Keys.A) && Keyboard.GetState().IsKeyUp(Keys.S) && Keyboard.GetState().IsKeyUp(Keys.D))
-            {
-                stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, GetPosition()));
-                lastMovementKey = Keys.None;
-            }
-                
+            ////if the gameObject reaches the bottom of the screen, stop the Y from decreasing further
+            //if (gameObject.Position.Y < ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Width)
+            //{
+            //    stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, new Vector2(gameObject.Position.X, ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Width)));
+            //}
+            ////if the gameObject reaches the top of the screen, then stop the y from increasing further
+            //else if (gameObject.Position.Y >= Kernel.SCREENHEIGHT- ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Height)
+            //{
+            //    stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, new Vector2(gameObject.Position.X, Kernel.SCREENHEIGHT- ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Height)));
+            //}
 
-            //if the gameObject reaches the bottom of the screen, stop the Y from decreasing further
-            if (gameObject.Position.Y < ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Width)
-            {
-                stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, new Vector2(gameObject.Position.X, ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Width)));
-            }
-            //if the gameObject reaches the top of the screen, then stop the y from increasing further
-            else if (gameObject.Position.Y >= Kernel.SCREENHEIGHT- ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Height)
-            {
-                stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, new Vector2(gameObject.Position.X, Kernel.SCREENHEIGHT- ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Height)));
-            }
             //Update the state manager
             stateMachine.Update();
         }

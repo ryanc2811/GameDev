@@ -1,4 +1,5 @@
 ﻿using GameEngine.Commands;
+using GameEngine.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,6 @@ namespace GameEngine.BehaviourManagement
         /// Ends the State transition
         /// </summary>
         void End();
-
-        void ChangeCommand(ICommand newCommand);
-        void AddCommandManager(ICommandManager commandManager);
+        int StateIndex();
     }
 }

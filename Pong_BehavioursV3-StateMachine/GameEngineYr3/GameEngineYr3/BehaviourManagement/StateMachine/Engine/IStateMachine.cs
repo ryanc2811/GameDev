@@ -1,4 +1,6 @@
-﻿using GameEngine.Commands;
+﻿using GameEngine.Animation_Stuff;
+using GameEngine.Commands;
+using GameEngine.Input;
 using GameEngine.State_Stuff;
 using System;
 using System.Collections.Generic;
@@ -15,18 +17,18 @@ namespace GameEngine.BehaviourManagement
         /// </summary>
         /// <param name="state"></param>
         /// <param name="command"></param>
-        void ChangeState(States state, ICommand command);
+        void ChangeState(int newStateIndex);
         /// <summary>
         /// Adds a new state to the dictionairy
         /// </summary>
         /// <param name="pStateEnum"></param>
         /// <param name="pState"></param>
-        void AddState(States pStateEnum, IState pState);
+        void HandleInput(IAIComponent AI,InputEventArgs inputEvent);
         /// <summary>
         /// Removes a state from the dictionairy
         /// </summary>
         /// <param name="pStateEnum"></param>
-        void RemoveState(States pStateEnum);
+        void RemoveState(int stateIndex);
         /// <summary>
         /// Updates the current state
         /// </summary>

@@ -32,6 +32,7 @@ namespace GameEngine.Input
         {
             //Get KeyBoard State
             keyboardState = Keyboard.GetState();
+            
             //Get Keys Pressed
             pressedKeys=keyboardState.GetPressedKeys();
             keysUp = new List<Keys>();
@@ -42,15 +43,12 @@ namespace GameEngine.Input
                     keysUp.Add(key);
             }
             //if There is some keys pressed do something
-            if (pressedKeys != null||keysUp!=null)
-            {
-                OnKeysPressed(pressedKeys);
-            }
+            OnInput(pressedKeys);
         }
         #endregion
 
         #region OnEvent
-        public virtual void OnKeysPressed(Keys[] pressedKeys)
+        public virtual void OnInput(Keys[] pressedKeys)
         {
             List<Keys>pressedKeysList = pressedKeys.ToList();
             if (InputEvent != null)
@@ -62,9 +60,8 @@ namespace GameEngine.Input
                     pressedEventKeys.Add(pressedKeys[i]);
                 }
 
-                if (pressedEventKeys.Count > 0)
+                if (keysUp.Count > 0)
                 {
-
                     InputEventArgs eventData = new InputEventArgs();
                     eventData.PressedKeys = pressedKeys;
                     eventData.KeysUp = keysUp;
@@ -72,27 +69,6 @@ namespace GameEngine.Input
                 }
             }
         }
-        //public virtual void OnKeysUp()
-        //{
-        //    IList<Keys> keysUpList = keysUp;
-        //    if (InputEvent != null)
-        //    {
-
-        //        IList<Keys> pressedEventKeys = new List<Keys>();
-        //        for (int i = 0; i < keysUpList.Count; i++)
-        //        {
-        //            pressedEventKeys.Add(pressedKeys[i]);
-        //        }
-
-        //        if (pressedEventKeys.Count > 0)
-        //        {
-
-        //            InputEventArgs eventData = new InputEventArgs();
-        //            eventData.KeysUp = keysUp;
-        //            InputEvent(this, eventData);
-        //        }
-        //    }
-        //}
         #endregion
 
         #region Add/Remove Event Handler

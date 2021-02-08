@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Animation_Stuff;
+using GameEngine.Input;
 
 namespace Pong.State_Stuff
 {
@@ -47,6 +48,16 @@ namespace Pong.State_Stuff
         public void End()
         {
             animationManager.Stop();
+        }
+
+        public IState HandleInput(IAIComponent AI, InputEventArgs inputEvent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int StateIndex()
+        {
+            throw new NotImplementedException();
         }
     }
 }

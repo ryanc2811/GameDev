@@ -180,7 +180,7 @@ namespace GameEngine.Kernel
                 { "moveDown",new Animation(Content.Load<Texture2D>("moveDown"),3)},
                 { "moveLeft",new Animation(Content.Load<Texture2D>("moveLeft"),3)},
                 { "moveRight",new Animation(Content.Load<Texture2D>("moveRight"),3)},
-                { "idle",new Animation(Content.Load<Texture2D>("moveDown"),1)}
+                { "idle",new Animation(Content.Load<Texture2D>("idle"),1)}
             };
             ((IAnimatedSprite)character).AddAnimations(characterAnimations);
             paddleL.SetTexture(Content.Load<Texture2D>("paddle"));

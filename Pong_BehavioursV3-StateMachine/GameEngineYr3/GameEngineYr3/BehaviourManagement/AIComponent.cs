@@ -42,5 +42,7 @@ namespace GameEngine.BehaviourManagement
         /// </summary>
         /// <returns></returns>
         public abstract int Width();
+
+        public abstract IAIUser GetAIUser();
     }
 }

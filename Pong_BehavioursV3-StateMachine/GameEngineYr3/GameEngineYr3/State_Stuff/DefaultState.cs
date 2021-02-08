@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameEngine.BehaviourManagement;
 using GameEngine.Commands;
+using GameEngine.Input;
 
 namespace GameEngine.State_Stuff
 {
@@ -36,6 +37,16 @@ namespace GameEngine.State_Stuff
         public void Execute()
         {
             //throw new NotImplementedException();
+        }
+
+        public IState HandleInput(IAIComponent AI, InputEventArgs inputEvent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int StateIndex()
+        {
+            throw new NotImplementedException();
         }
     }
 }

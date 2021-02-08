@@ -1,7 +1,10 @@
 ﻿using GameEngine.Animation_Stuff;
 using GameEngine.BehaviourManagement;
+using GameEngine.BehaviourManagement.StateMachine;
 using GameEngine.Commands;
+using GameEngine.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Pong.Commands;
 using System;
 using System.Collections.Generic;
@@ -10,39 +13,52 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Pong.State_Stuff
 {
-    class CharacterIdleState:IState
+    class CharacterIdleState:BaseState<CharacterStateMachine>, IStateWithAnimation,IStateWithInput
     {
         ICommandManager commandManager;
         ICommand currentCommand;
-        IAnimationManager animationManager;
-        public CharacterIdleState(IAnimationManager pAnimationManager)
+        //IAnimationManager animationManager;
+        public CharacterIdleState()
         {
-            animationManager = pAnimationManager;
-        }
-        public void AddCommandManager(ICommandManager pCommandManager)
-        {
-            commandManager = pCommandManager;
         }
 
-        public void Begin()
+        public override void Begin()
         {
-            Console.WriteLine("IDLE");
-            //animationManager.Play("idle");
+            stateMachine.AnimationManager.Play("idle");
+        }
+        public override void End()
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override void Execute()
+        {
             
         }
 
-        public void ChangeCommand(ICommand pNewCommand)
+        public int HandleInput(IAIComponent AI, InputEventArgs inputEvent)
         {
-            currentCommand = pNewCommand;
+            //stateMachine.AnimationManager.Play("idle");
+            if (inputEvent.PressedKeys.Contains(Keys.W)||inputEvent.PressedKeys.Contains(Keys.S)||inputEvent.PressedKeys.Contains(Keys.D)||inputEvent.PressedKeys.Contains(Keys.A))
+                return (int)CharacterStateMachine.CharacterState.Move;
+            return StateIndex();
         }
-        public void Execute()
+        public void SetAnimator(IAnimationManager pAnimationManager)
         {
-            commandManager.ExecuteCommand(currentCommand);
+            //animationManager = pAnimationManager;
         }
 
-        public void End()
+        public override void SetCommands()
         {
-            animationManager.Stop();
+            commands = new BaseCommand<CharacterStateMachine>[]
+            {
+                new CharacterIdleCommand(),
+            };
+        }
+
+        public override int StateIndex()
+        {
+            return (int)CharacterStateMachine.CharacterState.Idle;
         }
     }
 }

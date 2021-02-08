@@ -34,3 +34,4 @@ C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV3-StateMachine\
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV3-StateMachine\GameEngineYr3\GameEngineYr3\bin\Windows\x86\Debug\Content\moveLeft.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV3-StateMachine\GameEngineYr3\GameEngineYr3\bin\Windows\x86\Debug\Content\moveRight.xnb
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV3-StateMachine\GameEngineYr3\GameEngineYr3\bin\Windows\x86\Debug\Content\moveUp.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV3-StateMachine\GameEngineYr3\GameEngineYr3\bin\Windows\x86\Debug\Content\idle.xnb

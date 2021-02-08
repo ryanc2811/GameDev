@@ -13,6 +13,7 @@ using GameEngine.BehaviourManagement;
 using GameEngine.State_Stuff;
 using Pong.Commands;
 using GameEngine.Commands;
+using Pong.State_Stuff;
 
 namespace Pong.EntityMinds
 {
@@ -24,12 +25,12 @@ namespace Pong.EntityMinds
         public PaddleAI()
         {
             
-            stateMachine = new StateMachine();
+            stateMachine = new PaddleStateMachine();
         }
         public override void Initialise()
         {
             speed = 15;
-            stateMachine.AddState(States.DEFAULT, new DefaultState());
+            //stateMachine.AddState(States.DEFAULT, new DefaultState());
         }
         public Rectangle GetHitBox()
         {
@@ -52,13 +53,13 @@ namespace Pong.EntityMinds
                 {
                     velocity.Y -= speed;
                     //update the paddles position
-                    stateMachine.ChangeState(States.DEFAULT,new MoveCommand(gameObject, velocity));
+                    //stateMachine.ChangeState(States.DEFAULT,new MoveCommand(gameObject, velocity));
                 }
                 else if (keyList.Contains(Keys.Down))
                 {
                     velocity.Y += speed;
                     //update the paddles position
-                    stateMachine.ChangeState(States.DEFAULT,new MoveCommand(gameObject, velocity));
+                    //stateMachine.ChangeState(States.DEFAULT,new MoveCommand(gameObject, velocity));
                 }
             }
             if (gameObject.Position.X == 0)
@@ -68,13 +69,13 @@ namespace Pong.EntityMinds
                     velocity.Y -= speed;
                     //update the paddles position
                     //commandManager.ExecuteCommand(new MoveCommand(gameObject, velocity));
-                    stateMachine.ChangeState(States.DEFAULT, new MoveCommand(gameObject, velocity));
+                    //stateMachine.ChangeState(States.DEFAULT, new MoveCommand(gameObject, velocity));
                 }
                 else if (keyList.Contains(Keys.S))
                 {
                     velocity.Y +=speed;
                     //update the paddles position
-                    stateMachine.ChangeState(States.DEFAULT,new MoveCommand(gameObject, velocity));
+                    //stateMachine.ChangeState(States.DEFAULT,new MoveCommand(gameObject, velocity));
                 }
                 
             }
@@ -88,12 +89,12 @@ namespace Pong.EntityMinds
             //if the paddle reaches the bottom of the screen, stop the Y from decreasing further
             if (gameObject.Position.Y < 0)
             {
-                stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(gameObject.Position.X,0)));
+                //stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(gameObject.Position.X,0)));
             }
             //if the paddle reaches the top of the screen, then stop the y from increasing further
             else if (gameObject.Position.Y >= Kernel.SCREENHEIGHT - 150)
             {
-                stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(gameObject.Position.X, Kernel.SCREENHEIGHT - 150)));
+                //stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(gameObject.Position.X, Kernel.SCREENHEIGHT - 150)));
             }
         }
     }

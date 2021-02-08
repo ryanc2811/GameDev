@@ -16,5 +16,8 @@ namespace GameEngine.Commands
         /// Undo command
         /// </summary>
         void Undo();
+
+        void StartCommand();
+        void ExitCommand();
     }
 }

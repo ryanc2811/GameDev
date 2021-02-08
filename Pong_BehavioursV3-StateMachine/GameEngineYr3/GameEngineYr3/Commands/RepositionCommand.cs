@@ -29,6 +29,17 @@ namespace Pong.Commands
             oldPosition= entity.Position;
             entity.Position = newPosition;
         }
+
+        public void ExitCommand()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartCommand()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Undo the command
         /// </summary>

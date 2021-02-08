@@ -48,5 +48,10 @@ namespace Pong.EntityMinds
         {
             
         }
+
+        public override IAIUser GetAIUser()
+        {
+            return gameObject;
+        }
     }
 }

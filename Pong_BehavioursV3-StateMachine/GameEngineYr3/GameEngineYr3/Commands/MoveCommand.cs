@@ -36,5 +36,15 @@ namespace Pong.Commands
         {
             entity.Position -= direction;
         }
+
+        public void StartCommand()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExitCommand()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

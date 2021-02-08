@@ -34,8 +34,7 @@ namespace Pong.EntityMinds
         public BallAI()
         {
             random = new Random();
-            stateMachine = new StateMachine();
-            
+            stateMachine = new BallStateMachine();
         }
         public override void Initialise()
         {
@@ -44,8 +43,8 @@ namespace Pong.EntityMinds
         public override void OnContentLoad()
         {
             //ADD BALL STATES TO STATEMACHINE
-            stateMachine.AddState(States.DEFAULT, new DefaultState());
-            stateMachine.AddState(States.MOVING, new BallMoveState(((IAnimatedSprite)gameObject).GetAnimationManager()));
+            //stateMachine.AddState(States.DEFAULT, new DefaultState());
+            //stateMachine.AddState(States.MOVING, new BallMoveState(((IAnimatedSprite)gameObject).GetAnimationManager()));
             Serve();
         }
         public Rectangle GetHitBox()
@@ -66,7 +65,7 @@ namespace Pong.EntityMinds
             //ASSIGN speed value
             speed = 15;
             //place ball in the centre of the screen
-            stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(Kernel.SCREENWIDTH / 2, Kernel.SCREENHEIGHT / 2)));
+            //stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(Kernel.SCREENWIDTH / 2, Kernel.SCREENHEIGHT / 2)));
             //CALCULATE the rotation
             float rotation = (float)(Math.PI / 2 + (random.NextDouble() * (Math.PI / 5.0f) - Math.PI / 3));
             
@@ -82,7 +81,7 @@ namespace Pong.EntityMinds
 
             velocity.X *= speed;
             //Change state to MOVING
-            stateMachine.ChangeState(States.MOVING, new MoveCommand(gameObject, velocity));
+            //stateMachine.ChangeState(States.MOVING, new MoveCommand(gameObject, velocity));
         }
         #endregion
         public void OnCollide(IAIComponent entity)
@@ -117,7 +116,7 @@ namespace Pong.EntityMinds
                     velocity.X = speed * (float)Math.Cos(ballAngle);
                 }
                 //Change state to MOVING
-                stateMachine.ChangeState(States.MOVING, new MoveCommand(gameObject, velocity));
+                //stateMachine.ChangeState(States.MOVING, new MoveCommand(gameObject, velocity));
             }
         }
 
@@ -146,7 +145,7 @@ namespace Pong.EntityMinds
             {
                 velocity.Y *= -1;
                 //Change state to MOVING
-                stateMachine.ChangeState(States.MOVING, new MoveCommand(gameObject, velocity));
+                //stateMachine.ChangeState(States.MOVING, new MoveCommand(gameObject, velocity));
             }
         }
         #endregion
@@ -156,8 +155,8 @@ namespace Pong.EntityMinds
             //constantly check if the ball collides with the wall
             CheckWallCollision();
             //if the ball is not moving then set the state to DEFAULT
-            if (velocity== Vector2.Zero)
-                stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, GetPosition()));
+            //if (velocity== Vector2.Zero)
+            //    stateMachine.ChangeState(States.DEFAULT, new RepositionCommand(gameObject, GetPosition()));
 
             //Update the state manager
             stateMachine.Update();

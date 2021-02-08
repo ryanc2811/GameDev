@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV3-StateMachine/GameEngineYr3/GameEngineYr3/Content/moveRight.png</SourceFile>
-  <SourceTime>2021-01-24T22:32:24.282366+00:00</SourceTime>
-  <DestFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV3-StateMachine/GameEngineYr3/GameEngineYr3/Content/bin/Windows/moveRight.xnb</DestFile>
-  <DestTime>2021-02-06T16:27:56.6165207+00:00</DestTime>
+  <SourceFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV3-StateMachine/GameEngineYr3/GameEngineYr3/Content/idle.png</SourceFile>
+  <SourceTime>2021-02-06T16:29:18.3721151+00:00</SourceTime>
+  <DestFile>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV3-StateMachine/GameEngineYr3/GameEngineYr3/Content/bin/Windows/idle.xnb</DestFile>
+  <DestTime>2021-02-06T16:29:56.1356425+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T15:05:36+00:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

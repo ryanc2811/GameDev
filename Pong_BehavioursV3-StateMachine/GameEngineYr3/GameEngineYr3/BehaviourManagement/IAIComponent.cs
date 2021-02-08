@@ -11,6 +11,11 @@ namespace GameEngine.BehaviourManagement
     public interface IAIComponent
     {
         /// <summary>
+        /// Gets the AI User of the AIComponent
+        /// </summary>
+        /// <param name="aiUser"></param>
+        IAIUser GetAIUser();
+        /// <summary>
         /// Sets the AI User of the AIComponent
         /// </summary>
         /// <param name="aiUser"></param>
