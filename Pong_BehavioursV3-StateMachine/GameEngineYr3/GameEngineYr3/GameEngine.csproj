@@ -79,6 +79,7 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Paddle.cs" />
     <Compile Include="Entities\TopDownCharacter.cs" />
+    <Compile Include="Entities\Transform.cs" />
     <Compile Include="EntityManagement\EntityManager.cs" />
     <Compile Include="EntityManagement\IEntityManager.cs" />
     <Compile Include="EntityMinds\BallAI.cs" />

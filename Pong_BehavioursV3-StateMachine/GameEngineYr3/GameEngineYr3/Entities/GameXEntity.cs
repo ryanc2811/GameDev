@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Animation_Stuff;
+using GameEngine.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace GameEngine.Entities
@@ -16,8 +17,6 @@ namespace GameEngine.Entities
         #region Variables
         //DECLARE A COLOR OF THE DEFAULT COLOR OF THE SPRITE
         protected Color spriteColour=Color.AntiqueWhite;
-        //DECLARE vector2 used to store the location of each 2d entity, call it entityLocn
-        protected Vector2 position;
         //DECLARE Texture2D used to store the texture of each 2d entity, call it texture
         protected Texture2D texture;
         //DECLARE A FLOAT FOR THE ROTATION OF THE SPRITE
@@ -30,14 +29,19 @@ namespace GameEngine.Entities
         protected float layerDepth = 0f;
         protected SpriteEffects spriteEffect;
         protected IAnimationManager animationManager;
-        
+
+        protected Transform transform;
         #endregion
         
+        public GameXEntity()
+        {
+            transform = new Transform();
+        }
         #region Setters
         /// <summary>
-        /// SETS THE CURRENT POSITION OF THE GAME ENTITY
+        /// Property for CURRENT Transform OF THE GAME ENTITY
         /// </summary>
-        public override Vector2 Position { get => position; set { position = value; } }
+        public override Transform Transform { get { return transform; } }
         ///PROPERTY FOR GETTING THE ID OF AN ENTITY
         public override string id { get; set; }
         /// <summary>
@@ -59,9 +63,9 @@ namespace GameEngine.Entities
         {
             //draw the entity using the spritebatch
             if (texture != null)
-                pSpriteBatch.Draw(texture, position, null, spriteColour, rotation, spriteOrigin, scale, spriteEffect, layerDepth);
+                pSpriteBatch.Draw(texture, Transform.position, null, spriteColour, rotation, spriteOrigin, scale, spriteEffect, layerDepth);
             else if (animationManager != null)
-                animationManager.Draw(pSpriteBatch,Position);
+                animationManager.Draw(pSpriteBatch,Transform.position);
 
         }
         #endregion
@@ -73,7 +77,7 @@ namespace GameEngine.Entities
         /// <returns></returns>
         public override Vector2 GetPosition()
         {
-            return position;
+            return Transform.position;
         }
 
         public override Texture2D GetTexture()
@@ -105,6 +109,16 @@ namespace GameEngine.Entities
         public override void Initialise()
         {
             //DO NOTHING
+        }
+
+        public override void SetPosition(float x, float y)
+        {
+            transform.position = new Vector2(x, y);
+        }
+
+        public override void SetVelocity(float x, float y)
+        {
+            transform.velocity = new Vector2(x, y);
         }
     }
 }

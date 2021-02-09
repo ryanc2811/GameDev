@@ -50,9 +50,9 @@ namespace Pong.EntityMinds
         public Rectangle GetHitBox()
         {
             if (gameObject.GetTexture() != null)
-                return new Rectangle((int)gameObject.Position.X, (int)gameObject.Position.Y, gameObject.GetTexture().Width, gameObject.GetTexture().Height);
+                return new Rectangle((int)gameObject.Transform.position.X, (int)gameObject.Transform.position.Y, gameObject.GetTexture().Width, gameObject.GetTexture().Height);
             else if (((IAnimatedSprite)gameObject).GetAnimationManager() != null)
-                return new Rectangle((int)gameObject.Position.X, (int)gameObject.Position.Y, ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Width, ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Height);
+                return new Rectangle((int)gameObject.Transform.position.X, (int)gameObject.Transform.position.Y, ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Width, ((IAnimatedSprite)gameObject).GetCurrentAnimation().Texture.Height);
             else
             {
                 throw new Exception();
@@ -89,10 +89,10 @@ namespace Pong.EntityMinds
             //IF ball collided with paddle
             if (entity is PaddleAI)
             {
-                Console.WriteLine(gameObject.Position);
+                Console.WriteLine(gameObject.Transform.position);
             https://gamedev.stackexchange.com/questions/4253/in-pong-how-do-you-calculate-the-balls-direction-when-it-bounces-off-the-paddl 
                 //create a variable that stores the y position of the ball when the collision occurs
-                float onCollideY = gameObject.Position.Y;
+                float onCollideY = gameObject.Transform.position.Y;
                 //store the y of the ball in relation to the paddle
                 float onCollideRelativeY = entity.GetPosition().Y - onCollideY;
                 float onCollideNormalisedY = onCollideRelativeY / (entity.Height() / 2);
@@ -129,19 +129,19 @@ namespace Pong.EntityMinds
         public void CheckWallCollision()
         {
             //if ball reached left side of the screen
-            if (gameObject.Position.X < 0)
+            if (gameObject.Transform.position.X < 0)
             {
                 //reset ball
                 Serve();
             }
             //if ball reached right side of the screen
-            else if (gameObject.Position.X > Kernel.SCREENWIDTH - 50)
+            else if (gameObject.Transform.position.X > Kernel.SCREENWIDTH - 50)
             {
                 //reset ball
                 Serve();
             }
             //if the ball hits the top of the screen, then reverse the velocity
-            else if (gameObject.Position.Y >= Kernel.SCREENHEIGHT - 50 || gameObject.Position.Y < 0)
+            else if (gameObject.Transform.position.Y >= Kernel.SCREENHEIGHT - 50 || gameObject.Transform.position.Y < 0)
             {
                 velocity.Y *= -1;
                 //Change state to MOVING

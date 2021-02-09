@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace GameEngine.Entities
@@ -15,7 +16,7 @@ namespace GameEngine.Entities
         //store texture for entity
         public abstract void SetTexture(Texture2D texture2D);
         //store position of entity
-        public abstract Vector2 Position { get; set; }
+        public abstract Transform Transform { get; }
 
         //pass the spriteBatch
         public abstract void draw(SpriteBatch spriteBatch);
@@ -29,5 +30,8 @@ namespace GameEngine.Entities
 
         public abstract Texture2D GetTexture();
 
+        public abstract void SetPosition(float x, float y);
+
+        public abstract void SetVelocity(float x, float y);
     }
 }

@@ -2,6 +2,7 @@
 using GameEngine.BehaviourManagement;
 using GameEngine.BehaviourManagement.StateMachine;
 using GameEngine.Commands;
+using GameEngine.Entities;
 using GameEngine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -56,7 +57,7 @@ namespace Pong.State_Stuff
             return (int)CharacterStateMachine.CharacterState.Move;
         }
 
-        public int HandleInput(IAIComponent AI, InputEventArgs inputEvent)
+        public int HandleInput(IAIUser entity, InputEventArgs inputEvent)
         {
             //animationManager = ((IAnimatedSprite)AI.GetAIUser()).GetAnimationManager();
             if(inputEvent.PressedKeys.Contains(Keys.W))

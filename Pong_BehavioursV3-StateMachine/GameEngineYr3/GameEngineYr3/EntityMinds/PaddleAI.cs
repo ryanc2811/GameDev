@@ -34,7 +34,7 @@ namespace Pong.EntityMinds
         }
         public Rectangle GetHitBox()
         {
-            return new Rectangle((int)gameObject.Position.X, (int)gameObject.Position.Y, Width(), Height());
+            return new Rectangle((int)gameObject.Transform.position.X, (int)gameObject.Transform.position.Y, Width(), Height());
         }
 
         public void OnCollide(IAIComponent entity)
@@ -47,7 +47,7 @@ namespace Pong.EntityMinds
             // Act on data:
             velocity.Y = 0;
             keyList = args.PressedKeys;
-            if (gameObject.Position.X == 1550)
+            if (gameObject.Transform.position.X == 1550)
             {
                 if (keyList.Contains(Keys.Up))
                 {
@@ -62,7 +62,7 @@ namespace Pong.EntityMinds
                     //stateMachine.ChangeState(States.DEFAULT,new MoveCommand(gameObject, velocity));
                 }
             }
-            if (gameObject.Position.X == 0)
+            if (gameObject.Transform.position.X == 0)
             {
                 if (keyList.Contains(Keys.W))
                 {
@@ -87,12 +87,12 @@ namespace Pong.EntityMinds
         public override void Update()
         {
             //if the paddle reaches the bottom of the screen, stop the Y from decreasing further
-            if (gameObject.Position.Y < 0)
+            if (gameObject.Transform.position.Y < 0)
             {
                 //stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(gameObject.Position.X,0)));
             }
             //if the paddle reaches the top of the screen, then stop the y from increasing further
-            else if (gameObject.Position.Y >= Kernel.SCREENHEIGHT - 150)
+            else if (gameObject.Transform.position.Y >= Kernel.SCREENHEIGHT - 150)
             {
                 //stateMachine.ChangeState(States.DEFAULT,new RepositionCommand(gameObject, new Vector2(gameObject.Position.X, Kernel.SCREENHEIGHT - 150)));
             }

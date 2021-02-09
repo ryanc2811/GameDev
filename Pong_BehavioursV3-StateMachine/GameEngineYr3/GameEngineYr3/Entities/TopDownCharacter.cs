@@ -14,6 +14,7 @@ namespace Pong.Entities
         public override void Update(GameTime gameTime)
         {
             animationManager.Update(gameTime);
+            SetPosition(Transform.Position('+', Transform.velocity).X, Transform.Position('+', Transform.velocity).Y);
         }
         public void AddAnimations(IDictionary<string, IAnimation> animations)
         {

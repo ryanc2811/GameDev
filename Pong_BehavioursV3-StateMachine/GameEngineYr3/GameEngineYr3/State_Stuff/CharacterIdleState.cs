@@ -2,6 +2,7 @@
 using GameEngine.BehaviourManagement;
 using GameEngine.BehaviourManagement.StateMachine;
 using GameEngine.Commands;
+using GameEngine.Entities;
 using GameEngine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -36,7 +37,7 @@ namespace Pong.State_Stuff
             
         }
 
-        public int HandleInput(IAIComponent AI, InputEventArgs inputEvent)
+        public int HandleInput(IAIUser entity, InputEventArgs inputEvent)
         {
             //stateMachine.AnimationManager.Play("idle");
             if (inputEvent.PressedKeys.Contains(Keys.W)||inputEvent.PressedKeys.Contains(Keys.S)||inputEvent.PressedKeys.Contains(Keys.D)||inputEvent.PressedKeys.Contains(Keys.A))

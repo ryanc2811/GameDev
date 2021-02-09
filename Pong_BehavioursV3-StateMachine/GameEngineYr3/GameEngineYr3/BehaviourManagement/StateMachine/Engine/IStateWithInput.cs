@@ -1,4 +1,5 @@
-﻿using GameEngine.Input;
+﻿using GameEngine.Entities;
+using GameEngine.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace GameEngine.BehaviourManagement.StateMachine
 {
     public interface IStateWithInput
     {
-        int HandleInput(IAIComponent AI, InputEventArgs inputEvent);
+        int HandleInput(IAIUser entity, InputEventArgs inputEvent);
     }
 }

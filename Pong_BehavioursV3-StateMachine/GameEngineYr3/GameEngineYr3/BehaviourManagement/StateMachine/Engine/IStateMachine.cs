@@ -1,5 +1,6 @@
 ﻿using GameEngine.Animation_Stuff;
 using GameEngine.Commands;
+using GameEngine.Entities;
 using GameEngine.Input;
 using GameEngine.State_Stuff;
 using System;
@@ -23,7 +24,7 @@ namespace GameEngine.BehaviourManagement
         /// </summary>
         /// <param name="pStateEnum"></param>
         /// <param name="pState"></param>
-        void HandleInput(IAIComponent AI,InputEventArgs inputEvent);
+        void HandleInput(IAIUser AI,InputEventArgs inputEvent);
         /// <summary>
         /// Removes a state from the dictionairy
         /// </summary>

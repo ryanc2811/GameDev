@@ -147,10 +147,10 @@ namespace GameEngine.Kernel
             characterAI.Initialise();
 
             //set starting position of paddle 1
-            paddleL.Position=new Vector2(0, 375);
+            paddleL.SetPosition(0, 375);
             //set starting position of paddle 2
-            paddleR.Position=new Vector2(1550, 375);
-            character.Position = new Vector2(775, 375);
+            paddleR.SetPosition(1550, 375);
+            character.SetPosition(775, 375);
             //INITIALIZE
             base.Initialize();
             

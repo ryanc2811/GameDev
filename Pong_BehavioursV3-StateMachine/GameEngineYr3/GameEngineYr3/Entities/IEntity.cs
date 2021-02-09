@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,9 +18,11 @@ namespace GameEngine.Entities
         void SetTexture(Texture2D texture2D);
         Texture2D GetTexture();
         //store position of entity
-        Vector2 Position { get; set; }
+        Transform Transform { get; }
         //return Position value
         Vector2 GetPosition();
+        void SetPosition(float x, float y);
+        void SetVelocity(float x, float y);
         //initialise entity
         void Initialise();
         //pass the spriteBatch

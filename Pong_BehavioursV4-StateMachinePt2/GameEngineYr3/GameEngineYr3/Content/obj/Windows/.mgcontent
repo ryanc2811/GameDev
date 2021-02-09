@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/Square.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/JavaFish.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/Orange_Fish.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/paddle.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/BlueSquare.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/GreenSquare.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/RedSquare.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/moveDown.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/moveLeft.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/moveRight.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/moveUp.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/idle.png</File>
+  </SourceFiles>
+</SourceFileCollection>

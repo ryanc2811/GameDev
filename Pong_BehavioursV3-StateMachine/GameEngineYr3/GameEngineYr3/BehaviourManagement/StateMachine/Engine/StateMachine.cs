@@ -1,6 +1,7 @@
 ﻿using GameEngine.Animation_Stuff;
 using GameEngine.BehaviourManagement.StateMachine;
 using GameEngine.Commands;
+using GameEngine.Entities;
 using GameEngine.Input;
 using GameEngine.State_Stuff;
 using System;
@@ -113,9 +114,9 @@ namespace GameEngine.BehaviourManagement
                 currentState.Execute();
         }
 
-        public void HandleInput(IAIComponent AI, InputEventArgs inputEvent)
+        public void HandleInput(IAIUser entity, InputEventArgs inputEvent)
         {
-            int stateIndex = ((IStateWithInput)currentState).HandleInput(AI, inputEvent);
+            int stateIndex = ((IStateWithInput)currentState).HandleInput(entity, inputEvent);
             if (stateIndex != currentStateIndex)
             {
                 ChangeState(stateIndex);

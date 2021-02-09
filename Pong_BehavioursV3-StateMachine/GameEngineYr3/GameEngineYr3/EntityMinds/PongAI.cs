@@ -31,7 +31,7 @@ namespace Pong.EntityMinds
 
         public override Vector2 GetPosition()
         {
-            return gameObject.Position;
+            return gameObject.Transform.position;
         }
 
         public override int Height()
