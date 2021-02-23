@@ -17,6 +17,7 @@ namespace GameEngine.Entities
         void SetPosition(float x, float y);
         void SetVelocity(float x, float y);
         //Getter for Getting AIUsers Texture
-        Texture2D GetTexture();     
+        Texture2D GetTexture();  
+        string Tag { get; }
     }
 }

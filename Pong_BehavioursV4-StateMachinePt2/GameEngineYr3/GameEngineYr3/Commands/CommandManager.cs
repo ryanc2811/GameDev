@@ -37,7 +37,6 @@ namespace GameEngine.Commands
             if (commandIndex < 1)
                 return;
 
-            commands[commandIndex].Undo();
             commands.RemoveAt(commandIndex);
             commandIndex--;
         }

@@ -36,7 +36,10 @@ namespace Pong.Entities
         #region Update
         public override void Update(GameTime gameTime)
         {
-            
+            //animationManager.Update(gameTime);
+            //move character with velocity
+            transform.position += transform.velocity;
+            transform.velocity = Vector2.Zero;
         }
         #endregion
     }

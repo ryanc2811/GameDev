@@ -1,62 +1,49 @@
-﻿using GameEngine.Animation_Stuff;
-using GameEngine.Collision;
-using GameEngine.Commands;
-using GameEngine.Entities;
-using GameEngine.Input;
-using GameEngine.State_Stuff;
+﻿using GameEngine.Entities;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameEngine.BehaviourManagement.StateMachine_Stuff
 {
-    class StateMachine: AIComponent,IStateMachine,ICollidable, IInputListener
+    /// <summary>
+    /// The mind of the AI component
+    /// </summary>
+    class StateMachine: AIComponent,IStateMachine
     {
         //DECLARE an IDictionary for storing references to each state within the state machine
         private IDictionary<int, IState> allStates = new Dictionary<int, IState>();
-
-        public IDictionary<int, IState> AllStates
-        {
-            get => allStates;
-            set
-            {
-                allStates = value;
-                InitialiseStateMachine();
-            }
-        }
-
+        //DECLARE an ITextEntity for storing a reference to the text object that displays the current state
+        protected ITextEntity stateText;
         //DECLARE an IState for storing a reference to the current state
-        private IState currentState;
-        //DECLARE an ICommandManager for storing a reference to the command manager
-        private ICommandManager commandManager;
-
-        public IAnimationManager AnimationManager { get; set; }
-
-
+        protected IState currentState;
+        //DECLARE an IAIUser for storing a reference to the AIUser that relates to the the statemachine
+        protected IAIUser gameObject;
+        //DECLARE an Action for storing an event that is triggered when the state changes
         protected event Action<int> OnStateChanged = delegate { };
-
-        private int currentStateIndex;
+        //DECLARE an integer for storing the index of the current state
+        protected int currentStateIndex;
+        //DECLARE an IDictionary for returning the states dictionary
+        public IDictionary<int, IState> AllStates => allStates;
+        //DECLARE an int for returning the current state index
         public int CurrentStateIndex => currentStateIndex;
-        public StateMachine()
-        {
-            commandManager= new CommandManager();
-        }
 
-        protected virtual void PopulateStateMachine() { }
+        /// <summary>
+        /// Initialises the statemachine
+        /// </summary>
+        /// <param name="pState"></param>
         public void InitialiseStateMachine(IState pState= null)
         {
+            //Set the current state index to the index of the first value in the dictionary
             currentStateIndex = AllStates.First().Value.StateIndex();
+            //Set the current state to the first value in the dictionary
             currentState = pState ?? AllStates.Values.First();
-
+            
             foreach(KeyValuePair<int,IState> entry in AllStates)
             {
-                entry.Value.InitState(this);
+                //INITIALISE STATE
+                entry.Value.InitState(this, gameObject);
             }
-
-            currentState.Begin();
         }
 
         /// <summary>
@@ -97,76 +84,71 @@ namespace GameEngine.BehaviourManagement.StateMachine_Stuff
                 allStates.Remove(stateIndex);
             }
         }
-        /// <summary>
-        /// Loads a previous state
-        /// </summary>
-        public void PreviousState()
-        {
-            //Undo the last command
-            commandManager.Undo();
-        }
+        
         /// <summary>
         /// Update the state
         /// </summary>
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             if (currentState != null)
-                currentState.Execute();
+                currentState.Execute(gameTime);
         }
 
-        public void OnNewInput(object sender, InputEventArgs args)
-        {
-            int stateIndex = ((IStateWithInput)currentState).HandleInput(this, args);
-            if (stateIndex != currentStateIndex)
-            {
-                ChangeState(stateIndex);
-            }
-        }
+       /// <summary>
+       /// Sets the local AIUser
+       /// </summary>
+       /// <param name="aiUser"></param>
         #region AIComponent
         public override void SetAIUser(IAIUser aiUser)
         {
-            throw new NotImplementedException();
+            gameObject = aiUser;
         }
-
+        /// <summary>
+        /// Initialise StateMachine
+        /// </summary>
         public override void Initialise()
         {
-            throw new NotImplementedException();
+            InitialiseStateMachine();
         }
-
-        public override Vector2 GetPosition()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Initialises states once content is loaded
+        /// </summary>
         public override void OnContentLoad()
         {
-            throw new NotImplementedException();
+            //Start the current state
+            currentState.Begin();
         }
-
-        public override int Height()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override int Width()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Returns the IAIUser related to the statemachine
+        /// </summary>
+        /// <returns></returns>
         public override IAIUser GetAIUser()
         {
-            throw new NotImplementedException();
+            return gameObject;
         }
-        #endregion
-        #region ICollidable
-        public Rectangle GetHitBox()
+        /// <summary>
+        /// Adds a state to the dictionary
+        /// </summary>
+        /// <param name="pStateIndex"></param>
+        /// <param name="pState"></param>
+        public void AddState(int pStateIndex, IState pState) 
         {
-            throw new NotImplementedException();
+            allStates.Add(pStateIndex, pState);
         }
-
-        public void OnCollide(IEntity entity)
+        /// <summary>
+        /// Adds the text entity to the state machine
+        /// </summary>
+        /// <param name="textEntity"></param>
+        public void AddStateText(ITextEntity textEntity)
         {
-            throw new NotImplementedException();
+            stateText = textEntity;
+        }
+        /// <summary>
+        /// Updates the state text once the current state is changed
+        /// </summary>
+        /// <param name="pStateIndex"></param>
+        protected virtual void UpdateStateText(int pStateIndex)
+        {
         }
         #endregion
     }

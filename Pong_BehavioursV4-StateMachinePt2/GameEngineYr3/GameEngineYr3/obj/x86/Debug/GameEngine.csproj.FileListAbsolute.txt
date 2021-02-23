@@ -72,3 +72,5 @@ C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV4-StateMachineP
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV4-StateMachinePt2\GameEngineYr3\GameEngineYr3\obj\x86\Debug\GameEngine.csproj.CopyComplete
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV4-StateMachinePt2\GameEngineYr3\GameEngineYr3\obj\x86\Debug\GameEngineYr3.exe
 C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV4-StateMachinePt2\GameEngineYr3\GameEngineYr3\obj\x86\Debug\GameEngineYr3.pdb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV4-StateMachinePt2\GameEngineYr3\GameEngineYr3\bin\Windows\x86\Debug\Content\Fonts\StateText.xnb
+C:\Users\ryanc\OneDrive\Documents\GitHub\GameDev\Pong_BehavioursV4-StateMachinePt2\GameEngineYr3\GameEngineYr3\bin\Windows\x86\Debug\Content\Sounds\bounceSound.xnb

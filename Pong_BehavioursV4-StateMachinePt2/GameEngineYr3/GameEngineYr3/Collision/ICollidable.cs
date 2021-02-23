@@ -15,6 +15,6 @@ namespace GameEngine.Collision
         //Returns a hitbox of the collidable object
         Rectangle GetHitBox();
         //Passes Entity that has been collided with
-        void OnCollide(IEntity entity);
+        void OnCollide(IAIComponent entity);
     }
 }

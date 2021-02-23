@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,11 +52,11 @@ namespace GameEngine.BehaviourManagement
         /// <summary>
         /// Updates the AIComponents
         /// </summary>
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             for (int i = 0; i < AIComponents.Count; i++)
             {
-                AIComponents[i].Update();
+                AIComponents[i].Update(gameTime);
             }
         }
     }

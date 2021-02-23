@@ -2,8 +2,10 @@
 using GameEngine.BehaviourManagement;
 using GameEngine.BehaviourManagement.StateMachine_Stuff;
 using GameEngine.Commands;
+using GameEngine.State_Conditions;
 using GameEngine.Entities;
 using GameEngine.Input;
+using GameEngine.Transitions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Pong.Commands;
@@ -15,20 +17,18 @@ using System.Threading.Tasks;
 
 namespace Pong.State_Stuff
 {
-    class CharacterMoveState: BaseState, IStateWithAnimation, IStateWithInput
+    class CharacterMoveState: BaseState,IStateWithInput, IStateWithCollision
     {
-        ICommandManager commandManager;
-        ICommand currentCommand;
-        //IAnimationManager animationManager;
+        //DECLARE an Action for handling the input event
+        private Action<object, InputEventArgs> InputPressed;
+        //DECLARE an Action for getting and setting the input event
+        public Action<object, InputEventArgs> InputEvent { get => InputPressed; set => InputPressed=value; }
 
-        //private CharacterState state = CharacterState.Move;
-
-        Vector2 moveDirection;
-        public CharacterMoveState()
-        {
-
-        }
-
+        private Action<IAIComponent> collisionEvent;
+        public Action<IAIComponent> CollisionEvent { get => collisionEvent; set => collisionEvent = value; }
+        /// <summary>
+        /// Sets all the commands in the commands array
+        /// </summary>
         public override void SetCommands()
         {
             commands = new BaseCommand[]
@@ -36,67 +36,52 @@ namespace Pong.State_Stuff
                 new CharacterMoveCommand(),
             };
         }
-        public override void Begin()
-        {
-            //moveDirection = ((MoveCommand)currentCommand).direction;
-            
-        }
-
-        public override void End()
-        {
-            //throw new NotImplementedException();
-        }
-
-        public override void Execute()
-        {
-            //throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Returns the character state as an integer
+        /// </summary>
+        /// <returns></returns>
         public override int StateIndex()
         {
-            return (int)CharacterStateMachine.CharacterState.Move;
+            return (int)CharacterState.Move;
+        }
+        /// <summary>
+        /// Handles the input event 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public void HandleInput(object sender, InputEventArgs inputEvent)
+        {
+            InputPressed?.Invoke(sender, inputEvent);
+        }
+        /// <summary>
+        /// Sets all the transitions in the transitions array
+        /// </summary>
+        public override void SetTransitions()
+        {
+            transitions = new Transition[]
+            {
+                new Transition("ToStop",new CharacterStopped(),
+                (int)CharacterState.Idle,StateIndex(),0)
+            };
         }
 
-        public int HandleInput(object sender, InputEventArgs inputEvent)
+        public Rectangle GetHitBox()
         {
-            //animationManager = ((IAnimatedSprite)AI.GetAIUser()).GetAnimationManager();
-
-            Vector2 velocity = Vector2.Zero;
-            float speed = 2f;
-            if (inputEvent.PressedKeys.Contains(Keys.W))
-            {
-                ((IAnimatedSprite)((IAIComponent)stateMachine).GetAIUser()).GetAnimationManager().Play("moveUp");
-                velocity.Y -= speed;
-            }
-                
-            else if (inputEvent.PressedKeys.Contains(Keys.S))
-            {
-                ((IAnimatedSprite)((IAIComponent)stateMachine).GetAIUser()).GetAnimationManager().Play("moveDown");
-                velocity.Y += speed;
-            }
-            else if (inputEvent.PressedKeys.Contains(Keys.D))
-            {
-                ((IAnimatedSprite)((IAIComponent)stateMachine).GetAIUser()).GetAnimationManager().Play("moveRight");
-                velocity.X += speed;
-            }
-            else if (inputEvent.PressedKeys.Contains(Keys.A))
-            {
-                ((IAnimatedSprite)((IAIComponent)stateMachine).GetAIUser()).GetAnimationManager().Play("moveLeft");
-                velocity.X -= speed;
-            }
+            //If the character is not animated then draw using texture from entity class
+            if (owner.GetTexture() != null)
+                return new Rectangle((int)owner.Transform.position.X, (int)owner.Transform.position.Y, owner.GetTexture().Width, owner.GetTexture().Height);
+            else if (((IAnimatedSprite)owner).GetAnimationManager() != null)
+                return new Rectangle((int)owner.Transform.position.X, (int)owner.Transform.position.Y, 
+                    ((IAnimatedSprite)owner).GetCurrentAnimation().Texture.Width, ((IAnimatedSprite)owner).GetCurrentAnimation().Texture.Height);
             else
             {
-                return (int)CharacterStateMachine.CharacterState.Idle;
+                throw new Exception();
             }
-            ((IAIComponent)stateMachine).GetAIUser().SetVelocity(velocity.X, velocity.Y);
-            return StateIndex();
         }
 
-        public void SetAnimator(IAnimationManager pAnimationManager)
+        public void HandleCollision(IAIComponent entity)
         {
-            //animationManager = pAnimationManager;
-            Console.WriteLine("AFAfaf");
+            collisionEvent?.Invoke(entity);
         }
-
     }
 }

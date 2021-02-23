@@ -1,5 +1,8 @@
-﻿using GameEngine.BehaviourManagement.StateMachine_Stuff;
+﻿using GameEngine.BehaviourManagement;
+using GameEngine.BehaviourManagement.StateMachine_Stuff;
+using GameEngine.Collision;
 using GameEngine.Entities;
+using GameEngine.Input;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,46 +12,59 @@ using System.Threading.Tasks;
 
 namespace Pong.State_Stuff
 {
-    class BallStateMachine : StateMachine
+    class BallStateMachine : StateMachine, ICollidable, IInputListener
     {
-        public override IAIUser GetAIUser()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Vector2 GetPosition()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override int Height()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Initialises the statemachine
+        /// </summary>
         public override void Initialise()
         {
-            throw new NotImplementedException();
+            base.Initialise();
+            OnStateChanged += CharacterStateMachine_OnStateChanged;
+            OnStateChanged += UpdateStateText;
+            Console.WriteLine(((BallState)currentStateIndex).ToString());
         }
+        /// <summary>
+        /// Sets the current state index once state has changed
+        /// </summary>
+        /// <param name="pStateIndex"></param>
+        private void CharacterStateMachine_OnStateChanged(int pStateIndex) => currentStateIndex = pStateIndex;
 
-        public override void OnContentLoad()
+        /// <summary>
+        /// Handles the input 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public void OnNewInput(object sender, InputEventArgs args)
         {
-            throw new NotImplementedException();
+            if(currentState is IStateWithInput)
+                ((IStateWithInput)currentState).HandleInput(this, args);
         }
-
-        public override void SetAIUser(IAIUser aiUser)
+        /// <summary>
+        /// Returns the hitbox of the AI
+        /// </summary>
+        /// <returns></returns>
+        #region ICollidable
+        public Rectangle GetHitBox()
         {
-            throw new NotImplementedException();
+            return ((IStateWithCollision)currentState).GetHitBox();
         }
-
-        public override int Width()
+        /// <summary>
+        /// Handles the collision
+        /// </summary>
+        /// <param name="entity"></param>
+        public void OnCollide(IAIComponent entity)
         {
-            throw new NotImplementedException();
+            ((IStateWithCollision)currentState).HandleCollision(entity);
         }
-
-        protected override void PopulateStateMachine()
+        #endregion
+        /// <summary>
+        /// Updates the state text entity
+        /// </summary>
+        /// <param name="pStateIndex"></param>
+        protected override void UpdateStateText(int pStateIndex)
         {
-            
+            stateText.Text = "Ball: "+((BallState)pStateIndex).ToString();
         }
     }
 }

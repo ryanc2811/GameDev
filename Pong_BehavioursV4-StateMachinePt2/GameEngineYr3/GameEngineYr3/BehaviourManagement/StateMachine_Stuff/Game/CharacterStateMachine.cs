@@ -1,6 +1,9 @@
 ﻿using GameEngine.Animation_Stuff;
 using GameEngine.BehaviourManagement;
 using GameEngine.BehaviourManagement.StateMachine_Stuff;
+using GameEngine.Collision;
+using GameEngine.Input;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,41 +12,57 @@ using System.Threading.Tasks;
 
 namespace Pong.State_Stuff
 {
-    class CharacterStateMachine:StateMachine
+    class CharacterStateMachine:StateMachine, ICollidable, IInputListener
     {
-        public enum CharacterState
+        /// <summary>
+        /// Initialises the statemachine
+        /// </summary>
+        public override void Initialise()
         {
-            Idle,
-            Move,
-            Jump
-        }
-
-        public CharacterState currentState;
-
-        public CharacterStateMachine(/*IAnimationManager animationManager*/)
-        {
-            Console.WriteLine("HI");
-            //AnimationManager = animationManager;
+            base.Initialise();
             OnStateChanged += CharacterStateMachine_OnStateChanged;
-            PopulateStateMachine();
+            OnStateChanged += UpdateStateText;
         }
+        /// <summary>
+        /// Sets the current state index once state has changed
+        /// </summary>
+        /// <param name="pStateIndex"></param>
+        private void CharacterStateMachine_OnStateChanged(int pStateIndex) => currentStateIndex= pStateIndex;
 
-        private void CharacterStateMachine_OnStateChanged(int pStateIndex) => currentState = (CharacterState)pStateIndex;
-
-        protected override void PopulateStateMachine()
+        /// <summary>
+        /// Handles the input 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public void OnNewInput(object sender, InputEventArgs args)
         {
-            AllStates = new Dictionary<int, IState>()
-            {
-                {(int)CharacterState.Idle,new CharacterIdleState()},
-                {(int)CharacterState.Move,new CharacterMoveState()}
-            };
+            ((IStateWithInput)currentState).HandleInput(this, args);
         }
-        //Add state method 
-        //Pass key as int
-        //State machine becomes an ai component
-        //AI component manager has factory method for statemachine
-        //(perhaps if i have more time) states are created with factory method
-        //animation manager being pass through constructor is a big no no (either do it through a method or pass it into a command that needs it)
-        //Entity creates the commands and passes it to states
+        /// <summary>
+        /// Returns the hitbox of the AI
+        /// </summary>
+        /// <returns></returns>
+        #region ICollidable
+        public Rectangle GetHitBox()
+        {
+            return ((IStateWithCollision)currentState).GetHitBox();
+        }
+        /// <summary>
+        /// Handles the collision
+        /// </summary>
+        /// <param name="entity"></param>
+        public void OnCollide(IAIComponent entity)
+        {
+            ((IStateWithCollision)currentState).HandleCollision(entity);
+        }
+        #endregion
+        /// <summary>
+        /// Updates the state text entity
+        /// </summary>
+        /// <param name="pStateIndex"></param>
+        protected override void UpdateStateText(int pStateIndex)
+        {
+            stateText.Text = "Character: "+((CharacterState)pStateIndex).ToString();
+        }
     }
 }

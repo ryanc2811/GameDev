@@ -16,5 +16,7 @@
     <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/moveRight.png</File>
     <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/moveUp.png</File>
     <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/idle.png</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/Fonts/StateText.spritefont</File>
+    <File>C:/Users/ryanc/OneDrive/Documents/GitHub/GameDev/Pong_BehavioursV4-StateMachinePt2/GameEngineYr3/GameEngineYr3/Content/Sounds/bounceSound.wav</File>
   </SourceFiles>
 </SourceFileCollection>

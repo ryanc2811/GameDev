@@ -35,6 +35,11 @@ namespace Pong.Commands
             throw new NotImplementedException();
         }
 
+        public void SetOwner(IAIUser owner)
+        {
+            throw new NotImplementedException();
+        }
+
         public void StartCommand()
         {
             throw new NotImplementedException();

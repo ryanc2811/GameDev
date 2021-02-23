@@ -10,10 +10,11 @@ using GameEngine.Input;
 using GameEngine.Entities;
 using GameEngine.Kernel;
 using GameEngine.Animation_Stuff;
+using GameEngine.Sound_Stuff;
 
 namespace Pong.Entities
 {
-    class Ball : GameXEntity,IAIUser, IAnimatedSprite
+    class Ball : GameXEntity,IAIUser, IAnimatedSprite, ISoundEmitter
     {
         
         #region Initialise
@@ -30,6 +31,9 @@ namespace Pong.Entities
         public override void Update(GameTime gameTime)
         {
             animationManager.Update(gameTime);
+            //move character with velocity
+            transform.position += transform.velocity;
+            transform.velocity = Vector2.Zero;
         }
         #endregion
         /// <summary>
@@ -55,6 +59,19 @@ namespace Pong.Entities
         public IAnimation GetCurrentAnimation()
         {
             return animationManager.CurrentAnimation;
+        }
+        /// <summary>
+        /// Adds a collection of sounds and instatiate soundmanager with these sounds
+        /// </summary>
+        /// <param name="sounds"></param>
+        public void AddSounds(IDictionary<string, ISound> sounds)
+        {
+            soundManager = new SoundManager(sounds);
+        }
+
+        public ISoundManager GetSoundManager()
+        {
+            return soundManager;
         }
     }
 }

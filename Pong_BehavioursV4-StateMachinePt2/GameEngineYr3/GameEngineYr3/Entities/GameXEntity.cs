@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Animation_Stuff;
 using GameEngine.BehaviourManagement;
+using GameEngine.Sound_Stuff;
 using GameEngine.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,6 +31,7 @@ namespace GameEngine.Entities
         protected float layerDepth = 0f;
         protected SpriteEffects spriteEffect;
         protected IAnimationManager animationManager;
+        protected ISoundManager soundManager;
         protected Transform transform;
         #endregion
         
@@ -44,6 +46,7 @@ namespace GameEngine.Entities
         public override Transform Transform { get { return transform; } }
         ///PROPERTY FOR GETTING THE ID OF AN ENTITY
         public override string id { get; set; }
+        public override string Tag { get; set; }
         /// <summary>
         /// SETTER FOR THE TEXTURE OF THE ENTITY
         /// </summary>
@@ -110,17 +113,27 @@ namespace GameEngine.Entities
         {
             //DO NOTHING
         }
-
+        /// <summary>
+        /// Sets the position of the entity
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public override void SetPosition(float x, float y)
         {
             transform.position = new Vector2(x, y);
         }
-
+        /// <summary>
+        /// Sets the velocity of the entity
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public override void SetVelocity(float x, float y)
         {
             transform.velocity = new Vector2(x, y);
         }
-
+        /// <summary>
+        /// Called once the content has been loaded
+        /// </summary>
         public override void OnContentLoad()
         {
             //DO NOTHING

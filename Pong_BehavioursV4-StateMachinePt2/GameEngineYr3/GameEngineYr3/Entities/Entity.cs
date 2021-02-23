@@ -11,12 +11,13 @@ namespace GameEngine.Entities
     abstract class Entity:IEntity
     {
         //UID property
-        public virtual string id { get; set; }
+        public abstract string id { get; set; }
 
         //store texture for entity
         public abstract void SetTexture(Texture2D texture2D);
         //store position of entity
         public abstract Transform Transform { get; }
+        public abstract string Tag { get; set; }
 
         //pass the spriteBatch
         public abstract void draw(SpriteBatch spriteBatch);

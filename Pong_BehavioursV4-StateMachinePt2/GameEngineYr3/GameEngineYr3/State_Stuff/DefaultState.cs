@@ -10,7 +10,7 @@ using GameEngine.Input;
 
 namespace GameEngine.State_Stuff
 {
-    class DefaultState : IState
+    class DefaultState //: IState
     {
         ICommand currentCommand;
         ICommandManager commandManager;

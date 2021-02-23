@@ -133,7 +133,6 @@ namespace Pong.EntityMinds
             {
                 //reset ball
                 Serve();
-
             }
             //if ball reached right side of the screen
             else if (gameObject.Position.X > Kernel.SCREENWIDTH - 50)

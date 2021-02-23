@@ -12,6 +12,10 @@ using GameEngine.BehaviourManagement;
 using Pong.Entities;
 using GameEngine.Animation_Stuff;
 using Pong.State_Stuff;
+using GameEngine.BehaviourManagement.StateMachine_Stuff;
+using GameEngine.State_Stuff;
+using Microsoft.Xna.Framework.Audio;
+using GameEngine.Sound_Stuff;
 
 namespace GameEngine.Kernel
 {
@@ -49,9 +53,14 @@ namespace GameEngine.Kernel
         private IEntity paddleL;
         private IEntity paddleR;
         private IEntity ball;
-
         private IEntity character;
 
+        private IStateFactory stateFactory;
+
+        private IEntity characterStateText;
+        private IEntity ballStateText;
+        private IEntity paddleLStateText;
+        private IEntity paddleRStateText;
         #endregion
 
         #region Constructor
@@ -92,6 +101,7 @@ namespace GameEngine.Kernel
             //instantiate AI Component Manager
             componentManager = new AIComponentManager();
             
+            
             //instantiate Ball Entity
             ball = entityManager.CreateEntity<Ball>();
             //instantiate Ball AI
@@ -107,7 +117,15 @@ namespace GameEngine.Kernel
 
             character = entityManager.CreateEntity<TopDownCharacter>();
 
+            characterStateText = entityManager.CreateEntity<TextEntity>();
+
             characterStateMachine = componentManager.Create<CharacterStateMachine>();
+
+            ballStateText = entityManager.CreateEntity<TextEntity>();
+            paddleLStateText = entityManager.CreateEntity<TextEntity>();
+            paddleRStateText = entityManager.CreateEntity<TextEntity>();
+            //INSTANTIATE state factory
+            stateFactory = new StateFactory();
 
         }
         #region Initialize
@@ -120,39 +138,67 @@ namespace GameEngine.Kernel
         protected override void Initialize()
         {
             //Add all entities to collision Manager
-            //((ICollisionPublisher)collisionManager).Subscribe((ICollidable)ballAI);
-            //((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleLAI);
-            //((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleRAI);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)ballStateMachine);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleLStateMachine);
+            ((ICollisionPublisher)collisionManager).Subscribe((ICollidable)paddleRStateMachine);
             //Add all entities to Input Manager
-            //inputManager.addEventListener(InputDevice.Mouse, ((IInputListener)ballAI).OnNewInput);
-            //inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)ballAI).OnNewInput);
-            //inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleLAI).OnNewInput);
-            //inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleRAI).OnNewInput);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleLStateMachine).OnNewInput);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)paddleRStateMachine).OnNewInput);
 
-            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)character).OnNewInput);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)ballStateMachine).OnNewInput);
+            inputManager.addEventListener(InputDevice.Keyboard, ((IInputListener)characterStateMachine).OnNewInput);
             //add entities to list
             sceneManager.AddEntity(ball);
             sceneManager.AddEntity(paddleL);
             sceneManager.AddEntity(paddleR);
             sceneManager.AddEntity(character);
+            sceneManager.AddEntity(characterStateText);
+            sceneManager.AddEntity(ballStateText);
+            sceneManager.AddEntity(paddleLStateText);
+            sceneManager.AddEntity(paddleRStateText);
             //Initialise all entities
             sceneManager.Initialise();
-
+            //Add Entities to statemachine
             paddleLStateMachine.SetAIUser((IAIUser)paddleL);
             paddleRStateMachine.SetAIUser((IAIUser)paddleR);
             ballStateMachine.SetAIUser((IAIUser)ball);
             characterStateMachine.SetAIUser((IAIUser)character);
 
+            //populate statemachine with states
+            ((IStateMachine)characterStateMachine).AddState((int)CharacterState.Idle, stateFactory.Create<CharacterIdleState>());
+            ((IStateMachine)characterStateMachine).AddState((int)CharacterState.Move, stateFactory.Create<CharacterMoveState>());
+            //Add text that displays the current state
+            ((IStateMachine)characterStateMachine).AddStateText((ITextEntity)characterStateText);
+            ((IStateMachine)ballStateMachine).AddStateText((ITextEntity)ballStateText);
+            ((IStateMachine)paddleLStateMachine).AddStateText((ITextEntity)paddleLStateText);
+            ((IStateMachine)paddleRStateMachine).AddStateText((ITextEntity)paddleRStateText);
+
+            ((IStateMachine)ballStateMachine).AddState((int)BallState.Serve, stateFactory.Create<BallServeState>());
+            ((IStateMachine)ballStateMachine).AddState((int)BallState.Bounce, stateFactory.Create<BallBounceState>());
+            ((IStateMachine)ballStateMachine).AddState((int)BallState.Destroyed, stateFactory.Create<BallDestroyedState>());
+
+            ((IStateMachine)paddleLStateMachine).AddState((int)PaddleState.Idle, stateFactory.Create<PaddleIdleState>());
+            ((IStateMachine)paddleRStateMachine).AddState((int)PaddleState.Idle, stateFactory.Create<PaddleIdleState>());
+            
+            ((IStateMachine)paddleRStateMachine).AddState((int)PaddleState.Move, stateFactory.Create<PaddleMoveState>());
+            ((IStateMachine)paddleLStateMachine).AddState((int)PaddleState.Move, stateFactory.Create<PaddleMoveState>());
+            //initialise statemachines
             ballStateMachine.Initialise();
             paddleLStateMachine.Initialise();
             paddleRStateMachine.Initialise();
             characterStateMachine.Initialise();
 
-            //set starting position of paddle 1
-            paddleL.SetPosition(0, 375);
-            //set starting position of paddle 2
-            paddleR.SetPosition(1550, 375);
-            character.SetPosition(775, 375);
+            //set starting position entities
+            characterStateText.SetPosition(500, 300);
+            ballStateText.SetPosition(500, 100);
+            paddleLStateText.SetPosition(100, 100);
+            paddleRStateText.SetPosition(1000, 100);
+            paddleL.SetPosition(0, 500);
+            paddleR.SetPosition(1550, 500);
+            character.SetPosition(775, 300);
+            ball.SetPosition(500, 300);
+            paddleL.Tag = "LeftPaddle";
+            paddleR.Tag = "RightPaddle";
             //INITIALIZE
             base.Initialize();
             
@@ -169,7 +215,6 @@ namespace GameEngine.Kernel
         protected override void LoadContent()
         {
             //load texture for entities
-            //ball.SetTexture(Content.Load <Texture2D>("moveLeft"));
             IDictionary<string, IAnimation> ballAnimations = new Dictionary<string, IAnimation>()
             {
                 { "moveUp",new Animation(Content.Load<Texture2D>("square"),1)},
@@ -188,6 +233,16 @@ namespace GameEngine.Kernel
             paddleL.SetTexture(Content.Load<Texture2D>("paddle"));
             paddleR.SetTexture(Content.Load<Texture2D>("paddle"));
 
+            IDictionary<string, ISound> ballSounds = new Dictionary<string, ISound>()
+            {
+                {"bounce", new Sound(Content.Load<SoundEffect>("Sounds/bounceSound"))}
+            };
+            ((ISoundEmitter)ball).AddSounds(ballSounds);
+            ((ITextEntity)characterStateText).SetFont(Content.Load<SpriteFont>("Fonts/StateText"));
+            ((ITextEntity)ballStateText).SetFont(Content.Load<SpriteFont>("Fonts/StateText"));
+            ((ITextEntity)paddleRStateText).SetFont(Content.Load<SpriteFont>("Fonts/StateText"));
+            ((ITextEntity)paddleLStateText).SetFont(Content.Load<SpriteFont>("Fonts/StateText"));
+            //Tell ai components that content has been loaded
             componentManager.OnContentLoad();
         }
         #endregion
@@ -222,7 +277,8 @@ namespace GameEngine.Kernel
 
             //Update entities in scene manager array
             sceneManager.Update(gameTime);
-            componentManager.Update();
+            //Update all ai components
+            componentManager.Update(gameTime);
             //update Collision Manager
             collisionManager.Update();
             //update Input Manager

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,17 @@ namespace GameEngine.Commands
         /// </summary>
         void Execute();
         /// <summary>
-        /// Undo command
+        /// Starts the command
         /// </summary>
-        void Undo();
-
         void StartCommand();
+        /// <summary>
+        /// Closes the command
+        /// </summary>
         void ExitCommand();
+        /// <summary>
+        /// Sets the ai user member
+        /// </summary>
+        /// <param name="owner"></param>
+        void SetOwner(IAIUser owner);
     }
 }

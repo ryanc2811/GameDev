@@ -50,20 +50,26 @@
     <Compile Include="BehaviourManagement\AIComponentManager.cs" />
     <Compile Include="BehaviourManagement\IAIComponent.cs" />
     <Compile Include="BehaviourManagement\IAIComponentManager.cs" />
+    <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\IStateFactory.cs" />
+    <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\StateFactory.cs" />
+    <Compile Include="BehaviourManagement\StateMachine_Stuff\Game\BallState.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Game\BallStateMachine.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\BaseState.cs" />
+    <Compile Include="BehaviourManagement\StateMachine_Stuff\Game\CharacterState.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Game\CharacterStateMachine.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\IState.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\IStateMachine.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\IStateWithCollision.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\StateMachine.cs" />
-    <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\IStateWithAnimation.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Engine\IStateWithInput.cs" />
+    <Compile Include="BehaviourManagement\StateMachine_Stuff\Game\PaddleState.cs" />
     <Compile Include="BehaviourManagement\StateMachine_Stuff\Game\PaddleStateMachine.cs" />
     <Compile Include="Collision\CollisionManager.cs" />
     <Compile Include="Collision\ICollidable.cs" />
     <Compile Include="Collision\ICollisionManager.cs" />
     <Compile Include="Collision\ICollisionPublisher.cs" />
+    <Compile Include="Commands\BallBounceCommand.cs" />
+    <Compile Include="Commands\BallServeCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CharacterIdleCommand.cs" />
     <Compile Include="Commands\CharacterMoveCommand.cs" />
@@ -71,7 +77,24 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\MoveCommand.cs" />
+    <Compile Include="Commands\PaddleIdleCommand.cs" />
+    <Compile Include="Commands\PaddleMoveCommand.cs" />
     <Compile Include="Commands\RepositionCommand.cs" />
+    <Compile Include="Entities\ITextEntity.cs" />
+    <Compile Include="Entities\TextEntity.cs" />
+    <Compile Include="Sound_Stuff\ISound.cs" />
+    <Compile Include="Sound_Stuff\ISoundEmitter.cs" />
+    <Compile Include="Sound_Stuff\ISoundManager.cs" />
+    <Compile Include="Sound_Stuff\Sound.cs" />
+    <Compile Include="Sound_Stuff\SoundManager.cs" />
+    <Compile Include="State_Conditions\BallBounced.cs" />
+    <Compile Include="State_Conditions\BallHitCollidable.cs" />
+    <Compile Include="State_Conditions\BallOutOfBounds.cs" />
+    <Compile Include="State_Conditions\BallServed.cs" />
+    <Compile Include="State_Conditions\BaseCondition.cs" />
+    <Compile Include="State_Conditions\CharacterStopped.cs" />
+    <Compile Include="State_Conditions\CharacterMoved.cs" />
+    <Compile Include="State_Conditions\ICondition.cs" />
     <Compile Include="Entities\Ball.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\GameXEntity.cs" />
@@ -96,11 +119,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene\ISceneManager.cs" />
     <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="State_Conditions\PaddleMoved.cs" />
+    <Compile Include="State_Conditions\PaddleStopped.cs" />
+    <Compile Include="State_Conditions\RestartBall.cs" />
+    <Compile Include="State_Stuff\BallBounceState.cs" />
+    <Compile Include="State_Stuff\BallDestroyedState.cs" />
+    <Compile Include="State_Stuff\BallServeState.cs" />
     <Compile Include="State_Stuff\CharacterIdleState.cs" />
     <Compile Include="State_Stuff\CharacterMoveState.cs" />
     <Compile Include="State_Stuff\DefaultState.cs" />
-    <Compile Include="State_Stuff\BallMoveState.cs" />
+    <Compile Include="State_Stuff\PaddleIdleState.cs" />
+    <Compile Include="State_Stuff\PaddleMoveState.cs" />
     <Compile Include="State_Stuff\States.cs" />
+    <Compile Include="Transitions\Transition.cs" />
+    <Compile Include="Transitions\ITransition.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -110,10 +142,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Sounds\bounceSound.wav" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <Content Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

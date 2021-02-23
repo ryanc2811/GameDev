@@ -37,9 +37,9 @@ namespace GameEngine.Collision
                     if (EntityList[i].GetHitBox().Intersects(EntityList[j].GetHitBox()))
                     {
                         //pass a reference of the 2nd entity to the first entity
-                        EntityList[i].OnCollide((IEntity)EntityList[j]);
+                        EntityList[i].OnCollide((IAIComponent)EntityList[j]);
                         //pass a reference of the first entity to the 2nd entity
-                        EntityList[j].OnCollide((IEntity)EntityList[i]);
+                        EntityList[j].OnCollide((IAIComponent)EntityList[i]);
                     }
                 }
                 

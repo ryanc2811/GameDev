@@ -1,8 +1,5 @@
-﻿using GameEngine.Animation_Stuff;
-using GameEngine.Commands;
-using GameEngine.Entities;
-using GameEngine.Input;
-using GameEngine.State_Stuff;
+﻿using GameEngine.Entities;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +16,25 @@ namespace GameEngine.BehaviourManagement.StateMachine_Stuff
         /// <param name="state"></param>
         /// <param name="command"></param>
         void ChangeState(int newStateIndex);
-
-
-
         /// <summary>
-        /// Adds a new state to the dictionairy
+        /// returns the Current state index
         /// </summary>
-        /// <param name="pStateEnum"></param>
-        /// <param name="pState"></param>
-        
-
-
+        int CurrentStateIndex { get; }
         /// <summary>
-        /// Removes a state from the dictionairy
+        /// Adds the text entity to the statemachine
+        /// </summary>
+        /// <param name="textEntity"></param>
+        void AddStateText(ITextEntity textEntity);
+        /// <summary>
+        /// Adds a new state to the dictionary
+        /// </summary>
+        /// <param name="pStateIndex"></param>
+        /// <param name="pState"></param>
+        void AddState(int pStateIndex,IState pState);
+        /// <summary>
+        /// Removes a state from the dictionary
         /// </summary>
         /// <param name="pStateEnum"></param>
         void RemoveState(int stateIndex);
-        /// <summary>
-        /// Updates the current state
-        /// </summary>
-        void Update();
-        void PreviousState();
     }
 }

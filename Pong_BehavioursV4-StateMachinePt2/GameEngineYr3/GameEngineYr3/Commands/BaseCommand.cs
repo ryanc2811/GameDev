@@ -1,4 +1,5 @@
 ﻿using GameEngine.BehaviourManagement.StateMachine_Stuff;
+using GameEngine.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,24 @@ namespace GameEngine.Commands
 {
     public abstract class BaseCommand : ICommand
     {
-        protected IStateMachine owner;
-        public void SetOwner(IStateMachine pOwner) => owner=pOwner;
+        //DECLARE an IAIUser for storing a reference to the IAIUser that relate to this command
+        protected IAIUser owner;
+        /// <summary>
+        /// SET the AIUser member
+        /// </summary>
+        /// <param name="pOwner"></param>
+        public void SetOwner(IAIUser pOwner) => owner=pOwner;
+        /// <summary>
+        /// Executes the command
+        /// </summary>
         public abstract void Execute();
-        public abstract void Undo();
-
-        public abstract void StartCommand();
-
-        public abstract void ExitCommand();
+        /// <summary>
+        /// Starts the command
+        /// </summary>
+        public virtual void StartCommand() { }
+        /// <summary>
+        /// Stops the command
+        /// </summary>
+        public virtual void ExitCommand() { }
     }
 }

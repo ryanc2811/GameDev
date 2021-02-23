@@ -26,6 +26,7 @@ namespace GameEngine.Animation_Stuff
         public AnimationManager(IDictionary<string, IAnimation> pAnimations)
         {
             animations = pAnimations;
+            //current animation is the first value of the dictionary
             currentAnimation = animations.First().Value;
         }
         /// <summary>
@@ -59,11 +60,14 @@ namespace GameEngine.Animation_Stuff
         /// <param name="animationKey"></param>
         public void Play(string animationKey)
         {
+            //if the animation is already playing, return
             if (Find(animationKey) == currentAnimation)
                 return;
-
+            //set current animation
             currentAnimation = Find(animationKey);
+            //reset animation current frame
             currentAnimation.CurrentFrame = 0;
+            //reset animation timer
             timer = 0;
         }
         /// <summary>
@@ -71,8 +75,16 @@ namespace GameEngine.Animation_Stuff
         /// </summary>
         public void Stop()
         {
+            //reset animation timer
             timer = 0;
+            //reset the current animation frame
             currentAnimation.CurrentFrame = 0;
+        }
+        public bool AnimationFinished()
+        {
+            if (currentAnimation.CurrentFrame >= currentAnimation.FrameCount)
+                return true;
+            else return false;
         }
         /// <summary>
         /// Updates the animation
@@ -80,14 +92,15 @@ namespace GameEngine.Animation_Stuff
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
+            //add elapsed time to the animation timer
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            //reset timer on each frame
             if (timer > currentAnimation.FrameSpeed)
             {
                 timer = 0f;
-
+                //add 1 to current frame
                 currentAnimation.CurrentFrame++;
-
+                //if animation finished, then reset frame to 0
                 if (currentAnimation.CurrentFrame >= currentAnimation.FrameCount)
                     currentAnimation.CurrentFrame = 0;
             }

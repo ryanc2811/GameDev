@@ -1,5 +1,7 @@
 ﻿using GameEngine.Commands;
+using GameEngine.Entities;
 using GameEngine.Input;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +19,21 @@ namespace GameEngine.BehaviourManagement.StateMachine_Stuff
         /// <summary>
         /// Exectutes the states behaviour
         /// </summary>
-        void Execute();
+        void Execute(GameTime gameTime);
         /// <summary>
         /// Ends the State transition
         /// </summary>
         void End();
+        /// <summary>
+        /// Returns the states index
+        /// </summary>
+        /// <returns></returns>
         int StateIndex();
-        void InitState(IStateMachine stateMachine);
+        /// <summary>
+        /// Initialises the state
+        /// </summary>
+        /// <param name="stateMachine"></param>
+        /// <param name="owner"></param>
+        void InitState(IStateMachine stateMachine, IAIUser owner);
     }
 }

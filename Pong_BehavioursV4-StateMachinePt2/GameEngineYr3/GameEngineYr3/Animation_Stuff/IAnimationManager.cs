@@ -34,5 +34,6 @@ namespace GameEngine.Animation_Stuff
         /// returns the current animation
         /// </summary>
         IAnimation CurrentAnimation { get;}
+        bool AnimationFinished();
     }
 }

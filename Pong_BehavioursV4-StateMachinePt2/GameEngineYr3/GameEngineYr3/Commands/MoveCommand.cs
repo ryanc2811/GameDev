@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Commands;
+using GameEngine.BehaviourManagement.StateMachine_Stuff;
+
 namespace Pong.Commands
 {
     class MoveCommand : ICommand
@@ -43,6 +45,11 @@ namespace Pong.Commands
         }
 
         public void ExitCommand()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetOwner(IAIUser owner)
         {
             throw new NotImplementedException();
         }

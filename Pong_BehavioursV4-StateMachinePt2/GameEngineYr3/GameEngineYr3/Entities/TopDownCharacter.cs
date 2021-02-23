@@ -14,9 +14,15 @@ namespace Pong.Entities
 {
     class TopDownCharacter : GameXEntity, IAnimatedSprite, IAIUser
     {
+        /// <summary>
+        /// Updates the topdown character
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            //Update the animation manager
             animationManager.Update(gameTime);
+            //move character with velocity
             transform.position += transform.velocity;
             transform.velocity = Vector2.Zero;
         }
@@ -28,41 +34,21 @@ namespace Pong.Entities
         {
             animationManager = new AnimationManager(animations);
         }
-
+        /// <summary>
+        /// Returns the animation manager
+        /// </summary>
+        /// <returns></returns>
         public IAnimationManager GetAnimationManager()
         {
             return animationManager;
         }
-
+        /// <summary>
+        /// Returns the current animation
+        /// </summary>
+        /// <returns></returns>
         public IAnimation GetCurrentAnimation()
         {
             return animationManager.CurrentAnimation;
-        }
-        public Rectangle GetHitBox()
-        {
-            //If the character is not animated then draw using texture from entity class
-            if (texture != null)
-                return new Rectangle((int)Transform.position.X, (int)Transform.position.Y, texture.Width, texture.Height);
-            else if (animationManager!= null)
-                return new Rectangle((int)Transform.position.X, (int)Transform.position.Y, GetCurrentAnimation().Texture.Width,GetCurrentAnimation().Texture.Height);
-            else
-            {
-                throw new Exception();
-            }
-        }
-        public override void OnContentLoad()
-        {
-            
-        }
-        public void OnCollide(IEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnNewInput(object sender, InputEventArgs args)
-        {
-            //Pass Input data to statemachine
-            //stateMachine.HandleInput(this, args);
         }
     }
 }

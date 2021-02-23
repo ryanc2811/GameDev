@@ -10,6 +10,15 @@ namespace GameEngine.BehaviourManagement.StateMachine_Stuff
 {
     public interface IStateWithInput
     {
-        int HandleInput(object sender, InputEventArgs inputEvent);
+        /// <summary>
+        /// Handles the input of the state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="inputEvent"></param>
+        void HandleInput(object sender, InputEventArgs inputEvent);
+        /// <summary>
+        /// Stores the event for the input
+        /// </summary>
+        Action<object, InputEventArgs> InputEvent{get;set;}
     }
 }

@@ -23,26 +23,11 @@ namespace GameEngine.BehaviourManagement
         /// <summary>
         /// Updates the AI Component
         /// </summary>
-        void Update();
+        void Update(GameTime gameTime);
         /// <summary>
         /// Runs after Content is loaded
         /// </summary>
         void OnContentLoad();
-        /// <summary>
-        /// returns the position of Entity
-        /// </summary>
-        /// <returns></returns>
-        Vector2 GetPosition();
-        /// <summary>
-        /// returns the height of the texture
-        /// </summary>
-        /// <returns></returns>
-        int Height();
-        /// <summary>
-        /// returns the width of the texture
-        /// </summary>
-        /// <returns></returns>
-        int Width();
         /// <summary>
         /// Initialises the AIComponent
         /// </summary>

@@ -22,27 +22,16 @@ namespace GameEngine.BehaviourManagement
         /// <summary>
         /// Updates the AI Component
         /// </summary>
-        public abstract void Update();
-        /// <summary>
-        /// Gets the postion of the AI User
-        /// </summary>
-        /// <returns></returns>
-        public abstract Vector2 GetPosition();
+        public abstract void Update(GameTime gameTime);
+
         /// <summary>
         /// Runs after content is loaded
         /// </summary>
         public abstract void OnContentLoad();
         /// <summary>
-        /// returns the height of the texture
+        /// Gets the AIUser object
         /// </summary>
         /// <returns></returns>
-        public abstract int Height();
-        /// <summary>
-        /// returns the width of the texture
-        /// </summary>
-        /// <returns></returns>
-        public abstract int Width();
-
         public abstract IAIUser GetAIUser();
     }
 }

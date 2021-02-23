@@ -1,4 +1,5 @@
-﻿using Pong.State_Stuff;
+﻿using GameEngine.Animation_Stuff;
+using Pong.State_Stuff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,16 @@ namespace GameEngine.Commands
     {
         public override void Execute()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public override void ExitCommand()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Starts the idle command
+        /// </summary>
         public override void StartCommand()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Undo()
-        {
-            throw new NotImplementedException();
+            //Play the idle animation
+            ((IAnimatedSprite)owner).GetAnimationManager().Play("idle");
         }
     }
 }
