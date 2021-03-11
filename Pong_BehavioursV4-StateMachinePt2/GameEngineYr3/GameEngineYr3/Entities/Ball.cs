@@ -16,13 +16,10 @@ namespace Pong.Entities
 {
     class Ball : GameXEntity,IAIUser, IAnimatedSprite, ISoundEmitter
     {
-        
         #region Initialise
         //initialise the ball
         public override void Initialise()
         {
-            //Initialise Mind
-
         }
         #endregion
 
